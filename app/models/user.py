@@ -15,11 +15,19 @@ class User(db.Model, UserMixin):
     profile_pic = db.Column(db.String(255))
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    instruments = db.relationship("Instrument", back_populates="user")
-    repertoire = db.relationship("Repertoire", back_populates="user")
-    practice_sessions = db.relationship("PracticeSession", back_populates="user")
-    goals = db.relationship("Goal", back_populates="user")
-    achievements = db.relationship("Achievements", back_populates="user")
+    instruments = db.relationship(
+        "Instrument", back_populates="user", cascade="all, delete-orphan"
+    )
+    repertoire = db.relationship(
+        "Repertoire", back_populates="user", cascade="all, delete-orphan"
+    )
+    practice_sessions = db.relationship(
+        "PracticeSession", back_populates="user", cascade="all, delete-orphan"
+    )
+    goals = db.relationship("Goal", back_populates="user", cascade="all, delete-orphan")
+    achievements = db.relationship(
+        "Achievements", back_populates="user", cascade="all, delete-orphan"
+    )
 
     @property
     def password(self):
