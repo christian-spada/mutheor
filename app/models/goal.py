@@ -25,6 +25,9 @@ class Goal(db.Model):
         db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
+    user = db.relationship("User", back_populates="goals")
+    instrument = db.relationship("Instrument", back_populates="goals")
+
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,
