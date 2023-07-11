@@ -23,7 +23,7 @@ class Repertoire(db.Model):
     )
 
     user = db.relationship("User", back_populates="repertoire")
-    instrument = db.relationship("Instruments", back_populates="repertoire")
+    instrument = db.relationship("Instrument", back_populates="repertoire")
 
     def to_dict(self, timestamps=False):
         dct = {
