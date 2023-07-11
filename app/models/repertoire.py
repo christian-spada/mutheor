@@ -13,7 +13,7 @@ class Repertoire(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
     instrument_id = db.Column(
-        db.Integer, db.ForeignKey(add_prefix_for_prod("instrument.id")), nullable=False
+        db.Integer, db.ForeignKey(add_prefix_for_prod("instruments.id")), nullable=False
     )
     song_title = db.Column(db.String(50), nullable=False)
     artist = db.Column(db.String(50), nullable=False)
