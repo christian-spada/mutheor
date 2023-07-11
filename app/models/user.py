@@ -4,15 +4,22 @@ from flask_login import UserMixin
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     if environment == "production":
-        __table_args__ = {'schema': SCHEMA}
+        __table_args__ = {"schema": SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
+    profile_pic = db.Column(db.String(255))
     hashed_password = db.Column(db.String(255), nullable=False)
+
+    instruments = db.relationship("Instrument", back_populates="user")
+    repertoire = db.relationship("Repertoire", back_populates="user")
+    practice_sessions = db.relationship("PracticeSession", back_populates="user")
+    goals = db.relationship("Goal", back_populates="user")
+    achievements = db.relationship("Achievements", back_populates="user")
 
     @property
     def password(self):
@@ -25,9 +32,15 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'username': self.username,
-            'email': self.email
+    def to_dict(self, timestamps=False):
+        dct = {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "profilePic": self.profile_pic,
         }
+        if timestamps:
+            dct["createdAt"] = self.created_at
+            dct["updatedAt"] = self.updated_at
+
+        return dct
