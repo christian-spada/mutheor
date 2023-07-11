@@ -26,6 +26,15 @@ class Instrument(db.Model):
     )
 
     user = db.relationship("User", back_populates="instruments")
+    goals = db.relationship(
+        "Goal", back_populates="instrument", cascade="all, delete-orphan"
+    )
+    practice_sessions = db.relationship(
+        "PracticeSession", back_populates="instrument", cascade="all, delete-orphan"
+    )
+    repertoire = db.relationship(
+        "Repertoire", back_populates="instrument", cascade="all, delete-orphan"
+    )
 
     def to_dict(self, timestamps=False):
         dct = {

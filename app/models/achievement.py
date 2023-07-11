@@ -19,7 +19,10 @@ class Achievement(db.Model):
         db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
-    user = db.relationship("User", back_populates="achievements")
+    user = db.relationship(
+        "User",
+        back_populates="achievements",
+    )
 
     def to_dict(self, timestamps=False):
         dct = {
