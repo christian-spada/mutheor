@@ -25,6 +25,8 @@ class Instrument(db.Model):
         db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
+    user = db.relationship("User", back_populates="instruments")
+
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,
