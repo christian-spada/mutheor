@@ -26,7 +26,7 @@ class User(db.Model, UserMixin):
     )
     goals = db.relationship("Goal", back_populates="user", cascade="all, delete-orphan")
     achievements = db.relationship(
-        "Achievements", back_populates="user", cascade="all, delete-orphan"
+        "Achievement", back_populates="user", cascade="all, delete-orphan"
     )
 
     @property
