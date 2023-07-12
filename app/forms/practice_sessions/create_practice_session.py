@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import TextAreaField, SelectField, IntegerField, DateTimeField
-from wtforms.validators import DataRequired, ValidationError
+from wtforms.validators import DataRequired
 
 area_of_focus_choices = [
     ("Chords"),

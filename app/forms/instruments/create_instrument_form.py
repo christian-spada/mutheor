@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField
+from wtforms import IntegerField, StringField, SelectField
 from wtforms.validators import DataRequired, ValidationError
 
 type_choices = [
@@ -37,7 +37,7 @@ def is_image_url(form, field):
 
 
 class CreateInstrumentForm(FlaskForm):
-    user_id = StringField("user_id", validators=[DataRequired()])
+    user_id = IntegerField("user_id", validators=[DataRequired()])
     type = SelectField("type", choices=type_choices, validators=[DataRequired()])
     category = SelectField(
         "category", choices=category_choices, validators=[DataRequired()]
