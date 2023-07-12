@@ -20,6 +20,7 @@ class Instrument(db.Model):
     )
     type = db.Column(db.String(50), nullable=False)
     category = db.Column(db.Enum(categories), nullable=False)
+    image = db.Column(db.String(100))
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(
         db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
