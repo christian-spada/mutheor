@@ -41,4 +41,4 @@ class EditInstrumentForm(FlaskForm):
     category = SelectField(
         "category", choices=category_choices, validators=[DataRequired()]
     )
-    image = StringField("image", validators=is_image_url)
+    image = StringField("image", validators=[is_image_url])
