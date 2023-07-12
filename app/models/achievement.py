@@ -13,6 +13,7 @@ class Achievement(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
     type = db.Column(db.String(50), nullable=False)
+    date = db.Column(db.DateTime(timezone=True), server_default=func.now())
     reward = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(
