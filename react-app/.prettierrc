@@ -6,6 +6,6 @@
   "arrowParens": "avoid",
   "printWidth": 80,
   "bracketSpacing": true,
-  "singleAttributePerLine": true,
+  "singleAttributePerLine": false,
   "quoteProps": "as-needed"
 }
