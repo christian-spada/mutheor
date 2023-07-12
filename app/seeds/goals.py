@@ -6,19 +6,19 @@ from datetime import date
 def seed_goals():
     goal1 = Goal(
         user_id=1,
-        instrument_type=1,
+        instrument_id=1,
         description="Master paradiddles",
         target_date=date(2023, 10, 12),
     )
     goal2 = Goal(
         user_id=2,
-        instrument_type=2,
+        instrument_id=2,
         description="Get economy picking 16th notes up to 90 BPM",
         target_date=date(2024, 2, 12),
     )
     goal3 = Goal(
         user_id=3,
-        instrument_type=3,
+        instrument_id=3,
         description="Master spread triad voicings",
         target_date=date(2024, 12, 11),
     )

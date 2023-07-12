@@ -4,18 +4,13 @@ from datetime import date
 
 
 def seed_achievements():
-    ach1 = Achievement(
-        user_id=1, type="Complete 1 Goal", date=date(2023, 5, 9), reward="The Starter"
-    )
+    ach1 = Achievement(user_id=1, type="Complete 1 Goal", reward="The Starter")
     ach2 = Achievement(
         user_id=2,
         type="Complete 5 Goals",
-        date=date(2023, 7, 2),
         reward="The Committer",
     )
-    ach3 = Achievement(
-        user_id=1, type="Complete 10 Goals", date=date(2023, 1, 21), reward="The Doer"
-    )
+    ach3 = Achievement(user_id=1, type="Complete 10 Goals", reward="The Doer")
 
     db.session.add(ach1)
     db.session.add(ach2)
