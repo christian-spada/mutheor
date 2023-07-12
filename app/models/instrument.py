@@ -4,7 +4,7 @@ from enum import Enum
 
 categories = Enum(
     "Categories",
-    ["percussion", "brass", "woodwind", "string", "electronic"],
+    ["Percussion", "Brass", "Woodwind", "String", "Electronic"],
 )
 
 instrument_types = Enum(

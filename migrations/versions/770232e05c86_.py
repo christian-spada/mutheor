@@ -96,11 +96,11 @@ def upgrade():
         sa.Column(
             "category",
             sa.Enum(
-                "percussion",
-                "brass",
-                "woodwind",
-                "string",
-                "electronic",
+                "Percussion",
+                "Brass",
+                "Woodwind",
+                "String",
+                "Electronic",
                 name="categories",
             ),
             nullable=False,
