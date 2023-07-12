@@ -7,6 +7,26 @@ categories = Enum(
     ["percussion", "brass", "woodwind", "string", "electronic"],
 )
 
+instrument_types = Enum(
+    "Types",
+    [
+        "Electric Guitar",
+        "Acoustic Guitar",
+        "Bass",
+        "Drums",
+        "Piano",
+        "Synth",
+        "Violin",
+        "Saxophone",
+        "Clarinet",
+        "Flute",
+        "Trumpet",
+        "Trombone",
+        "Tuba",
+        "Bongos",
+    ],
+)
+
 
 class Instrument(db.Model):
     __tablename__ = "instruments"
@@ -18,7 +38,7 @@ class Instrument(db.Model):
     user_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
-    type = db.Column(db.String(50), nullable=False)
+    type = db.Column(db.Enum(instrument_types), nullable=False)
     category = db.Column(db.Enum(categories), nullable=False)
     image = db.Column(db.String(100))
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())

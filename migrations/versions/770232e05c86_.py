@@ -72,7 +72,27 @@ def upgrade():
         "instruments",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("user_id", sa.Integer(), nullable=False),
-        sa.Column("type", sa.String(length=50), nullable=False),
+        sa.Column(
+            "type",
+            sa.Enum(
+                "Electric Guitar",
+                "Acoustic Guitar",
+                "Bass",
+                "Drums",
+                "Piano",
+                "Synth",
+                "Violin",
+                "Saxophone",
+                "Clarinet",
+                "Flute",
+                "Trumpet",
+                "Trombone",
+                "Tuba",
+                "Bongos",
+                name="types",
+            ),
+            nullable=False,
+        ),
         sa.Column(
             "category",
             sa.Enum(
