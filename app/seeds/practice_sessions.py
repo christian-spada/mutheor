@@ -15,14 +15,14 @@ def seed_practice_sessions():
         instrument_id=2,
         duration=20,
         notes="Worked on the 3:4 and 3:2 polyrhythms",
-        area_of_focus="Polyrhythms",
+        area_of_focus="Rhythm",
     )
     sesh3 = PracticeSession(
         user_id=3,
         instrument_id=3,
         duration=320,
         notes="Practiced chord voicings, specifically spread triads",
-        area_of_focus="Chord Voicings",
+        area_of_focus="Chords",
     )
 
     db.session.add(sesh1)
