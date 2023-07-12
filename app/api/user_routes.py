@@ -43,7 +43,7 @@ def get_single_instrument(user_id, instrument_id):
     """
 
 
-@user_routes.route("/<int:user_id>/instruments", method=["POST"])
+@user_routes.route("/<int:user_id>/instruments", methods=["POST"])
 @login_required
 def create_new_instrument(user_id):
     """
