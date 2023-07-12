@@ -1,5 +1,10 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
+from enum import Enum
+
+area_of_focus_choices = Enum(
+    "FocusAreas", ["Chords", "Scales", "Technique", "Theory", "Rhythm", "Repertoire"]
+)
 
 
 class PracticeSession(db.Model):
@@ -20,7 +25,7 @@ class PracticeSession(db.Model):
     duration = db.Column(db.Integer, nullable=False)
     date = db.Column(db.DateTime(timezone=True), server_default=func.now())
     notes = db.Column(db.String(255), nullable=False)
-    area_of_focus = db.Column(db.String(50), nullable=False)
+    area_of_focus = db.Column(db.Enum(area_of_focus_choices), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(
         db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()

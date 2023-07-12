@@ -171,7 +171,19 @@ def upgrade():
             nullable=True,
         ),
         sa.Column("notes", sa.String(length=255), nullable=False),
-        sa.Column("area_of_focus", sa.String(length=50), nullable=False),
+        sa.Column(
+            "area_of_focus",
+            sa.Enum(
+                "Chords",
+                "Scales",
+                "Technique",
+                "Theory",
+                "Rhythm",
+                "Repertoire",
+                name="area_of_focus",
+            ),
+            nullable=False,
+        ),
         sa.Column(
             "created_at",
             sa.DateTime(timezone=True),
