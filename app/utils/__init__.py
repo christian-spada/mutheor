@@ -4,3 +4,9 @@ def entity_not_found(entity):
 
 def not_authorized():
     return {"errors": "You are not authorized for this action"}, 403
+
+
+def logger(label, item):
+    print("============== * ===============")
+    print(label.upper(), item)
+    print("============== * ===============")
