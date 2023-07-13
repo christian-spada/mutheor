@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from sqlalchemy import and_, or_
+from sqlalchemy import and_
 from datetime import date
 from app.models import (
     db,
@@ -58,6 +58,7 @@ def create_new_goal(user_id):
     if current_user.id != user_id:
         return not_authorized()
 
+    # TODO - Instrument.id is hardcoded. Add value from form when you add it on the frontend
     try:
         instrument = Instrument.query.filter(
             and_(Instrument.user_id == user_id, Instrument.id == 1)
