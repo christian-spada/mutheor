@@ -1,21 +1,16 @@
 """empty message
 
-Revision ID: 770232e05c86
+Revision ID: 187111e14a67
 Revises:
-Create Date: 2023-07-11 20:09:30.157136
+Create Date: 2023-07-13 13:12:37.369461
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
-
 
 # revision identifiers, used by Alembic.
-revision = "770232e05c86"
+revision = "187111e14a67"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,8 +29,6 @@ def upgrade():
         sa.UniqueConstraint("email"),
         sa.UniqueConstraint("username"),
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     op.create_table(
         "achievements",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -66,12 +59,11 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE achievements SET SCHEMA {SCHEMA};")
     op.create_table(
         "instruments",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("user_id", sa.Integer(), nullable=False),
+        sa.Column("nickname", sa.String(length=20), nullable=True),
         sa.Column(
             "type",
             sa.Enum(
@@ -124,8 +116,6 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE instruments SET SCHEMA {SCHEMA};")
     op.create_table(
         "goals",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -156,8 +146,6 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE goals SET SCHEMA {SCHEMA};")
     op.create_table(
         "practice_sessions",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -180,7 +168,7 @@ def upgrade():
                 "Theory",
                 "Rhythm",
                 "Repertoire",
-                name="area_of_focus",
+                name="focusareas",
             ),
             nullable=False,
         ),
@@ -206,8 +194,6 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE practice_sessions SET SCHEMA {SCHEMA};")
     op.create_table(
         "repertoire",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -237,8 +223,6 @@ def upgrade():
         ),
         sa.PrimaryKeyConstraint("id"),
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE repertoire SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
