@@ -4,7 +4,7 @@ from app.models import User
 from .instrument_routes import instrument_routes
 from .goal_routes import goal_routes
 from .practice_sessions_routes import practice_session_routes
-from .repertoire import repertoire_routes
+from .repertoire_routes import repertoire_routes
 
 user_routes = Blueprint("users", __name__)
 
