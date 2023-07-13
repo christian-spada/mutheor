@@ -50,6 +50,8 @@ def create_new_instrument(user_id):
     """
     Create new instrument in DB and return dictionary of new instrument
     """
+    if current_user != user_id:
+        return not_authorized()
 
     new_instrument = Instrument(
         user_id=user_id,
