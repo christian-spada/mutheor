@@ -4,7 +4,7 @@
   "semi": true,
   "singleQuote": true,
   "arrowParens": "avoid",
-  "printWidth": 100,
+  "printWidth": 95,
   "bracketSpacing": true,
   "singleAttributePerLine": false,
   "quoteProps": "as-needed"

@@ -69,7 +69,11 @@ export const thunkGetSingleInstrument = (userId, instrumentId) => async dispatch
 
 export const thunkCreateInstrument = (userId, newInstrument) => async dispatch => {
   try {
-    const instrument = await customFetch(`/api/users/${userId}/instruments`, 'POST', newInstrument);
+    const instrument = await customFetch(
+      `/api/users/${userId}/instruments`,
+      'POST',
+      newInstrument
+    );
 
     dispatch(createInstrument(instrument));
 
