@@ -61,8 +61,8 @@ class Instrument(db.Model):
         dct = {
             "id": self.id,
             "userId": self.user_id,
-            "type": self.type,
-            "category": self.category,
+            "type": str(self.type).split(".")[1],
+            "category": str(self.category).split(".")[1],
         }
         if timestamps:
             dct["createdAt"] = self.created_at

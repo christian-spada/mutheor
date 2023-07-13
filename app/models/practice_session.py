@@ -42,7 +42,7 @@ class PracticeSession(db.Model):
             "duration": self.duration,
             "date": self.date,
             "notes": self.notes,
-            "areaOfFocus": self.area_of_focus,
+            "areaOfFocus": str(self.area_of_focus).split(".")[1],
         }
         if timestamps:
             dct["createdAt"] = self.created_at
