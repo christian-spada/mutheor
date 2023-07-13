@@ -38,6 +38,7 @@ class Instrument(db.Model):
     user_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
+    nickname = db.Column(db.String(20), default="Needs nickname!")
     type = db.Column(db.Enum(instrument_types), nullable=False)
     category = db.Column(db.Enum(categories), nullable=False)
     image = db.Column(db.String(100))
@@ -57,12 +58,20 @@ class Instrument(db.Model):
         "Repertoire", back_populates="instrument", cascade="all, delete-orphan"
     )
 
+    def enums_to_string(self, enum):
+        enum_str = str(enum)
+        return enum_str.split(".")[1] if "." in enum_str else enum
+
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,
             "userId": self.user_id,
-            "type": self.type,
-            "category": self.category,
+            "nickname": self.nickname,
+            "type": self.enums_to_string(enum=self.enums_to_string(enum=self.type)),
+            "image": self.image,
+            "category": self.enums_to_string(
+                enum=self.enums_to_string(enum=self.category)
+            ),
         }
         if timestamps:
             dct["createdAt"] = self.created_at
