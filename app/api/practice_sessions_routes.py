@@ -1,6 +1,16 @@
-from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User, Instrument, Goal, PracticeSession, Repertoire, Achievement
+from flask import Blueprint, jsonify, request
+from flask_login import login_required, current_user
+from sqlalchemy import and_
+from app.models import (
+    db,
+    User,
+    Instrument,
+    Goal,
+    PracticeSession,
+    Repertoire,
+    Achievement,
+)
+from app.utils import entity_not_found, not_authorized, logger
 
 practice_session_routes = Blueprint(
     "practice_sessions",
@@ -15,6 +25,9 @@ def get_all_sessions(user_id):
     """
     Get all user practice sessions
     """
+    practice_sessions = PracticeSession.query.filter_by(user_id=user_id).all()
+
+    return {"practiceSessions": [sesh.to_dict() for sesh in practice_sessions]}
 
 
 @practice_session_routes.route("/sessions/<int:session_id>")
@@ -23,6 +36,11 @@ def get_single_session(user_id, session_id):
     """
     Get single user practice session
     """
+    practice_session = PracticeSession.query.get(session_id)
+    user = practice_session.user.to_dict()
+    instrument = practice_session.instrument.to_dict()
+
+    return {**practice_session.to_dict(), "user": user, "instrument": instrument}
 
 
 @practice_session_routes.route("/sessions", methods=["POST"])
@@ -31,3 +49,26 @@ def create_new_session(user_id):
     """
     Create new user practice session
     """
+    if current_user.id != user_id:
+        return not_authorized()
+
+    # TODO - Instrument.id is hardcoded. Add value from form when you add it on the frontend
+    try:
+        instrument = Instrument.query.filter(
+            and_(Instrument.user_id == user_id, Instrument.id == 1)
+        ).one()
+    except:
+        return entity_not_found("Instrument")
+
+    new_practice_session = PracticeSession(
+        user_id=user_id,
+        instrument_id=instrument.id,
+        duration=request.form["duration"],
+        notes=request.form["notes"],
+        area_of_focus=request.form["area_of_focus"],
+    )
+
+    db.session.add(new_practice_session)
+    db.session.commit()
+
+    return new_practice_session.to_dict()
