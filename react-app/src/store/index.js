@@ -2,10 +2,18 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session';
 import instrument from './instruments';
+import goal from './goals';
+import practiceSession from './practiceSessions';
+import repertoire from './repertoire';
+import achievements from './achievements';
 
 const rootReducer = combineReducers({
   session,
   instrument,
+  goal,
+  practiceSession,
+  repertoire,
+  achievements,
 });
 
 let enhancer;
