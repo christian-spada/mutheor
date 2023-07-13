@@ -34,6 +34,10 @@ class PracticeSession(db.Model):
     user = db.relationship("User", back_populates="practice_sessions")
     instrument = db.relationship("Instrument", back_populates="practice_sessions")
 
+    def enums_to_string(self, enum):
+        enum_str = str(enum)
+        return enum_str.split(".")[1] if "." in enum_str else enum
+
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,
@@ -42,7 +46,7 @@ class PracticeSession(db.Model):
             "duration": self.duration,
             "date": self.date,
             "notes": self.notes,
-            "areaOfFocus": str(self.area_of_focus).split(".")[1],
+            "areaOfFocus": self.enums_to_string(enum=self.area_of_focus),
         }
         if timestamps:
             dct["createdAt"] = self.created_at

@@ -57,12 +57,17 @@ class Instrument(db.Model):
         "Repertoire", back_populates="instrument", cascade="all, delete-orphan"
     )
 
+    def enums_to_string(self, enum):
+        enum_str = str(enum)
+        return enum_str.split(".")[1] if "." in enum_str else enum
+
     def to_dict(self, timestamps=False):
         dct = {
             "id": self.id,
             "userId": self.user_id,
-            "type": str(self.type).split(".")[1],
-            "category": str(self.category).split(".")[1],
+            "type": self.enums_to_string(enum=self.type),
+            "image": self.image,
+            "category": self.enums_to_string(enum=self.category),
         }
         if timestamps:
             dct["createdAt"] = self.created_at
