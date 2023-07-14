@@ -23,7 +23,7 @@ class PracticeSession(db.Model):
         nullable=False,
     )
     duration = db.Column(db.Integer, nullable=False)
-    date = db.Column(db.DateTime(timezone=True), server_default=func.now())
+    date = db.Column(db.Date, nullable=False)
     notes = db.Column(db.String(255), nullable=False)
     area_of_focus = db.Column(db.Enum(area_of_focus_choices), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())

@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from sqlalchemy import and_
+from app.forms import CreatePracticeSession
 from app.models import (
     db,
     User,
@@ -10,7 +11,13 @@ from app.models import (
     Repertoire,
     Achievement,
 )
-from app.utils import entity_not_found, not_authorized, logger
+from app.utils import (
+    bad_request,
+    entity_not_found,
+    not_authorized,
+    logger,
+    attach_csrf_token,
+)
 
 practice_session_routes = Blueprint(
     "practice_sessions",
@@ -60,15 +67,24 @@ def create_new_session(user_id):
     except:
         return entity_not_found("Instrument")
 
-    new_practice_session = PracticeSession(
-        user_id=user_id,
-        instrument_id=instrument.id,
-        duration=request.form["duration"],
-        notes=request.form["notes"],
-        area_of_focus=request.form["area_of_focus"],
-    )
+    form = CreatePracticeSession()
+    attach_csrf_token(form, request)
 
-    db.session.add(new_practice_session)
-    db.session.commit()
+    if form.validate_on_submit():
+        data = form.data
 
-    return new_practice_session.to_dict()
+        new_practice_session = PracticeSession(
+            user_id=user_id,
+            instrument_id=instrument.id,
+            duration=data["duration"],
+            notes=data["notes"],
+            date=data["date"],
+            area_of_focus=data["area_of_focus"],
+        )
+
+        db.session.add(new_practice_session)
+        db.session.commit()
+
+        return new_practice_session.to_dict()
+
+    return bad_request(form.errors)
