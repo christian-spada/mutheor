@@ -1,0 +1,34 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--primary-200);
+}
+
+.navbar__logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.navbar__app-title {
+  font-size: 20px;
+}
+
+.navbar__action-btn-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar__action-btn-container > button {
+  background-color: var(--primary-500);
+  color: var(--primary-100);
+}
+
+.navbar__logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--primary-400);
+}

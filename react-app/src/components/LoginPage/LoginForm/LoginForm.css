@@ -1,0 +1,74 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.login-form__input-section {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 2;
+  gap: 1.5rem;
+}
+
+.login-form label[for] {
+  color: hsl(0, 5%, 17%);
+  font-size: 14px;
+  margin-bottom: 0.2rem;
+}
+
+.login-form__btn-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 1rem;
+  flex-grow: 1;
+}
+
+.login-form__name-container,
+.login-form__password-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.login-form__btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.login-form__login-btn {
+  background-color: var(--primary-400);
+  color: var(--primary-100);
+}
+
+.login-form__demo-btn {
+  background-color: var(--primary-100);
+  color: var(--primary-800);
+}
+
+.login-form__input--style {
+  border: none;
+  outline: none;
+  height: 2.7rem;
+  border-radius: 8px;
+  background-color: var(--primary-100);
+  padding: 0.4rem;
+}
+
+.login-form__name {
+  position: absolute;
+  left: 5rem;
+  font-size: 14px;
+}
+
+.login-form__password {
+  position: absolute;
+  left: 5rem;
+  font-size: 14px;
+}
