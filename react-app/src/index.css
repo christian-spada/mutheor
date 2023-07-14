@@ -57,3 +57,15 @@ button {
   --primary-200: hsl(223, 62%, 90%);
   --primary-100: hsl(223, 62%, 95%);
 }
+
+.error {
+  color: hsl(0, 70%, 62%);
+}
+
+.form-wrapper {
+  padding: 2.2rem;
+  border-radius: 1rem;
+  box-shadow: 0 5px 10px 3px hsl(262, 10%, 90%);
+  width: 30rem;
+  height: 30rem;
+}
