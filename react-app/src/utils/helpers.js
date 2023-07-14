@@ -14,14 +14,14 @@ export const customFetch = async (url, method = 'GET', data = null) => {
   const resData = await res.json();
 
   if (!res.ok) {
-    throw Error(resData.error || 'An error occurred');
+    return { errors: resData.errors };
   }
 
   return resData;
 };
 
 export const logger = (label, item) => {
-  console.log('==============');
+  console.log('=============================================');
   console.log(label.toUpperCase(), item);
-  console.log('==============');
+  console.log('=============================================');
 };
