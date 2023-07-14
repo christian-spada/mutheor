@@ -1,4 +1,4 @@
-import { customFetch } from '../utils/helpers';
+import { customFetch, logger } from '../utils/helpers';
 
 const GET_ALL_INSTRUMENTS = 'instruments/GET_ALL_INSTRUMENTS';
 const GET_SINGLE_INSTRUMENT = 'instruments/GET_SINGLE_INSTRUMENT';
@@ -45,8 +45,14 @@ const deleteInstrument = instrumentId => {
 //! ===== THUNKS =====
 export const thunkGetAllInstruments = userId => async dispatch => {
   try {
-    const instruments = await customFetch(`/api/users/${userId}/instruments`);
+    const resData = await customFetch(`/api/users/${userId}/instruments`);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const instruments = resData;
     dispatch(getAllInstruments(instruments));
 
     return instruments;
@@ -57,8 +63,14 @@ export const thunkGetAllInstruments = userId => async dispatch => {
 
 export const thunkGetSingleInstrument = (userId, instrumentId) => async dispatch => {
   try {
-    const instrument = await customFetch(`/api/users/${userId}/instruments/${instrumentId}`);
+    const resData = await customFetch(`/api/users/${userId}/instruments/${instrumentId}`);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const instrument = resData;
     dispatch(getSingleInstrument(instrument));
 
     return instrument;
@@ -69,12 +81,18 @@ export const thunkGetSingleInstrument = (userId, instrumentId) => async dispatch
 
 export const thunkCreateInstrument = (userId, newInstrument) => async dispatch => {
   try {
-    const instrument = await customFetch(
+    const resData = await customFetch(
       `/api/users/${userId}/instruments`,
       'POST',
       newInstrument
     );
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const instrument = resData;
     dispatch(createInstrument(instrument));
 
     return instrument;
@@ -85,12 +103,18 @@ export const thunkCreateInstrument = (userId, newInstrument) => async dispatch =
 
 export const thunkEditInstrument = (userId, updatedInstrument) => async dispatch => {
   try {
-    const instrument = await customFetch(
+    const resData = await customFetch(
       `/api/users/${userId}/instruments/${updatedInstrument.id}`,
       'PUT',
       updatedInstrument
     );
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const instrument = resData;
     dispatch(editInstrument(instrument));
 
     return instrument;
@@ -101,14 +125,20 @@ export const thunkEditInstrument = (userId, updatedInstrument) => async dispatch
 
 export const thunkDeleteInstrument = (userId, instrumentToDelete) => async dispatch => {
   try {
-    const messageRes = await customFetch(
+    const resData = await customFetch(
       `/api/users/${userId}/instruments/${instrumentToDelete.id}`,
       'DELETE'
     );
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const message = resData;
     dispatch(deleteInstrument(instrumentToDelete.id));
 
-    return messageRes;
+    return message;
   } catch (error) {
     return error;
   }

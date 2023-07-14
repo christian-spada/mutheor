@@ -29,10 +29,15 @@ const createPracticeSession = practiceSession => {
 //! ===== THUNKS =====
 export const thunkGetAllPracticeSessions = userId => async dispatch => {
   try {
-    const practiceSessions = await customFetch(`/api/users/${userId}/practiceSessions`);
+    const resData = await customFetch(`/api/users/${userId}/practiceSessions`);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const practiceSessions = resData;
     dispatch(getAllPracticeSessions(practiceSessions));
-
     return practiceSessions;
   } catch (error) {
     return error;
@@ -41,12 +46,17 @@ export const thunkGetAllPracticeSessions = userId => async dispatch => {
 
 export const thunkGetSinglePracticeSession = (userId, practiceSessionId) => async dispatch => {
   try {
-    const practiceSession = await customFetch(
+    const resData = await customFetch(
       `/api/users/${userId}/practiceSessions/${practiceSessionId}`
     );
 
-    dispatch(getSinglePracticeSession(practiceSession));
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
 
+    const practiceSession = resData;
+    dispatch(getSinglePracticeSession(practiceSession));
     return practiceSession;
   } catch (error) {
     return error;
@@ -55,14 +65,19 @@ export const thunkGetSinglePracticeSession = (userId, practiceSessionId) => asyn
 
 export const thunkCreatePracticeSession = (userId, newPracticeSession) => async dispatch => {
   try {
-    const practiceSession = await customFetch(
+    const resData = await customFetch(
       `/api/users/${userId}/practiceSessions`,
       'POST',
       newPracticeSession
     );
 
-    dispatch(createPracticeSession(practiceSession));
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
 
+    const practiceSession = resData;
+    dispatch(createPracticeSession(practiceSession));
     return practiceSession;
   } catch (error) {
     return error;
