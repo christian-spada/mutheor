@@ -22,6 +22,6 @@ export const customFetch = async (url, method = 'GET', data = null) => {
 
 export const logger = (label, item) => {
   console.log('=============================================');
-  console.log(label.toUpperCase(), item);
+  console.log(label.toUpperCase() + ' ->', item);
   console.log('=============================================');
 };
