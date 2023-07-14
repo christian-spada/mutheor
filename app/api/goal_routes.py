@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from sqlalchemy import and_
 from datetime import date
+from app.forms import CreateGoalForm, EditGoalForm
 from app.models import (
     db,
     User,
@@ -11,7 +12,13 @@ from app.models import (
     Repertoire,
     Achievement,
 )
-from app.utils import not_authorized, entity_not_found, logger
+from app.utils import (
+    bad_request,
+    not_authorized,
+    entity_not_found,
+    logger,
+    attach_csrf_token,
+)
 
 goal_routes = Blueprint(
     "goals",
@@ -66,19 +73,25 @@ def create_new_goal(user_id):
     except:
         return entity_not_found("Instrument")
 
-    date_input = request.form["target_date"].split("/")
+    form = CreateGoalForm()
+    attach_csrf_token(form, request)
 
-    new_goal = Goal(
-        user_id=user_id,
-        instrument_id=instrument.id,
-        description=request.form["description"],
-        target_date=date(*[int(num) for num in date_input]),
-    )
+    if form.validate_on_submit():
+        data = form.data
 
-    db.session.add(new_goal)
-    db.session.commit()
+        new_goal = Goal(
+            user_id=user_id,
+            instrument_id=instrument.id,
+            description=data["description"],
+            target_date=data["target_date"],
+        )
 
-    return new_goal.to_dict()
+        db.session.add(new_goal)
+        db.session.commit()
+
+        return new_goal.to_dict()
+
+    return bad_request(form.errors)
 
 
 @goal_routes.route("/goals/<int:goal_id>", methods=["PUT"])
@@ -98,22 +111,21 @@ def edit_goal(user_id, goal_id):
     except:
         return entity_not_found("Goal")
 
-    date_input = None
-    if request.form.get("target_date"):
-        date_input = request.form["target_date"].split("/")
+    form = EditGoalForm()
+    attach_csrf_token(form, request)
 
-    goal.description = (
-        request.form["description"]
-        if request.form.get("description")
-        else goal.description
-    )
+    if form.validate_on_submit():
+        data = form.data
 
-    goal.target_date = (
-        date(*[int(num) for num in date_input]) if date_input else goal.target_date
-    )
-    db.session.commit()
+        goal.instrument_id = data["instrument_id"]
+        goal.description = data["description"]
+        goal.target_date = data["target_date"]
 
-    return goal.to_dict()
+        db.session.commit()
+
+        return goal.to_dict()
+
+    return bad_request(form.errors)
 
 
 @goal_routes.route("/goals/<int:goal_id>", methods=["DELETE"])

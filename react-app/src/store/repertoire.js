@@ -21,8 +21,14 @@ const createRepertoire = repertoire => {
 //! ===== THUNKS =====
 export const thunkGetAllRepertoire = userId => async dispatch => {
   try {
-    const repertoire = await customFetch(`/api/users/${userId}/repertoire`);
+    const resData = await customFetch(`/api/users/${userId}/repertoire`);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const repertoire = resData;
     dispatch(getAllRepertoire(repertoire));
 
     return repertoire;
@@ -33,12 +39,18 @@ export const thunkGetAllRepertoire = userId => async dispatch => {
 
 export const thunkCreateRepertoire = (userId, newRepertoire) => async dispatch => {
   try {
-    const repertoire = await customFetch(
+    const resData = await customFetch(
       `/api/users/${userId}/repertoire`,
       'POST',
       newRepertoire
     );
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const repertoire = resData;
     dispatch(createRepertoire(repertoire));
 
     return repertoire;

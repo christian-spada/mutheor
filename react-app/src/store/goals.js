@@ -45,8 +45,14 @@ const deleteGoal = goalId => {
 //! ===== THUNKS =====
 export const thunkGetAllGoals = userId => async dispatch => {
   try {
-    const goals = await customFetch(`/api/users/${userId}/goals`);
+    const resData = await customFetch(`/api/users/${userId}/goals`);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const goals = resData;
     dispatch(getAllGoals(goals));
 
     return goals;
@@ -57,8 +63,14 @@ export const thunkGetAllGoals = userId => async dispatch => {
 
 export const thunkGetSingleGoal = (userId, goalId) => async dispatch => {
   try {
-    const goal = await customFetch(`/api/users/${userId}/goals/${goalId}`);
+    const resData = await customFetch(`/api/users/${userId}/goals/${goalId}`);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const goal = resData;
     dispatch(getSingleGoal(goal));
 
     return goal;
@@ -69,8 +81,14 @@ export const thunkGetSingleGoal = (userId, goalId) => async dispatch => {
 
 export const thunkCreateGoal = (userId, newGoal) => async dispatch => {
   try {
-    const goal = await customFetch(`/api/users/${userId}/goals/${newGoal.id}`);
+    const resData = await customFetch(`/api/users/${userId}/goals`, 'POST', newGoal);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const goal = resData;
     dispatch(createGoal(goal));
 
     return goal;
@@ -81,8 +99,14 @@ export const thunkCreateGoal = (userId, newGoal) => async dispatch => {
 
 export const thunkEditGoal = (userId, updatedGoal) => async dispatch => {
   try {
-    const goal = await customFetch(`/api/users/${userId}/goals/${updatedGoal.id}`);
+    const resData = await customFetch(`/api/users/${userId}/goals/${updatedGoal.id}`);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const goal = resData;
     dispatch(editGoal(goal));
 
     return goal;
@@ -93,11 +117,17 @@ export const thunkEditGoal = (userId, updatedGoal) => async dispatch => {
 
 export const thunkDeleteGoal = (userId, goalToDelete) => async dispatch => {
   try {
-    const messageRes = await customFetch(`/api/users/${userId}/goals/${goalToDelete.id}`);
+    const resData = await customFetch(`/api/users/${userId}/goals/${goalToDelete.id}`);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const message = resData;
     dispatch(deleteGoal(goalToDelete.id));
 
-    return messageRes;
+    return message;
   } catch (error) {
     return error;
   }

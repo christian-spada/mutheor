@@ -38,7 +38,8 @@ def is_image_url(form, field):
 
 class EditInstrumentForm(FlaskForm):
     type = SelectField("type", choices=type_choices, validators=[DataRequired()])
+    nickname = StringField("nickname")
     category = SelectField(
         "category", choices=category_choices, validators=[DataRequired()]
     )
-    image = StringField("image", validators=[is_image_url])
+    image = StringField("image", validators=[DataRequired(), is_image_url])

@@ -1,7 +1,14 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from sqlalchemy import and_
-from app.utils import entity_not_found, not_authorized
+from app.utils import (
+    entity_not_found,
+    not_authorized,
+    bad_request,
+    attach_csrf_token,
+    logger,
+)
+from app.forms import CreateInstrumentForm, EditInstrumentForm
 from app.models import (
     db,
     User,
@@ -38,7 +45,11 @@ def get_single_instrument(user_id, instrument_id):
     Query for single user instrument and return as dictionary
     """
 
+    # TODO - Add check if user exists?
     instrument = Instrument.query.get(instrument_id)
+    if instrument == None:
+        return entity_not_found("Instrument")
+
     user = instrument.user.to_dict()
 
     return {**instrument.to_dict(), "user": user}
@@ -50,40 +61,63 @@ def create_new_instrument(user_id):
     """
     Create new instrument in DB and return dictionary of new instrument
     """
-    if current_user != user_id:
+
+    if current_user.id != user_id:
         return not_authorized()
 
-    new_instrument = Instrument(
-        user_id=user_id,
-        type=request.form["type"],
-        category=request.form["category"],
-        image=request.form["image"],
-    )
+    form = CreateInstrumentForm()
+    attach_csrf_token(form, request)
 
-    db.session.add(new_instrument)
-    db.session.commit()
+    if form.validate_on_submit():
+        data = form.data
+        new_instrument = Instrument(
+            user_id=data["user_id"],
+            nickname=data["nickname"],
+            type=data["type"],
+            category=data["category"],
+            image=data["image"],
+        )
 
-    return new_instrument.to_dict()
+        db.session.add(new_instrument)
+        db.session.commit()
+
+        return new_instrument.to_dict()
+
+    return bad_request(form.errors)
 
 
 @instrument_routes.route("/instruments/<int:instrument_id>", methods=["PUT"])
 @login_required
 def edit_instrument(user_id, instrument_id):
     """
-    Edit new instrument in DB and return dictionary of new instrument
+    Edit instrument in DB and return dictionary of updated instrument
     """
 
     if current_user.id != user_id:
         return not_authorized()
 
     try:
-        instrument = Instrument.query.filter(
+        instrument_to_edit = Instrument.query.filter(
             and_(Instrument.id == instrument_id, Instrument.user_id == user_id)
         ).one()
     except:
         return entity_not_found("Instrument")
 
-    return instrument.to_dict()
+    form = EditInstrumentForm()
+    attach_csrf_token(form, request)
+
+    if form.validate_on_submit():
+        data = form.data
+        instrument_to_edit.type = data["type"]
+        instrument_to_edit.category = data["category"]
+        instrument_to_edit.nickname = data["nickname"]
+        instrument_to_edit.image = data["image"]
+
+        db.session.commit()
+
+        return instrument_to_edit.to_dict()
+
+    return bad_request(form.errors)
 
 
 @instrument_routes.route("/instruments/<int:instrument_id>", methods=["DELETE"])

@@ -21,8 +21,14 @@ const createAchievement = achievement => {
 //! ===== THUNKS =====
 export const thunkGetAllAchievements = userId => async dispatch => {
   try {
-    const achievements = await customFetch(`/api/users/${userId}/achievements`);
+    const resData = await customFetch(`/api/users/${userId}/achievements`);
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const achievements = resData;
     dispatch(getAllAchievements(achievements));
 
     return achievements;
@@ -33,12 +39,18 @@ export const thunkGetAllAchievements = userId => async dispatch => {
 
 export const thunkCreateAchievement = (userId, newAchievement) => async dispatch => {
   try {
-    const achievement = await customFetch(
+    const resData = await customFetch(
       `/api/users/${userId}/achievements`,
       'POST',
       newAchievement
     );
 
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const achievement = resData;
     dispatch(createAchievement(achievement));
 
     return achievement;
