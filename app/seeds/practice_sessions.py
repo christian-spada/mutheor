@@ -1,5 +1,6 @@
 from app.models import db, PracticeSession, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import date
 
 
 def seed_practice_sessions():
@@ -7,6 +8,7 @@ def seed_practice_sessions():
         user_id=1,
         instrument_id=1,
         duration=112,
+        date=date(2020, 3, 3),
         notes="Practiced getting my economy picking faster. Now comfortably at 60 BPM for 16th notes",
         area_of_focus="Technique",
     )
@@ -14,6 +16,7 @@ def seed_practice_sessions():
         user_id=1,
         instrument_id=2,
         duration=20,
+        date=date(2021, 10, 2),
         notes="Worked on the 3:4 and 3:2 polyrhythms",
         area_of_focus="Rhythm",
     )
@@ -21,6 +24,7 @@ def seed_practice_sessions():
         user_id=3,
         instrument_id=3,
         duration=320,
+        date=date(2022, 5, 9),
         notes="Practiced chord voicings, specifically spread triads",
         area_of_focus="Chords",
     )
