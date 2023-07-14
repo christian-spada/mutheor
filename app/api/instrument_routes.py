@@ -1,7 +1,13 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from sqlalchemy import and_
-from app.utils import entity_not_found, not_authorized, attach_csrf_token
+from app.utils import (
+    entity_not_found,
+    not_authorized,
+    bad_request,
+    attach_csrf_token,
+    logger,
+)
 from app.forms import CreateInstrumentForm, EditInstrumentForm
 from app.models import (
     db,
@@ -12,7 +18,6 @@ from app.models import (
     Repertoire,
     Achievement,
 )
-from app.utils import logger, bad_request
 
 instrument_routes = Blueprint(
     "instruments",
@@ -41,11 +46,11 @@ def get_single_instrument(user_id, instrument_id):
     """
 
     # TODO - Add check if user exists?
-    try:
-        instrument = Instrument.query.get(instrument_id)
-        user = instrument.user.to_dict()
-    except:
+    instrument = Instrument.query.get(instrument_id)
+    if instrument == None:
         return entity_not_found("Instrument")
+
+    user = instrument.user.to_dict()
 
     return {**instrument.to_dict(), "user": user}
 
