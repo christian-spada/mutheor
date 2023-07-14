@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from sqlalchemy import and_
+from app.forms import CreateRepertoireForm
 from app.models import (
     db,
     User,
@@ -10,7 +11,13 @@ from app.models import (
     Repertoire,
     Achievement,
 )
-from app.utils import entity_not_found, not_authorized, logger
+from app.utils import (
+    bad_request,
+    entity_not_found,
+    not_authorized,
+    logger,
+    attach_csrf_token,
+)
 
 repertoire_routes = Blueprint(
     "repertoire",
@@ -48,14 +55,22 @@ def create_new_song_in_repertoire(user_id):
     except:
         return entity_not_found("Instrument")
 
-    new_repertoire = Repertoire(
-        user_id=user_id,
-        instrument_id=instrument.id,
-        song_title=request.form["song_title"],
-        artist=request.form["artist"],
-    )
+    form = CreateRepertoireForm()
+    attach_csrf_token(form, request)
 
-    db.session.add(new_repertoire)
-    db.session.commit()
+    if form.validate_on_submit():
+        data = form.data
 
-    return new_repertoire.to_dict()
+        new_repertoire = Repertoire(
+            user_id=user_id,
+            instrument_id=instrument.id,
+            song_title=data["song_title"],
+            artist=data["artist"],
+        )
+
+        db.session.add(new_repertoire)
+        db.session.commit()
+
+        return new_repertoire.to_dict()
+
+    return bad_request(form.errors)
