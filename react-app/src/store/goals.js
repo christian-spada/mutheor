@@ -81,7 +81,7 @@ export const thunkGetSingleGoal = (userId, goalId) => async dispatch => {
 
 export const thunkCreateGoal = (userId, newGoal) => async dispatch => {
   try {
-    const resData = await customFetch(`/api/users/${userId}/goals/${newGoal.id}`);
+    const resData = await customFetch(`/api/users/${userId}/goals`, 'POST', newGoal);
 
     if (resData.errors) {
       const error = resData;

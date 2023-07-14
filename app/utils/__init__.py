@@ -33,5 +33,5 @@ def attach_csrf_token(form, request):
 # ===== GENERAL =====
 def logger(label, item):
     print("============== * ===============")
-    print(label.upper(), item)
+    print(label.upper() + " ->", item)
     print("============== * ===============")
