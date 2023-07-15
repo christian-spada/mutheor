@@ -1,0 +1,48 @@
+.profile-button__img-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-300);
+  cursor: pointer;
+}
+
+.profile-button__img {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.profile-dropdown {
+  position: absolute;
+  left: -70px;
+  bottom: -6rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 10px 3px hsl(262, 10%, 90%);
+}
+
+.profile-dropdown > li {
+  padding: 0.3rem;
+  text-align: center;
+}
+
+.profile-dropdown > :nth-child(odd) {
+  background-color: var(--primary-100);
+}
+
+.profile-dropdown__username {
+  border-radius: 8px 8px 0 0;
+}
+
+.profile-dropdown__logout-btn {
+  cursor: pointer;
+  border-radius: 0 0 8px 8px;
+}
+
+.profile-dropdown-container {
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
