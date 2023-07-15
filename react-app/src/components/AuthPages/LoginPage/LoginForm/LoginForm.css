@@ -62,6 +62,10 @@
   width: 100%;
 }
 
+.login-form__input--style:focus {
+  outline: 1.5px solid var(--primary-400);
+}
+
 .login-form__name {
   position: absolute;
   top: 0;

@@ -7,6 +7,7 @@ from app.utils import (
     attach_csrf_token,
     bad_request,
     validation_errors_to_error_messages,
+    logger,
 )
 
 auth_routes = Blueprint("auth", __name__)
@@ -55,6 +56,7 @@ def sign_up():
     attach_csrf_token(form, request)
     if form.validate_on_submit():
         user = User(
+            profile_pic=form.data["profile_pic"],
             username=form.data["username"],
             email=form.data["email"],
             password=form.data["password"],

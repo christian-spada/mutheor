@@ -13,10 +13,10 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <div className="login-page__sidebar"></div>
-      <div className="login-page__main-section">
+      <aside className="login-page__sidebar"></aside>
+      <main className="login-page__main-section">
         <LoginForm />
-      </div>
+      </main>
     </div>
   );
 };
