@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import ProfileButton from '../Navigation/ProfileButton';
+import ProfileButton from '../ProfileButton/ProfileButton';
 import './UserDashboard.css';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const HamburgerMenu = ({ showSideBar, setShowSidebar }) => {
   const handleClick = e => {
@@ -22,6 +22,21 @@ const HamburgerMenu = ({ showSideBar, setShowSidebar }) => {
 const UserDashboard = () => {
   const user = useSelector(state => state.session.user);
   const [showSideBar, setShowSidebar] = useState(false);
+  const sidebar = useRef();
+
+  useEffect(() => {
+    if (!showSideBar) return;
+
+    const closeMenu = e => {
+      if (!sidebar.current.contains(e.target)) {
+        setShowSidebar(false);
+      }
+    };
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener('click', closeMenu);
+  }, [showSideBar]);
 
   return (
     <>
@@ -32,7 +47,10 @@ const UserDashboard = () => {
         </div>
       </header>
       <main>
-        <aside className={`user-dashboard__sidebar ${showSideBar ? 'show' : ''}`}></aside>
+        <aside
+          className={`user-dashboard__sidebar ${showSideBar ? 'show' : ''}`}
+          ref={sidebar}
+        ></aside>
         {showSideBar && <div className="overlay"></div>}
       </main>
     </>
