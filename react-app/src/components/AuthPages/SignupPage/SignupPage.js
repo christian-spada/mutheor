@@ -13,10 +13,10 @@ const SignupPage = () => {
 
   return (
     <div className="signup-page">
-      <div className="signup-page__sidebar"></div>
-      <div className="signup-page__main-section">
+      <aside className="signup-page__sidebar"></aside>
+      <main className="signup-page__main-section">
         <SignupForm />
-      </div>
+      </main>
     </div>
   );
 };

@@ -1,5 +1,9 @@
-.signup-form > div:not(:last-child) {
+.signup-form > section:not(:last-child) {
   margin-bottom: 1rem;
+}
+
+.signup-form__profile-pic {
+  border-radius: 50%;
 }
 
 .signup-form label[for] {
@@ -17,9 +21,14 @@
   background-color: var(--primary-100);
   padding: 0.4rem;
   width: 100%;
+  transition: outline 150ms ease-in-out;
 }
 
-.signup-form__btn-container {
+.signup-form__input--style:focus {
+  outline: 1.5px solid var(--primary-400);
+}
+
+.signup-form__btn-section {
   display: flex;
   justify-content: center;
 }
@@ -28,4 +37,19 @@
   background-color: var(--primary-400);
   color: var(--primary-100);
   margin-top: 1rem;
+}
+
+.signup-form__img-container {
+  border-radius: 50%;
+  height: 125px;
+  width: 125px;
+  margin: 0 auto;
+  background-color: var(--primary-300);
+  margin-bottom: 1rem;
+}
+
+.signup-form__profile-pic {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }

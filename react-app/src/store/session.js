@@ -41,7 +41,6 @@ export const login = (email, password) => async dispatch => {
       const error = resData;
       return error;
     }
-    logger('data error thunk', resData);
 
     const user = resData;
     dispatch(setUser(user));
