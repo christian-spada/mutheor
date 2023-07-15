@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { login } from '../../../store/session';
+import { login } from '../../../../store/session';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { ErrorView } from '../../UtilComponents/ErrorView';
-import { logger } from '../../../utils/helpers';
+import { ErrorView } from '../../../UtilComponents/ErrorView';
+import { logger } from '../../../../utils/helpers';
 import './LoginForm.css';
 
 export const LoginForm = () => {
@@ -15,6 +15,7 @@ export const LoginForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    e.stopPropagation();
 
     const data = await dispatch(login(email, password));
 
@@ -23,6 +24,13 @@ export const LoginForm = () => {
     } else {
       history.push(`/users/${data.id}/dashboard`);
     }
+  };
+
+  const handleDemoUser = async e => {
+    e.preventDefault();
+
+    dispatch(login('demo@aa.io', 'password'));
+    history.push('/users/1/dashboard');
   };
 
   return (
@@ -35,12 +43,12 @@ export const LoginForm = () => {
               id="login-email"
               value={email}
               onChange={e => setEmail(e.target.value)}
-              required
               autoComplete="off"
               className="login-form__input--style"
             />
             {errors.email && <ErrorView error={errors.email} styling={'login-form__name'} />}
           </div>
+
           <div className="login-form__password-container">
             <label htmlFor="login-password">Password</label>
             <input
@@ -48,7 +56,6 @@ export const LoginForm = () => {
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              required
               autoComplete="off"
               className="login-form__input--style"
             />
@@ -57,12 +64,13 @@ export const LoginForm = () => {
             )}
           </div>
         </section>
+
         <section className="login-form__btn-section">
           <div className="login-form__btn-container">
             <button className="login-form__login-btn" type="submit">
               Log In
             </button>
-            <button className="login-form__demo-btn" type="submit">
+            <button className="login-form__demo-btn" onClick={handleDemoUser}>
               Demo User
             </button>
           </div>
