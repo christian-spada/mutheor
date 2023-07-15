@@ -31,20 +31,24 @@ export const authenticate = () => async dispatch => {
 };
 
 export const login = (email, password) => async dispatch => {
-  const resData = await customFetch('/api/auth/login', 'POST', {
-    email,
-    password,
-  });
+  try {
+    const resData = await customFetch('/api/auth/login', 'POST', {
+      email,
+      password,
+    });
 
-  if (resData.errors) {
-    const error = resData;
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+    logger('data error thunk', resData);
+
+    const user = resData;
+    dispatch(setUser(user));
+    return user;
+  } catch (error) {
     return error;
   }
-  logger('data error thunk', resData);
-
-  const user = resData;
-  dispatch(setUser(user));
-  return user;
 };
 
 export const logout = () => async dispatch => {
@@ -60,29 +64,23 @@ export const logout = () => async dispatch => {
 };
 
 export const signUp = (username, email, password) => async dispatch => {
-  const response = await fetch('/api/auth/signup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
+  try {
+    const resData = await customFetch('/api/auth/signup', 'POST', {
       username,
       email,
       password,
-    }),
-  });
+    });
 
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(setUser(data));
-    return null;
-  } else if (response.status < 500) {
-    const data = await response.json();
-    if (data.errors) {
-      return data.errors;
+    if (resData.errors) {
+      const error = resData;
+      return error;
     }
-  } else {
-    return ['An error occurred. Please try again.'];
+
+    const user = resData;
+    dispatch(setUser(user));
+    return user;
+  } catch (error) {
+    return error;
   }
 };
 

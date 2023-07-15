@@ -1,0 +1,16 @@
+.login-page {
+  display: flex;
+}
+
+.login-page__main-section {
+  display: grid;
+  place-items: center;
+  flex-grow: 2;
+  background-color: hsl(262, 1%, 98%);
+}
+
+.login-page__sidebar {
+  background-color: var(--primary-400);
+  height: 100vh;
+  width: 22%;
+}

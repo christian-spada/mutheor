@@ -5,10 +5,10 @@ import './LoginPage.css';
 
 const LoginPage = () => {
   const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session.user);
 
-  if (sessionUser) {
-    history.push('/dashboard');
+  if (user) {
+    history.push(`/users/${user.id}/dashboard`);
   }
 
   return (

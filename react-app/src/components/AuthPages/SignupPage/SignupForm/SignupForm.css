@@ -1,0 +1,31 @@
+.signup-form > div:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.signup-form label[for] {
+  color: hsl(0, 5%, 17%);
+  font-size: 14px;
+  margin-bottom: 0.2rem;
+  display: block;
+}
+
+.signup-form__input--style {
+  border: none;
+  outline: none;
+  height: 2.7rem;
+  border-radius: 8px;
+  background-color: var(--primary-100);
+  padding: 0.4rem;
+  width: 100%;
+}
+
+.signup-form__btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.signup-form__signup-btn {
+  background-color: var(--primary-400);
+  color: var(--primary-100);
+  margin-top: 1rem;
+}

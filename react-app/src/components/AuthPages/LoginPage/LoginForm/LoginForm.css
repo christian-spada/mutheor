@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
+  gap: 2rem;
 }
 
 .login-form__input-section {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,20 +18,19 @@
   color: hsl(0, 5%, 17%);
   font-size: 14px;
   margin-bottom: 0.2rem;
+  display: block;
 }
 
 .login-form__btn-section {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   gap: 1rem;
   flex-grow: 1;
 }
 
 .login-form__name-container,
 .login-form__password-container {
-  display: flex;
-  flex-direction: column;
   position: relative;
 }
 
@@ -50,6 +49,7 @@
 .login-form__demo-btn {
   background-color: var(--primary-100);
   color: var(--primary-800);
+  font-size: 12px;
 }
 
 .login-form__input--style {
@@ -59,16 +59,19 @@
   border-radius: 8px;
   background-color: var(--primary-100);
   padding: 0.4rem;
+  width: 100%;
 }
 
 .login-form__name {
   position: absolute;
+  top: 0;
   left: 5rem;
   font-size: 14px;
 }
 
 .login-form__password {
   position: absolute;
+  top: 0;
   left: 5rem;
   font-size: 14px;
 }
