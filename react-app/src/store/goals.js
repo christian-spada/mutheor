@@ -1,4 +1,4 @@
-import { customFetch } from '../utils/helpers';
+import { customFetch, normalizeData } from '../utils/helpers';
 
 const GET_ALL_GOALS = 'goals/GET_ALL_';
 const GET_SINGLE_GOAL = 'goals/GET_SINGLE_GOAL';
@@ -135,12 +135,15 @@ export const thunkDeleteGoal = (userId, goalToDelete) => async dispatch => {
 
 //! ===== REDUCER =====
 
-const initialState = { goals: {} };
+const initialState = { allGoals: {} };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_GOALS:
-      return {};
+      return {
+        ...state,
+        allGoals: normalizeData(action.payload.goals),
+      };
     case GET_SINGLE_GOAL:
       return {};
     case EDIT_GOAL:
