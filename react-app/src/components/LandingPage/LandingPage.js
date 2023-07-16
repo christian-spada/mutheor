@@ -1,6 +1,6 @@
 import { NavBar } from './NavBar/NavBar';
 import { useSelector } from 'react-redux';
-import { useHistory, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {

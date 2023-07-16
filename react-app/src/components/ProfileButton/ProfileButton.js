@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
 import { logger } from '../../utils/helpers';
 import './ProfileButton.css';
@@ -34,7 +34,6 @@ const ProfileButton = ({ user }) => {
   };
 
   const ulClassName = 'profile-dropdown' + (showMenu ? '' : ' hidden');
-  logger('user', user);
 
   if (showMenu && !user) return <Redirect to="/" />;
 

@@ -6,7 +6,7 @@
   display: grid;
   place-items: center;
   flex-grow: 2;
-  background-color: hsl(262, 1%, 98%);
+  background-color: hsl(246, 1%, 98%);
 }
 
 .login-page__sidebar {
