@@ -37,6 +37,7 @@ export const LoginForm = () => {
     <div className="form-wrapper">
       <form className="login-form" onSubmit={handleSubmit}>
         <section className="login-form__input-section">
+          {/* ===== NAME ===== */}
           <div className="login-form__name-container">
             <label htmlFor="login-email">Email</label>
             <input
@@ -44,11 +45,12 @@ export const LoginForm = () => {
               value={email}
               onChange={e => setEmail(e.target.value)}
               autoComplete="off"
-              className="login-form__input--style"
+              className={`login-form__input--style ${errors.email ? 'error-outline' : ''}`}
             />
             {errors.email && <ErrorView error={errors.email} styling={'login-form__name'} />}
           </div>
 
+          {/* ===== PASSWORD ===== */}
           <div className="login-form__password-container">
             <label htmlFor="login-password">Password</label>
             <input
@@ -57,7 +59,7 @@ export const LoginForm = () => {
               value={password}
               onChange={e => setPassword(e.target.value)}
               autoComplete="off"
-              className="login-form__input--style"
+              className={`login-form__input--style ${errors.password ? 'error-outline' : ''}`}
             />
             {errors.password && (
               <ErrorView error={errors.password} styling={'login-form__password'} />
@@ -65,6 +67,7 @@ export const LoginForm = () => {
           </div>
         </section>
 
+        {/* ===== BUTTONS ===== */}
         <section className="login-form__btn-section">
           <div className="login-form__btn-container">
             <button className="login-form__login-btn" type="submit">

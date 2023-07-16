@@ -1,0 +1,8 @@
+.session-card {
+  padding: 1rem;
+}
+
+.session-card__header {
+  display: flex;
+  justify-content: flex-end;
+}

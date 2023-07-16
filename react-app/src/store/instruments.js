@@ -1,4 +1,4 @@
-import { customFetch, logger } from '../utils/helpers';
+import { customFetch, logger, normalizeData } from '../utils/helpers';
 
 const GET_ALL_INSTRUMENTS = 'instruments/GET_ALL_INSTRUMENTS';
 const GET_SINGLE_INSTRUMENT = 'instruments/GET_SINGLE_INSTRUMENT';
@@ -146,12 +146,15 @@ export const thunkDeleteInstrument = (userId, instrumentToDelete) => async dispa
 
 //! ===== REDUCER =====
 
-const initialState = { instruments: {} };
+const initialState = { allInstruments: {} };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_INSTRUMENTS:
-      return {};
+      return {
+        ...state,
+        allInstruments: normalizeData(action.payload.instruments),
+      };
     case GET_SINGLE_INSTRUMENT:
       return {};
     case CREATE_INSTRUMENT:

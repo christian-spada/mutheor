@@ -1,4 +1,4 @@
-import { customFetch } from '../utils/helpers';
+import { customFetch, logger, normalizeData } from '../utils/helpers';
 
 const GET_ALL_PRACTICE_SESSIONS = 'practiceSessions/GET_ALL_PRACTICE_SESSIONS';
 const GET_SINGLE_PRACTICE_SESSION = 'practiceSessions/GET_SINGLE_PRACTICE_SESSION';
@@ -29,7 +29,7 @@ const createPracticeSession = practiceSession => {
 //! ===== THUNKS =====
 export const thunkGetAllPracticeSessions = userId => async dispatch => {
   try {
-    const resData = await customFetch(`/api/users/${userId}/practiceSessions`);
+    const resData = await customFetch(`/api/users/${userId}/sessions`);
 
     if (resData.errors) {
       const error = resData;
@@ -46,9 +46,7 @@ export const thunkGetAllPracticeSessions = userId => async dispatch => {
 
 export const thunkGetSinglePracticeSession = (userId, practiceSessionId) => async dispatch => {
   try {
-    const resData = await customFetch(
-      `/api/users/${userId}/practiceSessions/${practiceSessionId}`
-    );
+    const resData = await customFetch(`/api/users/${userId}/sessions/${practiceSessionId}`);
 
     if (resData.errors) {
       const error = resData;
@@ -66,7 +64,7 @@ export const thunkGetSinglePracticeSession = (userId, practiceSessionId) => asyn
 export const thunkCreatePracticeSession = (userId, newPracticeSession) => async dispatch => {
   try {
     const resData = await customFetch(
-      `/api/users/${userId}/practiceSessions`,
+      `/api/users/${userId}/sessions`,
       'POST',
       newPracticeSession
     );
@@ -86,12 +84,16 @@ export const thunkCreatePracticeSession = (userId, newPracticeSession) => async 
 
 //! ===== REDUCER =====
 
-const initialState = { practiceSessions: {} };
+const initialState = { allPracticeSessions: {}, singlePracticeSession: {} };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_PRACTICE_SESSIONS:
-      return {};
+      logger('payload', action.payload);
+      return {
+        ...state,
+        allPracticeSessions: normalizeData(action.payload.practiceSessions),
+      };
     case GET_SINGLE_PRACTICE_SESSION:
       return {};
     case CREATE_PRACTICE_SESSION:

@@ -25,3 +25,13 @@ export const logger = (label, item) => {
   console.log(label.toUpperCase() + ' ->', item);
   console.log('=============================================');
 };
+
+export const normalizeData = data => {
+  const normalized = {};
+
+  for (const obj of data) {
+    normalized[obj.id] = obj;
+  }
+
+  return normalized;
+};

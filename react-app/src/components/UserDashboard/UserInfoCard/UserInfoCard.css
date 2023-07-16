@@ -1,0 +1,20 @@
+.user-info-card {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 5rem;
+  border-radius: 1rem;
+  background-color: var(--primary-200);
+}
+
+.user-info-card__img-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.user-info-card__info {
+  border: 1px solid black;
+  width: 300px;
+  height: 200px;
+}
