@@ -1,8 +1,29 @@
-.session-card {
+.session-card > section {
   padding: 1rem;
+}
+
+.session-card section i {
+  font-size: 18px;
+  color: var(--primary-400);
+}
+
+.session-card section > div {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .session-card__header {
   display: flex;
   justify-content: flex-end;
+}
+
+.session-card__time-section {
+  display: flex;
+  justify-content: space-around;
+}
+
+.session-card__notes-section {
+  background-color: var(--primary-200);
+  border-radius: inherit;
 }

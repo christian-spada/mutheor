@@ -34,7 +34,9 @@ def get_all_sessions(user_id):
     """
     practice_sessions = PracticeSession.query.filter_by(user_id=user_id).all()
 
-    return {"practiceSessions": [sesh.to_dict() for sesh in practice_sessions]}
+    return {
+        "practiceSessions": [sesh.to_dict() for sesh in practice_sessions],
+    }
 
 
 @practice_session_routes.route("/sessions/<int:session_id>")

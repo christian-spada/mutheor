@@ -42,11 +42,11 @@ class PracticeSession(db.Model):
         dct = {
             "id": self.id,
             "userId": self.user_id,
-            "instrumentId": self.instrument_id,
             "duration": self.duration,
             "date": self.date,
             "notes": self.notes,
             "areaOfFocus": self.enums_to_string(enum=self.area_of_focus),
+            "instrument": self.instrument.to_dict(),
         }
         if timestamps:
             dct["createdAt"] = self.created_at
