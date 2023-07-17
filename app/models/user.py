@@ -46,6 +46,7 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "profilePic": self.profile_pic,
+            "instruments": [inst.to_dict() for inst in self.instruments],
         }
         if timestamps:
             dct["createdAt"] = self.created_at
