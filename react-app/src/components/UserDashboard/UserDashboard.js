@@ -62,11 +62,21 @@ const UserDashboard = () => {
     return () => document.removeEventListener('click', closeMenu);
   }, [showSideBar]);
 
+  useEffect(() => {
+    if (user && contentView === 'Practice Sessions')
+      dispatch(thunkGetAllPracticeSessions(user.id));
+    if (user && contentView === 'Instruments') dispatch(thunkGetAllInstruments(user.id));
+    if (user && contentView === 'Goals') dispatch(thunkGetAllGoals(user.id));
+  }, []);
+
   return (
     <>
       {/* ===== HEADER ==== */}
       <header className="user-dashboard__header">
-        <HamburgerMenu showSideBar={showSideBar} setShowSidebar={setShowSidebar} />
+        <HamburgerMenu
+          showSideBar={showSideBar}
+          setShowSidebar={setShowSidebar}
+        />
         <div className="user-dashboard__profile-container">
           <ProfileButton user={user} />
         </div>
@@ -125,7 +135,12 @@ const UserDashboard = () => {
               </button>
               {contentView === 'Goals' && (
                 <OpenModalButton
-                  modalComponent={<CreateGoalModal user={user} />}
+                  modalComponent={
+                    <CreateGoalModal
+                      user={user}
+                      instruments={instruments}
+                    />
+                  }
                   icon={<i className="fa-solid fa-square-plus"></i>}
                 />
               )}
@@ -138,14 +153,28 @@ const UserDashboard = () => {
           <div className="user-dashboard__content-container">
             {contentView === 'Practice Sessions' &&
               practiceSessions.map(session => (
-                <PracticeSessionCard key={session.id} user={user} session={session} />
+                <PracticeSessionCard
+                  key={session.id}
+                  user={user}
+                  session={session}
+                />
               ))}
             {contentView === 'Instruments' &&
               instruments.map(instrument => (
-                <InstrumentCard key={instrument.id} user={user} instrument={instrument} />
+                <InstrumentCard
+                  key={instrument.id}
+                  user={user}
+                  instrument={instrument}
+                />
               ))}
             {contentView === 'Goals' &&
-              goals.map(goal => <GoalCard key={goal.id} user={user} goal={goal} />)}
+              goals.map(goal => (
+                <GoalCard
+                  key={goal.id}
+                  user={user}
+                  goal={goal}
+                />
+              ))}
           </div>
         </section>
       </main>
