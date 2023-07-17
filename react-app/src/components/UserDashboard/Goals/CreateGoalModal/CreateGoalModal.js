@@ -5,14 +5,15 @@ import { thunkCreateGoal } from '../../../../store/goals';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';
 
-const CreateGoalModal = ({ instruments, user }) => {
+const CreateGoalModal = ({ user }) => {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
 
+  const instruments = user.instruments;
   const [instrumentId, setInstrumentId] = useState();
   const [targetDate, setTargetDate] = useState('');
   const [description, setDescription] = useState('');
-  const [instrumentType, setInstrumentType] = useState(instruments[0].type);
+  const [instrumentType, setInstrumentType] = useState(user.instruments[0].type);
 
   const userInstruments = new Set();
   const multipleSameTypeInstruments = instruments.filter(inst => {
