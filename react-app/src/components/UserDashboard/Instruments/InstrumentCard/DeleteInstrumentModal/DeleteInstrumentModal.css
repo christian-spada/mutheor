@@ -1,0 +1,16 @@
+.delete-instrument-modal {
+  padding: 2rem;
+  width: 300px;
+}
+
+.delete-instrument-modal__btn-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+.delete-instrument-modal__delete-btn {
+  background-color: var(--primary-red);
+  color: var(--primary-white);
+}
