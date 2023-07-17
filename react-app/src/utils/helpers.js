@@ -35,3 +35,35 @@ export const normalizeData = data => {
 
   return normalized;
 };
+
+export const formatDate = (date, delimiter) => {
+  const dateObj = new Date(date);
+  const formattedDate = `${
+    dateObj.getMonth() + 1
+  }${delimiter}${dateObj.getDate()}${delimiter}${dateObj.getFullYear()}`;
+  return formattedDate;
+};
+
+export const formatDuration = duration => {
+  const minutes = duration % 60;
+
+  let formattedDuration;
+
+  if (duration === 60) {
+    formattedDuration = '1 h';
+  }
+
+  if (minutes === 0) {
+    formattedDuration = `${duration / 60} h`;
+  }
+
+  if (duration < 60) {
+    formattedDuration = `${minutes} m`;
+  }
+
+  if (duration > 60 && minutes !== 0) {
+    formattedDuration = `${Math.floor(duration / 60)} h ${minutes} m`;
+  }
+
+  return formattedDuration;
+};

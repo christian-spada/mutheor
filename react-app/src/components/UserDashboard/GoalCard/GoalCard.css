@@ -1,0 +1,10 @@
+/* .goal-card {
+  background-color: var(--primary-100);
+  padding: 1rem;
+  border-radius: 8px;
+} */
+
+.goal-card__header {
+  display: flex;
+  justify-content: space-between;
+}
