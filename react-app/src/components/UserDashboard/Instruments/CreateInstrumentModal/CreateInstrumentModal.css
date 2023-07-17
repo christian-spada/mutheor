@@ -1,0 +1,33 @@
+.create-instrument-modal {
+  padding: 2rem;
+}
+
+.create-instrument-form label {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.create-instrument-form__img-section {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.create-instrument-form__img-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--primary-400);
+}
+
+.create-instrument-form__type-section {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.create-instrument-form__btn-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}

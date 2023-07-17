@@ -1,35 +1,21 @@
-import OpenModalButton from '../../OpenModalButton';
+import OpenModalButton from '../../../OpenModalButton';
+import DeleteInstrumentModal from './DeleteInstrumentModal/DeleteInstrumentModal';
+import EditInstrumentModal from './EditInstrumentModal/EditInstrumentModal';
 import './InstrumentCard.css';
 
-const DeleteInstrumentModal = () => {
-  return (
-    <div>
-      <h1>HEY</h1>
-      <button>Delete</button>
-    </div>
-  );
-};
-
-const EditInstrumentModal = () => {
-  return (
-    <div>
-      <h1>HEY</h1>
-      <button>Save Changes</button>
-    </div>
-  );
-};
-
-const InstrumentCard = ({ instrument }) => {
+const InstrumentCard = ({ instrument, user }) => {
   return (
     <div className="instrument-card card">
       <header className="instrument-card__header">
         <OpenModalButton
-          modalComponent={EditInstrumentModal}
+          modalComponent={<EditInstrumentModal instrumentToEdit={instrument} user={user} />}
           icon={<i className="fa-regular fa-pen-to-square instrument-card__edit-btn"></i>}
         />
 
         <OpenModalButton
-          modalComponent={DeleteInstrumentModal}
+          modalComponent={
+            <DeleteInstrumentModal instrumentToDelete={instrument} user={user} />
+          }
           icon={<i className="fa-solid fa-xmark instrument-card__delete-btn"></i>}
         />
       </header>

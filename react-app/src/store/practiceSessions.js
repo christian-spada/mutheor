@@ -89,7 +89,6 @@ const initialState = { allPracticeSessions: {}, singlePracticeSession: {} };
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_PRACTICE_SESSIONS:
-      logger('payload', action.payload);
       return {
         ...state,
         allPracticeSessions: normalizeData(action.payload.practiceSessions),

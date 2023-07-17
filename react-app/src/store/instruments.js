@@ -162,7 +162,13 @@ export default function reducer(state = initialState, action) {
     case EDIT_INSTRUMENT:
       return {};
     case DELETE_INSTRUMENT:
-      return {};
+      const newState = {
+        ...state,
+        allInstruments: { ...state.allInstruments },
+        singleInstrument: {},
+      };
+      delete newState.allInstruments[action.payload.id];
+      return newState;
     default:
       return state;
   }
