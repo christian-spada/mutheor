@@ -1,17 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileButton from '../ProfileButton/ProfileButton';
-import './UserDashboard.css';
 import { useEffect, useRef, useState } from 'react';
+
+import ProfileButton from '../ProfileButton/ProfileButton';
 import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
 import UserInfoCard from './UserInfoCard/UserInfoCard';
-import PracticeSessionCard from './PracticeSessionCard/PracticeSessionCard';
-import InstrumentCard from './InstrumentCard/InstrumentCard';
-import GoalCard from './GoalCard/GoalCard';
+import PracticeSessionCard from './PracticeSessions/PracticeSessionCard/PracticeSessionCard';
+import CreatePracticeSessionModal from './PracticeSessions/CreatePracticeSessionModal/CreatePracticeSessionModal';
+import InstrumentCard from './Instruments/InstrumentCard/InstrumentCard';
+import CreateInstrumentModal from './Instruments/CreateInstrumentModal/CreateInstrumentModal';
+import GoalCard from './Goals/GoalCard/GoalCard';
+import CreateGoalModal from './Goals/CreateGoalModal/CreateGoalModal';
 import './UserDashboard.css';
-import { logger } from '../../utils/helpers';
+
 import { thunkGetAllPracticeSessions } from '../../store/practiceSessions';
 import { thunkGetAllInstruments } from '../../store/instruments';
 import { thunkGetAllGoals } from '../../store/goals';
+
+import OpenModalButton from '../OpenModalButton';
+import { logger } from '../../utils/helpers';
+import './UserDashboard.css';
 
 const UserDashboard = () => {
   const dispatch = useDispatch();
@@ -25,17 +32,17 @@ const UserDashboard = () => {
   const [contentView, setContentView] = useState('Practice Sessions');
   const sidebar = useRef();
 
-  const handlePracticeSessionClick = async e => {
+  const handlePracticeSessionSelection = async e => {
     setContentView('Practice Sessions');
 
     dispatch(thunkGetAllPracticeSessions(user.id));
   };
-  const handleInstrumentClick = async e => {
+  const handleInstrumentSelection = async e => {
     setContentView('Instruments');
 
     dispatch(thunkGetAllInstruments(user.id));
   };
-  const handleGoalClick = async e => {
+  const handleGoalSelection = async e => {
     setContentView('Goals');
 
     dispatch(thunkGetAllGoals(user.id));
@@ -81,24 +88,48 @@ const UserDashboard = () => {
         {/* ===== SELECTION SECTION ==== */}
         <section className="user-dashboard__view-selection-section">
           <div className="user-dashboard__view-selection">
-            <button
-              onClick={handleInstrumentClick}
-              className={contentView === 'Instruments' ? 'active' : ''}
-            >
-              Instruments
-            </button>
-            <button
-              onClick={handlePracticeSessionClick}
-              className={contentView === 'Practice Sessions' ? 'active' : ''}
-            >
-              Practice Sessions
-            </button>
-            <button
-              onClick={handleGoalClick}
-              className={contentView === 'Goals' ? 'active' : ''}
-            >
-              Goals
-            </button>
+            <div>
+              <button
+                onClick={handleInstrumentSelection}
+                className={contentView === 'Instruments' ? 'active' : ''}
+              >
+                Instruments
+              </button>
+              {contentView === 'Instruments' && (
+                <OpenModalButton
+                  modalComponent={<CreateInstrumentModal user={user} />}
+                  icon={<i className="fa-solid fa-square-plus"></i>}
+                />
+              )}
+            </div>
+            <div>
+              <button
+                onClick={handlePracticeSessionSelection}
+                className={contentView === 'Practice Sessions' ? 'active' : ''}
+              >
+                Practice Sessions
+              </button>
+              {contentView === 'Practice Sessions' && (
+                <OpenModalButton
+                  modalComponent={<CreatePracticeSessionModal user={user} />}
+                  icon={<i className="fa-solid fa-square-plus"></i>}
+                />
+              )}
+            </div>
+            <div>
+              <button
+                onClick={handleGoalSelection}
+                className={contentView === 'Goals' ? 'active' : ''}
+              >
+                Goals
+              </button>
+              {contentView === 'Goals' && (
+                <OpenModalButton
+                  modalComponent={<CreateGoalModal user={user} />}
+                  icon={<i className="fa-solid fa-square-plus"></i>}
+                />
+              )}
+            </div>
           </div>
         </section>
 
@@ -107,14 +138,14 @@ const UserDashboard = () => {
           <div className="user-dashboard__content-container">
             {contentView === 'Practice Sessions' &&
               practiceSessions.map(session => (
-                <PracticeSessionCard key={session.id} session={session} />
+                <PracticeSessionCard key={session.id} user={user} session={session} />
               ))}
             {contentView === 'Instruments' &&
               instruments.map(instrument => (
-                <InstrumentCard key={instrument.id} instrument={instrument} />
+                <InstrumentCard key={instrument.id} user={user} instrument={instrument} />
               ))}
             {contentView === 'Goals' &&
-              goals.map(goal => <GoalCard key={goal.id} goal={goal} />)}
+              goals.map(goal => <GoalCard key={goal.id} user={user} goal={goal} />)}
           </div>
         </section>
       </main>
