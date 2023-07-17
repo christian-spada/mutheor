@@ -32,7 +32,7 @@ class Goal(db.Model):
         dct = {
             "id": self.id,
             "userId": self.user_id,
-            "instrumentId": self.instrument_id,
+            "instrument": self.instrument.to_dict(),
             "description": self.description,
             "targetDate": self.target_date,
             "isCompleted": self.is_completed,
