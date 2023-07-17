@@ -158,7 +158,13 @@ export default function reducer(state = initialState, action) {
     case EDIT_GOAL:
       return {};
     case DELETE_GOAL:
-      return {};
+      const newState = {
+        ...state,
+        allGoals: { ...state.allGoals },
+        singleGoal: {},
+      };
+      delete newState.allGoals[action.payload];
+      return newState;
     default:
       return state;
   }
