@@ -55,42 +55,54 @@ const UserDashboard = () => {
     return () => document.removeEventListener('click', closeMenu);
   }, [showSideBar]);
 
-  let contentCard;
-
-  if (contentView === 'Practice Sessions') contentCard = <PracticeSessionCard />;
-  if (contentView === 'Instruments') contentCard = <InstrumentCard />;
-  if (contentView === 'Goals') contentCard = <GoalCard />;
-
-  logger('goals', goals);
-  logger('instruments', instruments);
-
   return (
     <>
+      {/* ===== HEADER ==== */}
       <header className="user-dashboard__header">
         <HamburgerMenu showSideBar={showSideBar} setShowSidebar={setShowSidebar} />
         <div className="user-dashboard__profile-container">
           <ProfileButton user={user} />
         </div>
       </header>
+
+      {/* ===== SIDEBAR ===== */}
       <aside
         className={`user-dashboard__sidebar ${showSideBar ? 'show' : ''}`}
         ref={sidebar}
       ></aside>
       {showSideBar && <div className="overlay"></div>}
 
+      {/* ===== MAIN ==== */}
       <main className="user-dashboard__main-content">
         <section className="user-dashboard__user-info-section">
           <UserInfoCard user={user} />
         </section>
 
+        {/* ===== SELECTION SECTION ==== */}
         <section className="user-dashboard__view-selection-section">
           <div className="user-dashboard__view-selection">
-            <button onClick={handleInstrumentClick}>Instruments</button>
-            <button onClick={handlePracticeSessionClick}>Practice Sessions</button>
-            <button onClick={handleGoalClick}>Goals</button>
+            <button
+              onClick={handleInstrumentClick}
+              className={contentView === 'Instruments' ? 'active' : ''}
+            >
+              Instruments
+            </button>
+            <button
+              onClick={handlePracticeSessionClick}
+              className={contentView === 'Practice Sessions' ? 'active' : ''}
+            >
+              Practice Sessions
+            </button>
+            <button
+              onClick={handleGoalClick}
+              className={contentView === 'Goals' ? 'active' : ''}
+            >
+              Goals
+            </button>
           </div>
         </section>
 
+        {/* ===== CONTENT SECTION ==== */}
         <section className="user-dashboard__content-section">
           <div className="user-dashboard__content-container">
             {contentView === 'Practice Sessions' &&
