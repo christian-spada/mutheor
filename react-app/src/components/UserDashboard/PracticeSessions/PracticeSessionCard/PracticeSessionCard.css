@@ -28,7 +28,7 @@
   border-radius: inherit;
   height: 90px;
   overflow-y: hidden;
-  word-break: break-all;
-  text-overflow: ellipsis;
+  /* word-break: break-all;
+  hyphens: auto; */
   padding: 0.8rem;
 }
