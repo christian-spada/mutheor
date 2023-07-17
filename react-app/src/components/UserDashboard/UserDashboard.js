@@ -135,12 +135,7 @@ const UserDashboard = () => {
               </button>
               {contentView === 'Goals' && (
                 <OpenModalButton
-                  modalComponent={
-                    <CreateGoalModal
-                      user={user}
-                      instruments={instruments}
-                    />
-                  }
+                  modalComponent={<CreateGoalModal user={user} />}
                   icon={<i className="fa-solid fa-square-plus"></i>}
                 />
               )}
