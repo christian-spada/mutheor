@@ -2,8 +2,11 @@ import './GoalCard.css';
 
 const GoalCard = ({ goal }) => {
   return (
-    <div style={{ height: '200px', width: '200px', backgroundColor: 'lightblue' }}>
-      <h1></h1>
+    <div className="goal-card card">
+      <header className="goal-card__header">
+        <i className="fa-regular fa-pen-to-square"></i>
+        <i className="fa-solid fa-xmark"></i>
+      </header>
     </div>
   );
 };

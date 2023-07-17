@@ -26,4 +26,9 @@
 .session-card__notes-section {
   background-color: var(--primary-200);
   border-radius: inherit;
+  height: 90px;
+  overflow-y: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  padding: 0.8rem;
 }
