@@ -1,0 +1,16 @@
+.delete-goal-modal {
+  padding: 2rem;
+  width: 300px;
+}
+
+.delete-goal-modal__btn-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  justify-content: flex-end;
+}
+
+.delete-goal-modal__delete-btn {
+  background-color: var(--primary-red);
+  color: var(--primary-white);
+}
