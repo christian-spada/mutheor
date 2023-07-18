@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { logger } from '../../../../utils/helpers';
+import { ErrorView } from '../../../UtilComponents/ErrorView';
 import './CreateGoalModal.css';
 import { thunkCreateGoal } from '../../../../store/goals';
 import { useDispatch } from 'react-redux';
@@ -14,6 +15,8 @@ const CreateGoalModal = ({ user }) => {
   const [targetDate, setTargetDate] = useState('');
   const [description, setDescription] = useState('');
   const [instrumentType, setInstrumentType] = useState(user.instruments[0].type);
+
+  const [errors, setErrors] = useState({});
 
   const userInstruments = new Set();
   const multipleSameTypeInstruments = instruments.filter(inst => {
@@ -38,7 +41,12 @@ const CreateGoalModal = ({ user }) => {
     };
 
     const res = await dispatch(thunkCreateGoal(user.id, newGoal));
-    closeModal();
+
+    if (res.errors) {
+      setErrors(res.errors);
+    } else {
+      closeModal();
+    }
   };
 
   return (
@@ -78,6 +86,7 @@ const CreateGoalModal = ({ user }) => {
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}
             />
+            {errors.target_date && <ErrorView error={errors.target_date} />}
           </div>
         </section>
 
@@ -108,6 +117,7 @@ const CreateGoalModal = ({ user }) => {
             onChange={e => setDescription(e.target.value)}
             value={description}
           ></textarea>
+          {errors.description && <ErrorView error={errors.description} />}
         </section>
 
         <section className="create-goal-form__btn-section">
