@@ -10,6 +10,7 @@ const CreateInstrumentModal = ({ user }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
+  const [previewImage, setPreviewImage] = useState('');
   const [image, setImage] = useState('');
   const [instrumentType, setInstrumentType] = useState('Electric Guitar');
   const [category, setCategory] = useState('String');
@@ -44,10 +45,6 @@ const CreateInstrumentModal = ({ user }) => {
     closeModal();
   };
 
-  logger('type ref', typeSelectRef.current?.value);
-  logger('instrumentType', instrumentType);
-  logger('image', image);
-  logger('category', category);
   return (
     <div className="create-instrument-modal">
       <form
@@ -57,7 +54,7 @@ const CreateInstrumentModal = ({ user }) => {
         <section className="create-instrument-form__img-section">
           <div className="create-instrument-form__img-container">
             <img
-              src={image}
+              src={previewImage}
               alt=""
             ></img>
           </div>
@@ -65,7 +62,9 @@ const CreateInstrumentModal = ({ user }) => {
             <label htmlFor="create-instrument-image">Image Url</label>
             <input
               id="create-instrument-image"
-              onBlur={e => setImage(e.target.value)}
+              onBlur={e => setPreviewImage(e.target.value)}
+              value={image}
+              onChange={e => setImage(e.target.value)}
             />
           </div>
         </section>
