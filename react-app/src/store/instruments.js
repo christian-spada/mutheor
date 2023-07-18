@@ -146,7 +146,7 @@ export const thunkDeleteInstrument = (userId, instrumentToDelete) => async dispa
 
 //! ===== REDUCER =====
 
-const initialState = { allInstruments: {} };
+const initialState = { allInstruments: {}, singleInstrument: {} };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -158,7 +158,11 @@ export default function reducer(state = initialState, action) {
     case GET_SINGLE_INSTRUMENT:
       return {};
     case CREATE_INSTRUMENT:
-      return {};
+      return {
+        ...state,
+        allInstruments: { ...state.allInstruments, [action.payload.id]: action.payload },
+        singleInstrument: action.payload,
+      };
     case EDIT_INSTRUMENT:
       return {};
     case DELETE_INSTRUMENT:
@@ -167,7 +171,7 @@ export default function reducer(state = initialState, action) {
         allInstruments: { ...state.allInstruments },
         singleInstrument: {},
       };
-      delete newState.allInstruments[action.payload.id];
+      delete newState.allInstruments[action.payload];
       return newState;
     default:
       return state;
