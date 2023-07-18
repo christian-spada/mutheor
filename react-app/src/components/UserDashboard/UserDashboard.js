@@ -98,7 +98,7 @@ const UserDashboard = () => {
         {/* ===== SELECTION SECTION ==== */}
         <section className="user-dashboard__view-selection-section">
           <div className="user-dashboard__view-selection">
-            <div>
+            <div className="user-dashboard-view-selection-btn-container">
               <button
                 onClick={handleInstrumentSelection}
                 className={contentView === 'Instruments' ? 'active' : ''}
@@ -112,32 +112,42 @@ const UserDashboard = () => {
                 />
               )}
             </div>
-            <div>
+            <div className="user-dashboard-view-selection-btn-container">
               <button
                 onClick={handlePracticeSessionSelection}
                 className={contentView === 'Practice Sessions' ? 'active' : ''}
               >
                 Practice Sessions
               </button>
-              {contentView === 'Practice Sessions' && (
+              {contentView === 'Practice Sessions' && instruments.length > 0 && (
                 <OpenModalButton
                   modalComponent={<CreatePracticeSessionModal user={user} />}
                   icon={<i className="fa-solid fa-square-plus"></i>}
                 />
               )}
+              {contentView === 'Practice Sessions' && !instruments.length && (
+                <span className="need-instruments-reminder">
+                  Add instruments to create new practice sessions
+                </span>
+              )}
             </div>
-            <div>
+            <div className="user-dashboard-view-selection-btn-container">
               <button
                 onClick={handleGoalSelection}
                 className={contentView === 'Goals' ? 'active' : ''}
               >
                 Goals
               </button>
-              {contentView === 'Goals' && (
+              {contentView === 'Goals' && instruments.length > 0 && (
                 <OpenModalButton
                   modalComponent={<CreateGoalModal user={user} />}
                   icon={<i className="fa-solid fa-square-plus"></i>}
                 />
+              )}
+              {contentView === 'Goals' && !instruments.length && (
+                <span className="need-instruments-reminder">
+                  Add instruments to create new goals
+                </span>
               )}
             </div>
           </div>
