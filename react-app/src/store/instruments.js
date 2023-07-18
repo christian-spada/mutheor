@@ -156,7 +156,10 @@ export default function reducer(state = initialState, action) {
         allInstruments: normalizeData(action.payload.instruments),
       };
     case GET_SINGLE_INSTRUMENT:
-      return {};
+      return {
+        ...state,
+        singleInstrument: action.payload,
+      };
     case CREATE_INSTRUMENT:
       return {
         ...state,
@@ -164,7 +167,11 @@ export default function reducer(state = initialState, action) {
         singleInstrument: action.payload,
       };
     case EDIT_INSTRUMENT:
-      return {};
+      return {
+        ...state,
+        allInstruments: { ...state.allInstruments, [action.payload.id]: action.payload },
+        singleInstrument: action.payload,
+      };
     case DELETE_INSTRUMENT:
       const newState = {
         ...state,
