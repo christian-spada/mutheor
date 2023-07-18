@@ -1,7 +1,17 @@
 import { logger, customFetch } from '../utils/helpers';
-// constants
+
+//! ===== ACTIONS ======
+const GET_USER = 'sessoin/GET_USER';
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+
+//! ===== ACTION CREATORS ======
+const getUser = user => {
+  return {
+    type: GET_USER,
+    payload: user,
+  };
+};
 
 const setUser = user => ({
   type: SET_USER,
@@ -14,6 +24,7 @@ const removeUser = () => ({
 
 const initialState = { user: null };
 
+//! ===== THUNKS ======
 export const authenticate = () => async dispatch => {
   const response = await fetch('/api/auth/', {
     headers: {
@@ -27,6 +38,23 @@ export const authenticate = () => async dispatch => {
     }
 
     dispatch(setUser(data));
+  }
+};
+
+export const thunkGetUser = userId => async dispatch => {
+  try {
+    const resData = await customFetch(`/api/users/${userId}`);
+
+    if (resData.errors) {
+      const error = resData;
+      return error;
+    }
+
+    const user = resData;
+    dispatch(getUser(user));
+    return user;
+  } catch (error) {
+    return error;
   }
 };
 
@@ -86,6 +114,8 @@ export const signUp = (username, email, password) => async dispatch => {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
+      return { user: action.payload };
+    case GET_USER:
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
