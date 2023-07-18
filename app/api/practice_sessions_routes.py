@@ -61,23 +61,25 @@ def create_new_session(user_id):
     if current_user.id != user_id:
         return not_authorized()
 
-    # TODO - Instrument.id is hardcoded. Add value from form when you add it on the frontend
+    form = CreatePracticeSession()
+    attach_csrf_token(form, request)
+
     try:
         instrument = Instrument.query.filter(
-            and_(Instrument.user_id == user_id, Instrument.id == 1)
+            and_(
+                Instrument.user_id == user_id,
+                Instrument.id == form.data["instrument_id"],
+            )
         ).one()
     except:
         return entity_not_found("Instrument")
-
-    form = CreatePracticeSession()
-    attach_csrf_token(form, request)
 
     if form.validate_on_submit():
         data = form.data
 
         new_practice_session = PracticeSession(
             user_id=user_id,
-            instrument_id=instrument.id,
+            instrument_id=data["instrument_id"],
             duration=data["duration"],
             notes=data["notes"],
             date=data["date"],
