@@ -117,7 +117,10 @@ export const thunkEditGoal = (userId, updatedGoal) => async dispatch => {
 
 export const thunkDeleteGoal = (userId, goalToDelete) => async dispatch => {
   try {
-    const resData = await customFetch(`/api/users/${userId}/goals/${goalToDelete.id}`);
+    const resData = await customFetch(
+      `/api/users/${userId}/goals/${goalToDelete.id}`,
+      'DELETE'
+    );
 
     if (resData.errors) {
       const error = resData;
