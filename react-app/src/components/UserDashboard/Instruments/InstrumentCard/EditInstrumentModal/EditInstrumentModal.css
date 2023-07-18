@@ -1,0 +1,50 @@
+.edit-instrument-modal {
+  padding: 2rem;
+}
+
+.edit-instrument-form label {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.edit-instrument-form__img-section {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.edit-instrument-form__img-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--primary-400);
+}
+
+#edit-instrument-image,
+#edit-instrument-type,
+#edit-instrument-category {
+  padding: 0.2rem;
+  border-radius: 8px;
+}
+
+.edit-instrument-form__type-section {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.edit-instrument-form__btn-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.edit-instrument-form__update-btn {
+  background-color: var(--primary-500);
+  color: var(--primary-white);
+}
+
+#edit-instrument-type,
+#edit-instrument-category {
+  width: 132px;
+}
