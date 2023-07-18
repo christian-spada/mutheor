@@ -72,7 +72,7 @@ def create_new_instrument(user_id):
         data = form.data
         new_instrument = Instrument(
             user_id=data["user_id"],
-            nickname=data["nickname"],
+            model=data["model"],
             type=data["type"],
             category=data["category"],
             image=data["image"],
@@ -110,7 +110,7 @@ def edit_instrument(user_id, instrument_id):
         data = form.data
         instrument_to_edit.type = data["type"]
         instrument_to_edit.category = data["category"]
-        instrument_to_edit.nickname = data["nickname"]
+        instrument_to_edit.model = data["model"]
         instrument_to_edit.image = data["image"]
 
         db.session.commit()

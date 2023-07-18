@@ -3,10 +3,28 @@
   justify-content: space-between;
 }
 
+.goal-card section i {
+  font-size: 18px;
+  color: var(--primary-400);
+}
+
+.goal-card__edit-btn:hover {
+  color: var(--primary-500);
+}
+
+.goal-card__delete-btn:hover {
+  color: hsl(0, 70%, 61%);
+}
+
 .goal-card__info-section {
   display: flex;
-  gap: 3rem;
+  justify-content: space-evenly;
   margin-top: 2rem;
+}
+
+.goal-card__info-section > div {
+  display: flex;
+  gap: 7px;
 }
 
 .goal-card__description-section {

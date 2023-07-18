@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 0ecdb561821e
+Revision ID: d74146d741c0
 Revises: 
-Create Date: 2023-07-14 13:09:48.877718
+Create Date: 2023-07-18 12:43:10.782742
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0ecdb561821e'
+revision = 'd74146d741c0'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,7 +42,7 @@ def upgrade():
     op.create_table('instruments',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('nickname', sa.String(length=20), nullable=True),
+    sa.Column('model', sa.String(length=20), nullable=False),
     sa.Column('type', sa.Enum('Electric Guitar', 'Acoustic Guitar', 'Bass', 'Drums', 'Piano', 'Synth', 'Violin', 'Saxophone', 'Clarinet', 'Flute', 'Trumpet', 'Trombone', 'Tuba', 'Bongos', name='types'), nullable=False),
     sa.Column('category', sa.Enum('Percussion', 'Brass', 'Woodwind', 'String', 'Electronic', name='categories'), nullable=False),
     sa.Column('image', sa.String(length=100), nullable=True),

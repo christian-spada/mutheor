@@ -15,7 +15,7 @@ const GoalCard = ({ goal, user }) => {
               user={user}
             />
           }
-          icon={<i className="fa-regular fa-pen-to-square"></i>}
+          icon={<i className="fa-regular fa-pen-to-square goal-card__edit-btn"></i>}
         />
 
         <OpenModalButton
@@ -25,15 +25,14 @@ const GoalCard = ({ goal, user }) => {
               user={user}
             />
           }
-          icon={<i className="fa-solid fa-xmark"></i>}
+          icon={<i className="fa-solid fa-xmark goal-card__delete-btn"></i>}
         />
       </header>
       <section className="goal-card__info-section">
         <div>
           <i className="fa-solid fa-sliders"></i>
           <span>
-            {goal.instrument.type}{' '}
-            {goal.instrument.nickname !== 'Needs nickname!' ? goal.instrument.nickname : ''}
+            {goal.instrument.type} - {goal.instrument.model}
           </span>
         </div>
         <div>

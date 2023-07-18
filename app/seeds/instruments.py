@@ -6,18 +6,21 @@ def seed_instruments():
     inst1 = Instrument(
         user_id=1,
         type="Electric Guitar",
+        model="Fender Strat",
         category="String",
         image="https://images.pexels.com/photos/2646825/pexels-photo-2646825.jpeg",
     )
     inst2 = Instrument(
         user_id=1,
         type="Bongos",
+        model="Tama",
         category="Percussion",
         image="https://images.pexels.com/photos/9488150/pexels-photo-9488150.jpeg",
     )
     inst3 = Instrument(
         user_id=2,
         type="Piano",
+        model="Yamaha",
         category="Percussion",
         image="https://images.pexels.com/photos/1021142/pexels-photo-1021142.jpeg",
     )

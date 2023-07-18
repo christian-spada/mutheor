@@ -99,7 +99,11 @@ export const thunkCreateGoal = (userId, newGoal) => async dispatch => {
 
 export const thunkEditGoal = (userId, updatedGoal) => async dispatch => {
   try {
-    const resData = await customFetch(`/api/users/${userId}/goals/${updatedGoal.id}`);
+    const resData = await customFetch(
+      `/api/users/${userId}/goals/${updatedGoal.id}`,
+      'PUT',
+      updatedGoal
+    );
 
     if (resData.errors) {
       const error = resData;
@@ -159,7 +163,11 @@ export default function reducer(state = initialState, action) {
         singleGoal: action.payload,
       };
     case EDIT_GOAL:
-      return {};
+      return {
+        ...state,
+        allGoals: { ...state.allGoals, [action.payload.id]: action.payload },
+        singleGoal: action.payload,
+      };
     case DELETE_GOAL:
       const newState = {
         ...state,

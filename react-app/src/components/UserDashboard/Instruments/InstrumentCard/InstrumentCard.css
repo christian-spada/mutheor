@@ -24,14 +24,14 @@
 
 .instrument-card__type-section > div,
 .instrument-card__category-section > div,
-.instrument-card__nickname-section > div {
+.instrument-card__model-section > div {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 0.8rem;
 }
 
-.instrument-card__nickname {
+.instrument-card__model {
   position: relative;
   right: 3.5px;
 }

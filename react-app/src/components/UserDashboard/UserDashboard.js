@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
+import { logger } from '../../utils/helpers';
 
 import ProfileButton from '../ProfileButton/ProfileButton';
 import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
@@ -10,14 +11,12 @@ import InstrumentCard from './Instruments/InstrumentCard/InstrumentCard';
 import CreateInstrumentModal from './Instruments/CreateInstrumentModal/CreateInstrumentModal';
 import GoalCard from './Goals/GoalCard/GoalCard';
 import CreateGoalModal from './Goals/CreateGoalModal/CreateGoalModal';
-import './UserDashboard.css';
+import OpenModalButton from '../OpenModalButton';
 
 import { thunkGetAllPracticeSessions } from '../../store/practiceSessions';
 import { thunkGetAllInstruments } from '../../store/instruments';
 import { thunkGetAllGoals } from '../../store/goals';
 
-import OpenModalButton from '../OpenModalButton';
-import { logger } from '../../utils/helpers';
 import './UserDashboard.css';
 
 const UserDashboard = () => {
@@ -29,7 +28,7 @@ const UserDashboard = () => {
   const instruments = useSelector(state => Object.values(state.instrument.allInstruments));
   const goals = useSelector(state => Object.values(state.goal.allGoals));
   const [showSideBar, setShowSidebar] = useState(false);
-  const [contentView, setContentView] = useState('Practice Sessions');
+  const [contentView, setContentView] = useState('Instruments');
   const sidebar = useRef();
 
   const handlePracticeSessionSelection = async e => {
