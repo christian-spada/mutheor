@@ -23,16 +23,16 @@ const PracticeSessionCard = ({ session }) => {
         <div>
           <i className="fa-solid fa-sliders"></i>
           <span>
-            {session.instrument.type}{' '}
-            {session.instrument.nickname !== 'Needs nickname!'
-              ? session.instrument.nickname
-              : ''}
+            {session.instrument.type} - {session.instrument.model}
           </span>
         </div>
       </section>
       <section className="session-card__focus-area">
         <div>
-          <i onClick={handleDelete} className="fa-solid fa-arrows-to-circle"></i>
+          <i
+            onClick={handleDelete}
+            className="fa-solid fa-arrows-to-circle"
+          ></i>
           <span>{session.areaOfFocus}</span>
         </div>
       </section>
