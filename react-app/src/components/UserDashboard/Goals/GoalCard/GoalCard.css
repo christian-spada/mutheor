@@ -1,10 +1,22 @@
-/* .goal-card {
-  background-color: var(--primary-100);
-  padding: 1rem;
-  border-radius: 8px;
-} */
-
 .goal-card__header {
   display: flex;
   justify-content: space-between;
+}
+
+.goal-card__info-section {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.goal-card__description-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--primary-200);
+  border-radius: inherit;
+}
+
+.goal-card__days-remaining-section {
+  text-align: center;
+  margin-top: 2rem;
 }

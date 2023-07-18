@@ -48,6 +48,7 @@
 .fa-square-plus {
   color: hsl(100, 51%, 67%);
   font-size: 30px;
+  cursor: pointer;
 }
 
 .active {
@@ -106,4 +107,29 @@
 .card:hover {
   transform: scale(1.05);
   box-shadow: 0 5px 7px hsl(246, 10%, 90%);
+}
+
+.need-instruments-reminder {
+  position: absolute;
+  background-color: var(--primary-800);
+  color: var(--primary-white);
+  width: 200px;
+  padding: 0.7rem;
+  border-radius: 8px;
+  font-size: 14px;
+  bottom: -75px;
+  animation: 300ms ease-in-out fade-in-reminder;
+}
+
+@keyframes fade-in-reminder {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.user-dashboard-view-selection-btn-container {
+  position: relative;
 }

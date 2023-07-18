@@ -62,11 +62,21 @@ const UserDashboard = () => {
     return () => document.removeEventListener('click', closeMenu);
   }, [showSideBar]);
 
+  useEffect(() => {
+    if (user && contentView === 'Practice Sessions')
+      dispatch(thunkGetAllPracticeSessions(user.id));
+    if (user && contentView === 'Instruments') dispatch(thunkGetAllInstruments(user.id));
+    if (user && contentView === 'Goals') dispatch(thunkGetAllGoals(user.id));
+  }, []);
+
   return (
     <>
       {/* ===== HEADER ==== */}
       <header className="user-dashboard__header">
-        <HamburgerMenu showSideBar={showSideBar} setShowSidebar={setShowSidebar} />
+        <HamburgerMenu
+          showSideBar={showSideBar}
+          setShowSidebar={setShowSidebar}
+        />
         <div className="user-dashboard__profile-container">
           <ProfileButton user={user} />
         </div>
@@ -88,7 +98,7 @@ const UserDashboard = () => {
         {/* ===== SELECTION SECTION ==== */}
         <section className="user-dashboard__view-selection-section">
           <div className="user-dashboard__view-selection">
-            <div>
+            <div className="user-dashboard-view-selection-btn-container">
               <button
                 onClick={handleInstrumentSelection}
                 className={contentView === 'Instruments' ? 'active' : ''}
@@ -102,32 +112,42 @@ const UserDashboard = () => {
                 />
               )}
             </div>
-            <div>
+            <div className="user-dashboard-view-selection-btn-container">
               <button
                 onClick={handlePracticeSessionSelection}
                 className={contentView === 'Practice Sessions' ? 'active' : ''}
               >
                 Practice Sessions
               </button>
-              {contentView === 'Practice Sessions' && (
+              {contentView === 'Practice Sessions' && instruments.length > 0 && (
                 <OpenModalButton
                   modalComponent={<CreatePracticeSessionModal user={user} />}
                   icon={<i className="fa-solid fa-square-plus"></i>}
                 />
               )}
+              {contentView === 'Practice Sessions' && !instruments.length && (
+                <span className="need-instruments-reminder">
+                  Add instruments to create new practice sessions
+                </span>
+              )}
             </div>
-            <div>
+            <div className="user-dashboard-view-selection-btn-container">
               <button
                 onClick={handleGoalSelection}
                 className={contentView === 'Goals' ? 'active' : ''}
               >
                 Goals
               </button>
-              {contentView === 'Goals' && (
+              {contentView === 'Goals' && instruments.length > 0 && (
                 <OpenModalButton
                   modalComponent={<CreateGoalModal user={user} />}
                   icon={<i className="fa-solid fa-square-plus"></i>}
                 />
+              )}
+              {contentView === 'Goals' && !instruments.length && (
+                <span className="need-instruments-reminder">
+                  Add instruments to create new goals
+                </span>
               )}
             </div>
           </div>
@@ -138,14 +158,28 @@ const UserDashboard = () => {
           <div className="user-dashboard__content-container">
             {contentView === 'Practice Sessions' &&
               practiceSessions.map(session => (
-                <PracticeSessionCard key={session.id} user={user} session={session} />
+                <PracticeSessionCard
+                  key={session.id}
+                  user={user}
+                  session={session}
+                />
               ))}
             {contentView === 'Instruments' &&
               instruments.map(instrument => (
-                <InstrumentCard key={instrument.id} user={user} instrument={instrument} />
+                <InstrumentCard
+                  key={instrument.id}
+                  user={user}
+                  instrument={instrument}
+                />
               ))}
             {contentView === 'Goals' &&
-              goals.map(goal => <GoalCard key={goal.id} user={user} goal={goal} />)}
+              goals.map(goal => (
+                <GoalCard
+                  key={goal.id}
+                  user={user}
+                  goal={goal}
+                />
+              ))}
           </div>
         </section>
       </main>

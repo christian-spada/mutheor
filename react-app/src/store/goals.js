@@ -1,4 +1,4 @@
-import { customFetch, normalizeData } from '../utils/helpers';
+import { customFetch, logger, normalizeData } from '../utils/helpers';
 
 const GET_ALL_GOALS = 'goals/GET_ALL_';
 const GET_SINGLE_GOAL = 'goals/GET_SINGLE_GOAL';
@@ -117,7 +117,10 @@ export const thunkEditGoal = (userId, updatedGoal) => async dispatch => {
 
 export const thunkDeleteGoal = (userId, goalToDelete) => async dispatch => {
   try {
-    const resData = await customFetch(`/api/users/${userId}/goals/${goalToDelete.id}`);
+    const resData = await customFetch(
+      `/api/users/${userId}/goals/${goalToDelete.id}`,
+      'DELETE'
+    );
 
     if (resData.errors) {
       const error = resData;
@@ -135,7 +138,7 @@ export const thunkDeleteGoal = (userId, goalToDelete) => async dispatch => {
 
 //! ===== REDUCER =====
 
-const initialState = { allGoals: {} };
+const initialState = { allGoals: {}, singleGoal: {} };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -145,11 +148,26 @@ export default function reducer(state = initialState, action) {
         allGoals: normalizeData(action.payload.goals),
       };
     case GET_SINGLE_GOAL:
-      return {};
+      return {
+        ...state,
+        singleGoal: action.payload,
+      };
+    case CREATE_GOAL:
+      return {
+        ...state,
+        allGoals: { ...state.allGoals, [action.payload.id]: action.payload },
+        singleGoal: action.payload,
+      };
     case EDIT_GOAL:
       return {};
     case DELETE_GOAL:
-      return {};
+      const newState = {
+        ...state,
+        allGoals: { ...state.allGoals },
+        singleGoal: {},
+      };
+      delete newState.allGoals[action.payload];
+      return newState;
     default:
       return state;
   }

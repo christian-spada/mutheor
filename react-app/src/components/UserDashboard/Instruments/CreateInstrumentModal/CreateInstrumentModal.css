@@ -20,6 +20,13 @@
   background-color: var(--primary-400);
 }
 
+#create-instrument-image,
+#create-instrument-type,
+#create-instrument-category {
+  padding: 0.2rem;
+  border-radius: 8px;
+}
+
 .create-instrument-form__type-section {
   display: flex;
   gap: 3rem;
@@ -28,6 +35,16 @@
 
 .create-instrument-form__btn-section {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 2rem;
+}
+
+.create-instrument-form__create-btn {
+  background-color: var(--primary-500);
+  color: var(--primary-white);
+}
+
+#create-instrument-type,
+#create-instrument-category {
+  width: 132px;
 }

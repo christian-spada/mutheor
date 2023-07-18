@@ -1,0 +1,39 @@
+.create-goal-modal {
+  padding: 1rem;
+}
+
+.create-goal-form__type-section {
+  display: flex;
+  gap: 3rem;
+}
+
+.create-goal-form label {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.create-goal-form__multiple-same-type-section {
+  margin-top: 1rem;
+}
+
+.create-goal-form__description-section {
+  margin-top: 2rem;
+}
+.create-goal-form__description {
+  border-radius: 8px;
+  height: 100px;
+  width: 100%;
+  resize: none;
+  padding: 0.3rem;
+}
+
+.create-goal-form__btn-section {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.create-goal-form__create-btn {
+  background-color: var(--primary-500);
+  color: var(--primary-white);
+}
