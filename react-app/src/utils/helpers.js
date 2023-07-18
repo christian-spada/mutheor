@@ -38,9 +38,9 @@ export const normalizeData = data => {
 
 export const formatDate = (date, delimiter) => {
   const dateObj = new Date(date);
-  const formattedDate = `${
-    dateObj.getMonth() + 1
-  }${delimiter}${dateObj.getDate()}${delimiter}${dateObj.getFullYear()}`;
+  const formattedDate = `${dateObj.getMonth() + 1}${delimiter}${
+    dateObj.getDate() + 1
+  }${delimiter}${dateObj.getFullYear()}`;
   return formattedDate;
 };
 
