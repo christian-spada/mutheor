@@ -103,12 +103,13 @@ const CreateGoalModal = ({ user }) => {
                   key={inst.id}
                   value={inst.id}
                 >
-                  {inst.nickname}
+                  {inst.model}
                 </option>
               ))}
             </select>
           </section>
         )}
+
         {/* ===== GOAL DESCRIPTION SECTION ===== */}
         <section className="create-goal-form__description-section">
           <textarea
