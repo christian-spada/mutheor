@@ -38,7 +38,7 @@ class Instrument(db.Model):
     user_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
-    nickname = db.Column(db.String(20), default="Needs nickname!")
+    model = db.Column(db.String(20), nullable=False)
     type = db.Column(db.Enum(instrument_types), nullable=False)
     category = db.Column(db.Enum(categories), nullable=False)
     image = db.Column(db.String(100))
@@ -66,7 +66,7 @@ class Instrument(db.Model):
         dct = {
             "id": self.id,
             "userId": self.user_id,
-            "nickname": self.nickname,
+            "model": self.model,
             "type": self.enums_to_string(enum=self.enums_to_string(enum=self.type)),
             "image": self.image,
             "category": self.enums_to_string(
