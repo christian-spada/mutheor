@@ -1,0 +1,43 @@
+.edit-goal-modal {
+  padding: 1rem;
+}
+
+.edit-goal-form__type-section {
+  display: flex;
+  gap: 3rem;
+}
+
+.edit-goal-form label {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.edit-goal-form__date-input {
+  width: 136px;
+}
+
+.edit-goal-form__multiple-same-type-section {
+  margin-top: 1rem;
+}
+
+.edit-goal-form__description-section {
+  margin-top: 2rem;
+}
+.edit-goal-form__description {
+  border-radius: 8px;
+  height: 100px;
+  width: 100%;
+  resize: none;
+  padding: 0.3rem;
+}
+
+.edit-goal-form__btn-section {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.edit-goal-form__update-goal-btn {
+  background-color: var(--primary-500);
+  color: var(--primary-white);
+}
