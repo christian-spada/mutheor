@@ -97,7 +97,7 @@ const UserDashboard = () => {
         {/* ===== SELECTION SECTION ==== */}
         <section className="user-dashboard__view-selection-section">
           <div className="user-dashboard__view-selection">
-            <div className="user-dashboard-view-selection-btn-container">
+            <div className="user-dashboard__view-selection-btn-container">
               <button
                 onClick={handleInstrumentSelection}
                 className={contentView === 'Instruments' ? 'active' : ''}
@@ -111,7 +111,7 @@ const UserDashboard = () => {
                 />
               )}
             </div>
-            <div className="user-dashboard-view-selection-btn-container">
+            <div className="user-dashboard__view-selection-btn-container">
               <button
                 onClick={handlePracticeSessionSelection}
                 className={contentView === 'Practice Sessions' ? 'active' : ''}
@@ -130,7 +130,7 @@ const UserDashboard = () => {
                 </span>
               )}
             </div>
-            <div className="user-dashboard-view-selection-btn-container">
+            <div className="user-dashboard__view-selection-btn-container">
               <button
                 onClick={handleGoalSelection}
                 className={contentView === 'Goals' ? 'active' : ''}
