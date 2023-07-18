@@ -13,6 +13,7 @@ const CreateInstrumentModal = ({ user }) => {
   const [previewImage, setPreviewImage] = useState('');
   const [image, setImage] = useState('');
   const [instrumentType, setInstrumentType] = useState('Electric Guitar');
+  const [model, setModel] = useState('');
   const [category, setCategory] = useState('String');
 
   const typeSelectRef = useRef();
@@ -35,6 +36,7 @@ const CreateInstrumentModal = ({ user }) => {
     const newInstrument = {
       user_id: user.id,
       type: instrumentType,
+      model,
       category,
       image,
     };
@@ -132,6 +134,14 @@ const CreateInstrumentModal = ({ user }) => {
               <option>Electronic</option>
             </select>
           </div>
+        </section>
+        <section className="create-instrument-form__model-section">
+          <label htmlFor="create-instrument-model">Model</label>
+          <input
+            id="create-instrument-model"
+            onChange={e => setModel(e.target.value)}
+            value={model}
+          />
         </section>
         <section className="create-instrument-form__btn-section">
           <button className="create-instrument-form__create-btn">Create Instrument</button>
