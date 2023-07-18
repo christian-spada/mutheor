@@ -22,14 +22,19 @@
 
 #edit-instrument-image,
 #edit-instrument-type,
-#edit-instrument-category {
-  padding: 0.2rem;
+#edit-instrument-category,
+#edit-instrument-model {
+  padding: 0.3rem;
   border-radius: 8px;
 }
 
 .edit-instrument-form__type-section {
   display: flex;
   gap: 3rem;
+  margin-top: 2rem;
+}
+
+.edit-instrument-form__model-section {
   margin-top: 2rem;
 }
 
@@ -47,4 +52,8 @@
 #edit-instrument-type,
 #edit-instrument-category {
   width: 132px;
+}
+
+#edit-instrument-model {
+  width: 100%;
 }

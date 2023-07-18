@@ -13,6 +13,7 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
   const [previewImage, setPreviewImage] = useState(instrumentToEdit.image);
   const [image, setImage] = useState(instrumentToEdit.image);
   const [instrumentType, setInstrumentType] = useState(instrumentToEdit.type);
+  const [model, setModel] = useState(instrumentToEdit.model);
   const [category, setCategory] = useState(instrumentToEdit.category);
 
   const typeSelectRef = useRef();
@@ -33,8 +34,10 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
     e.preventDefault();
 
     const updatedInstrument = {
+      id: instrumentToEdit.id,
       user_id: user.id,
       type: instrumentType,
+      model,
       category,
       image,
     };
@@ -132,6 +135,14 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
               <option>Electronic</option>
             </select>
           </div>
+        </section>
+        <section className="edit-instrument-form__model-section">
+          <label htmlFor="edit-instrument-model">Model</label>
+          <input
+            id="edit-instrument-model"
+            onChange={e => setModel(e.target.value)}
+            value={model}
+          />
         </section>
         <section className="edit-instrument-form__btn-section">
           <button className="edit-instrument-form__update-btn">Update Instrument</button>
