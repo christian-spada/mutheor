@@ -14,6 +14,7 @@ from app.api.aws_helpers import (
     remove_file_from_s3,
     upload_file_to_s3,
 )
+from email_validator import validate_email, EmailNotValidError
 
 auth_routes = Blueprint("auth", __name__)
 
@@ -59,6 +60,8 @@ def sign_up():
     """
     form = SignUpForm()
     attach_csrf_token(form, request)
+
+    validate_email(form.data["email"])
 
     if form.validate_on_submit():
         data = form.data

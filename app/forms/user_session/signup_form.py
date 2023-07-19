@@ -28,7 +28,11 @@ class SignUpForm(FlaskForm):
         validators=[DataRequired("Username field is required"), username_exists],
     )
     email = StringField(
-        "email", validators=[DataRequired("Email field is required"), user_exists]
+        "email",
+        validators=[
+            DataRequired("Email field is required"),
+            user_exists,
+        ],
     )
     profile_pic = FileField(
         "profile_pic",
