@@ -59,15 +59,26 @@ def sign_up():
     """
     form = SignUpForm()
     attach_csrf_token(form, request)
+
     if form.validate_on_submit():
         data = form.data
+
+        if data["profile_pic"] == None:
+            user = User(
+                username=form.data["username"],
+                email=form.data["email"],
+                password=form.data["password"],
+            )
+
+            db.session.add(user)
+            db.session.commit()
+            login_user(user)
+
+            return user.to_dict()
 
         profile_pic = data["profile_pic"]
         profile_pic.filename = get_unique_filename(profile_pic.filename)
         upload = upload_file_to_s3(profile_pic)
-        logger("profile_pic s3 signup", profile_pic)
-        logger("profile_pic.filename s3 signup", profile_pic.filename)
-        logger("upload s3 file signup", upload)
 
         if "url" not in upload:
             return bad_request(form.errors)
