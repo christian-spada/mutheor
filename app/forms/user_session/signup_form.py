@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import User
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from app.api.aws_helpers import ALLOWED_EXTENSIONS
 
 
 def user_exists(form, field):
@@ -20,22 +22,14 @@ def username_exists(form, field):
         raise ValidationError("Username is already in use.")
 
 
-def is_image_url(form, field):
-    image = field.data
-    if not image:
-        return
-
-    image_name = image.split("/")[-1]
-    split = image_name.split(".")
-    valid_extensions = ["jpg", "jpeg", "png"]
-    if (not len(split) == 2) or (split[1] not in valid_extensions):
-        raise ValidationError(
-            "Image url must be of type " + ", ".join(valid_extensions)
-        )
-
-
 class SignUpForm(FlaskForm):
     username = StringField("username", validators=[DataRequired(), username_exists])
     email = StringField("email", validators=[DataRequired(), user_exists])
-    profile_pic = StringField("profle_pic", validators=[is_image_url])
+    profile_pic = FileField(
+        "profile_pic",
+        validators=[
+            FileRequired(),
+            FileAllowed(list(ALLOWED_EXTENSIONS)),
+        ],
+    )
     password = StringField("password", validators=[DataRequired()])
