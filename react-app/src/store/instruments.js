@@ -81,21 +81,19 @@ export const thunkGetSingleInstrument = (userId, instrumentId) => async dispatch
 
 export const thunkCreateInstrument = (userId, newInstrument) => async dispatch => {
   try {
-    const resData = await customFetch(
-      `/api/users/${userId}/instruments`,
-      'POST',
-      newInstrument
-    );
+    const res = await fetch(`/api/users/${userId}/instruments`, {
+      method: 'POST',
+      body: newInstrument,
+    });
 
-    if (resData.errors) {
-      const error = resData;
+    if (res.ok) {
+      const instrument = await res.json();
+      dispatch(createInstrument(instrument));
+      return instrument;
+    } else {
+      const error = await res.json();
       return error;
     }
-
-    const instrument = resData;
-    dispatch(createInstrument(instrument));
-
-    return instrument;
   } catch (error) {
     return error;
   }
@@ -103,21 +101,22 @@ export const thunkCreateInstrument = (userId, newInstrument) => async dispatch =
 
 export const thunkEditInstrument = (userId, updatedInstrument) => async dispatch => {
   try {
-    const resData = await customFetch(
-      `/api/users/${userId}/instruments/${updatedInstrument.id}`,
-      'PUT',
-      updatedInstrument
+    const res = await fetch(
+      `/api/users/${userId}/instruments/${updatedInstrument.get('id')}`,
+      {
+        method: 'PUT',
+        body: updatedInstrument,
+      }
     );
 
-    if (resData.errors) {
-      const error = resData;
+    if (res.ok) {
+      const instrument = await res.json();
+      dispatch(editInstrument(instrument));
+      return instrument;
+    } else {
+      const error = await res.json();
       return error;
     }
-
-    const instrument = resData;
-    dispatch(editInstrument(instrument));
-
-    return instrument;
   } catch (error) {
     return error;
   }
