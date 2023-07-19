@@ -1,0 +1,69 @@
+.create-session-modal {
+  padding: 2rem;
+}
+
+.create-session-form label {
+  display: block;
+  font-size: var(--font-size-700);
+  margin-bottom: 0.3rem;
+  color: var(--primary-900);
+}
+
+.create-session-form section:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.session-flex {
+  display: flex;
+  gap: 3rem;
+}
+
+.create-session-form__time-section {
+  display: flex;
+  gap: 3rem;
+}
+
+.create-session-form__focus-section {
+  position: relative;
+}
+
+.create-session-form__multiple-same-type-section {
+  text-align: center;
+}
+
+#create-session-focus {
+  width: 176px;
+}
+
+#create-session-inst-type {
+  width: 146px;
+}
+
+#create-session-focus,
+#create-session-inst-type,
+#create-session-duration,
+#create-session-date,
+#create-session-multiple-inst-type,
+#create-session-focus,
+#create-session-notes {
+  padding: 0.3rem;
+  border-radius: 8px;
+  background-color: var(--primary-100);
+  border: none;
+}
+
+#create-session-notes {
+  width: 100%;
+  height: 100px;
+  resize: none;
+}
+
+.create-session-form__btn-section {
+  display: flex;
+  justify-content: center;
+}
+
+.create-session-form__create-session-btn {
+  background-color: var(--primary-500);
+  color: var(--primary-white);
+}
