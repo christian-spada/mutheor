@@ -9,6 +9,11 @@ from app.utils import (
     validation_errors_to_error_messages,
     logger,
 )
+from app.api.aws_helpers import (
+    get_unique_filename,
+    remove_file_from_s3,
+    upload_file_to_s3,
+)
 
 auth_routes = Blueprint("auth", __name__)
 
@@ -55,8 +60,22 @@ def sign_up():
     form = SignUpForm()
     attach_csrf_token(form, request)
     if form.validate_on_submit():
+        data = form.data
+
+        profile_pic = data["profile_pic"]
+        profile_pic.filename = get_unique_filename(profile_pic.filename)
+        upload = upload_file_to_s3(profile_pic)
+        logger("profile_pic s3 signup", profile_pic)
+        logger("profile_pic.filename s3 signup", profile_pic.filename)
+        logger("upload s3 file signup", upload)
+
+        if "url" not in upload:
+            return bad_request(form.errors)
+
+        url = upload["url"]
+
         user = User(
-            profile_pic=form.data["profile_pic"],
+            profile_pic=url,
             username=form.data["username"],
             email=form.data["email"],
             password=form.data["password"],
