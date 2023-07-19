@@ -79,9 +79,6 @@ def create_new_instrument(user_id):
         image = data["image"]
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
-        logger("image s3 create instrument", image)
-        logger("image.filename s3 create instrument", image.filename)
-        logger("upload s3 file", upload)
 
         if "url" not in upload:
             return bad_request(form.errors)
@@ -127,12 +124,19 @@ def edit_instrument(user_id, instrument_id):
     if form.validate_on_submit():
         data = form.data
 
+        if data["image"] == None:
+            #! if user chose not to update image, update the other required fields and return before S3 processing
+            instrument_to_edit.type = data["type"]
+            instrument_to_edit.category = data["category"]
+            instrument_to_edit.model = data["model"]
+
+            db.session.commit()
+            return instrument_to_edit.to_dict()
+
         image = data["image"]
+
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
-        logger("image s3 edit instrument", image)
-        logger("image.filename s3 edit instrument", image.filename)
-        logger("upload s3 file edit instrument", upload)
 
         if "url" not in upload:
             return bad_request(form.errors)
