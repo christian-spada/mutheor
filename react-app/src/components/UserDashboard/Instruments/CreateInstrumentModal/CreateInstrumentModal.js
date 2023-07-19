@@ -10,10 +10,12 @@ const CreateInstrumentModal = ({ user }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  const [previewImage, setPreviewImage] = useState('');
   const [image, setImage] = useState('');
   const [instrumentType, setInstrumentType] = useState('Electric Guitar');
+  const [model, setModel] = useState('');
   const [category, setCategory] = useState('String');
+
+  const [loadingState, setLoadingState] = useState(false);
 
   const typeSelectRef = useRef();
 
@@ -32,17 +34,22 @@ const CreateInstrumentModal = ({ user }) => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const newInstrument = {
-      user_id: user.id,
-      type: instrumentType,
-      category,
-      image,
-    };
+    const formData = new FormData();
 
-    await dispatch(thunkCreateInstrument(user.id, newInstrument));
+    formData.append('user_id', user.id);
+    formData.append('type', instrumentType);
+    formData.append('model', model);
+    formData.append('category', category);
+    formData.append('image', image);
+
+    setLoadingState(true);
+
+    await dispatch(thunkCreateInstrument(user.id, formData));
 
     await dispatch(thunkGetUser(user.id));
+
     closeModal();
+    setLoadingState(false);
   };
 
   return (
@@ -50,23 +57,17 @@ const CreateInstrumentModal = ({ user }) => {
       <form
         className="create-instrument-form"
         onSubmit={handleSubmit}
+        encType="multipart/form-data"
       >
         <section className="create-instrument-form__img-section">
-          <div className="create-instrument-form__img-container">
-            <img
-              src={previewImage}
-              alt=""
-            ></img>
-          </div>
-          <div>
-            <label htmlFor="create-instrument-image">Image Url</label>
-            <input
-              id="create-instrument-image"
-              onBlur={e => setPreviewImage(e.target.value)}
-              value={image}
-              onChange={e => setImage(e.target.value)}
-            />
-          </div>
+          <span className="create-instrument-form__img-file-name">{image?.name}</span>
+          <label htmlFor="create-instrument-image">Choose Image File</label>
+          <input
+            type="file"
+            accept="image/*"
+            id="create-instrument-image"
+            onChange={e => setImage(e.target.files[0])}
+          />
         </section>
         <section className="create-instrument-form__type-section">
           <div>
@@ -133,8 +134,18 @@ const CreateInstrumentModal = ({ user }) => {
             </select>
           </div>
         </section>
+        <section className="create-instrument-form__model-section">
+          <label htmlFor="create-instrument-model">Model</label>
+          <input
+            id="create-instrument-model"
+            onChange={e => setModel(e.target.value)}
+            value={model}
+          />
+        </section>
         <section className="create-instrument-form__btn-section">
-          <button className="create-instrument-form__create-btn">Create Instrument</button>
+          <button className="create-instrument-form__create-btn">
+            {loadingState ? 'Loading...' : 'Create Instrument'}
+          </button>
         </section>
       </form>
     </div>

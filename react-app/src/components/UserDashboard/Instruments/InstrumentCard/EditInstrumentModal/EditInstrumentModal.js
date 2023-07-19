@@ -10,9 +10,10 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  const [previewImage, setPreviewImage] = useState(instrumentToEdit.image);
   const [image, setImage] = useState(instrumentToEdit.image);
+  const [imageLoading, setImageLoading] = useState(false);
   const [instrumentType, setInstrumentType] = useState(instrumentToEdit.type);
+  const [model, setModel] = useState(instrumentToEdit.model);
   const [category, setCategory] = useState(instrumentToEdit.category);
 
   const typeSelectRef = useRef();
@@ -32,14 +33,18 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const updatedInstrument = {
-      user_id: user.id,
-      type: instrumentType,
-      category,
-      image,
-    };
+    const formData = new FormData();
 
-    await dispatch(thunkEditInstrument(user.id, updatedInstrument));
+    formData.append('id', instrumentToEdit.id);
+    formData.append('user_id', user.id);
+    formData.append('type', instrumentType);
+    formData.append('model', model);
+    formData.append('category', category);
+    formData.append('image', image);
+
+    setImageLoading(true);
+
+    await dispatch(thunkEditInstrument(user.id, formData));
 
     await dispatch(thunkGetUser(user.id));
     closeModal();
@@ -50,21 +55,22 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
       <form
         className="edit-instrument-form"
         onSubmit={handleSubmit}
+        encType="multipart/form-data"
       >
         <section className="edit-instrument-form__img-section">
           <div className="edit-instrument-form__img-container">
             <img
-              src={previewImage}
+              src={image}
               alt=""
             ></img>
           </div>
           <div>
             <label htmlFor="edit-instrument-image">Image Url</label>
             <input
+              type="file"
+              accept="image/*"
               id="edit-instrument-image"
-              onBlur={e => setPreviewImage(e.target.value)}
-              value={image}
-              onChange={e => setImage(e.target.value)}
+              onChange={e => setImage(e.target.files[0])}
             />
           </div>
         </section>
@@ -132,6 +138,14 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
               <option>Electronic</option>
             </select>
           </div>
+        </section>
+        <section className="edit-instrument-form__model-section">
+          <label htmlFor="edit-instrument-model">Model</label>
+          <input
+            id="edit-instrument-model"
+            onChange={e => setModel(e.target.value)}
+            value={model}
+          />
         </section>
         <section className="edit-instrument-form__btn-section">
           <button className="edit-instrument-form__update-btn">Update Instrument</button>

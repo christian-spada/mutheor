@@ -90,22 +90,18 @@ export const logout = () => async dispatch => {
   }
 };
 
-export const signUp = (username, email, password) => async dispatch => {
+export const signUp = newUser => async dispatch => {
   try {
-    const resData = await customFetch('/api/auth/signup', 'POST', {
-      username,
-      email,
-      password,
-    });
+    const res = await fetch('/api/auth/signup', { method: 'POST', body: newUser });
 
-    if (resData.errors) {
-      const error = resData;
+    if (res.ok) {
+      const user = await res.json();
+      dispatch(setUser(user));
+      return user;
+    } else {
+      const error = await res.json();
       return error;
     }
-
-    const user = resData;
-    dispatch(setUser(user));
-    return user;
   } catch (error) {
     return error;
   }

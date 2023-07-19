@@ -18,6 +18,11 @@ from app.models import (
     Repertoire,
     Achievement,
 )
+from app.api.aws_helpers import (
+    upload_file_to_s3,
+    remove_file_from_s3,
+    get_unique_filename,
+)
 
 instrument_routes = Blueprint(
     "instruments",
@@ -70,12 +75,25 @@ def create_new_instrument(user_id):
 
     if form.validate_on_submit():
         data = form.data
+
+        image = data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        logger("image s3 create instrument", image)
+        logger("image.filename s3 create instrument", image.filename)
+        logger("upload s3 file", upload)
+
+        if "url" not in upload:
+            return bad_request(form.errors)
+
+        url = upload["url"]
+
         new_instrument = Instrument(
             user_id=data["user_id"],
             model=data["model"],
             type=data["type"],
             category=data["category"],
-            image=data["image"],
+            image=url,
         )
 
         db.session.add(new_instrument)
@@ -108,10 +126,23 @@ def edit_instrument(user_id, instrument_id):
 
     if form.validate_on_submit():
         data = form.data
+
+        image = data["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        logger("image s3 edit instrument", image)
+        logger("image.filename s3 edit instrument", image.filename)
+        logger("upload s3 file edit instrument", upload)
+
+        if "url" not in upload:
+            return bad_request(form.errors)
+
+        url = upload["url"]
+
         instrument_to_edit.type = data["type"]
         instrument_to_edit.category = data["category"]
         instrument_to_edit.model = data["model"]
-        instrument_to_edit.image = data["image"]
+        instrument_to_edit.image = url
 
         db.session.commit()
 

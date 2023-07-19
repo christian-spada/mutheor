@@ -9,8 +9,32 @@
 
 .create-instrument-form__img-section {
   display: flex;
-  gap: 1rem;
-  align-items: center;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.create-instrument-form__img-file-name {
+  border-radius: 8px 0 0 8px;
+  height: 30px;
+  padding: 0.3rem 0.6rem;
+  overflow: hidden;
+  width: 10rem;
+  display: block;
+  background-color: var(--primary-100);
+}
+
+.create-instrument-form__img-section label {
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  width: fit-content;
+  height: 30px;
+  background-color: var(--primary-500);
+  color: var(--primary-white);
 }
 
 .create-instrument-form__img-container {
@@ -22,14 +46,21 @@
 
 #create-instrument-image,
 #create-instrument-type,
-#create-instrument-category {
-  padding: 0.2rem;
+#create-instrument-category,
+#create-instrument-model {
+  padding: 0.3rem;
   border-radius: 8px;
+  background-color: var(--primary-100);
+  border: none;
 }
 
 .create-instrument-form__type-section {
   display: flex;
   gap: 3rem;
+  margin-top: 2rem;
+}
+
+.create-instrument-form__model-section {
   margin-top: 2rem;
 }
 
@@ -47,4 +78,8 @@
 #create-instrument-type,
 #create-instrument-category {
   width: 132px;
+}
+
+#create-instrument-model {
+  width: 100%;
 }
