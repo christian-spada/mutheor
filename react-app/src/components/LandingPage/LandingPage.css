@@ -1,0 +1,43 @@
+.hero {
+  background-color: var(--primary-700);
+  height: 100vh;
+}
+
+.hero__heading {
+  height: 50%;
+}
+
+#hero-session-card {
+  width: 300px;
+}
+
+.hero__heading-container {
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 500px;
+}
+
+.hero__headline {
+  font-size: 60px;
+  font-weight: 900;
+  color: var(--primary-100);
+  letter-spacing: 4px;
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+
+.hero__subheading {
+  font-size: 25px;
+  font-weight: 300;
+  color: var(--primary-300);
+  width: 60%;
+}
+
+.hero__action-btn {
+  font-size: 20px;
+  padding: 1rem 2rem;
+  margin-top: 2rem;
+}
