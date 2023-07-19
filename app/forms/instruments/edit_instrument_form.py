@@ -33,7 +33,6 @@ class EditInstrumentForm(FlaskForm):
     image = FileField(
         "image",
         validators=[
-            FileRequired(),
             FileAllowed(list(ALLOWED_EXTENSIONS)),
         ],
     )

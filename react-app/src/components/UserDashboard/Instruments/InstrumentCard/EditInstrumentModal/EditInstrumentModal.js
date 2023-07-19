@@ -11,7 +11,7 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
   const { closeModal } = useModal();
 
   const [image, setImage] = useState(instrumentToEdit.image);
-  const [imageLoading, setImageLoading] = useState(false);
+  const [loadingState, setLoadingState] = useState(false);
   const [instrumentType, setInstrumentType] = useState(instrumentToEdit.type);
   const [model, setModel] = useState(instrumentToEdit.model);
   const [category, setCategory] = useState(instrumentToEdit.category);
@@ -42,11 +42,13 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
     formData.append('category', category);
     formData.append('image', image);
 
-    setImageLoading(true);
+    setLoadingState(true);
 
     await dispatch(thunkEditInstrument(user.id, formData));
 
     await dispatch(thunkGetUser(user.id));
+
+    setLoadingState(true);
     closeModal();
   };
 
@@ -148,7 +150,9 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
           />
         </section>
         <section className="edit-instrument-form__btn-section">
-          <button className="edit-instrument-form__update-btn">Update Instrument</button>
+          <button className="edit-instrument-form__update-btn">
+            {loadingState ? 'Loading...' : 'Update Instrument'}
+          </button>
         </section>
       </form>
     </div>

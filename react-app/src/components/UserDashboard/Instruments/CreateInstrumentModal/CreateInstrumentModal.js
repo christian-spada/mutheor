@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import './CreateInstrumentModal.css';
 import { logger } from '../../../../utils/helpers';
 import { useDispatch } from 'react-redux';
 import { thunkCreateInstrument } from '../../../../store/instruments';
 import { useModal } from '../../../../context/Modal';
 import { thunkGetUser } from '../../../../store/session';
+import './CreateInstrumentModal.css';
 
 const CreateInstrumentModal = ({ user }) => {
   const dispatch = useDispatch();
@@ -48,8 +48,8 @@ const CreateInstrumentModal = ({ user }) => {
 
     await dispatch(thunkGetUser(user.id));
 
-    closeModal();
     setLoadingState(false);
+    closeModal();
   };
 
   return (
