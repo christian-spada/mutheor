@@ -6,16 +6,30 @@ import './SignupForm.css';
 
 export const SignupForm = () => {
   const dispatch = useDispatch();
+
   const [image, setImage] = useState('');
+  const [imageLoading, setImageLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
   const [errors, setErrors] = useState({});
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const data = await dispatch(signUp(username, email, password));
+
+    const formData = new FormData();
+
+    formData.append('username', username);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('profile_pic', image);
+
+    setImageLoading(true);
+
+    const data = await dispatch(signUp(formData));
+
     if (data?.errors) {
       if (confirmPassword !== password) {
         data.errors.confirmPasswordError =
@@ -27,18 +41,27 @@ export const SignupForm = () => {
 
   return (
     <div className="form-wrapper">
-      <form className="signup-form" onSubmit={handleSubmit}>
+      <form
+        className="signup-form"
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+      >
         {/* {errors.prof && <ErrorView error={errors.email} />} */}
         <section className="signup-form__img-section">
           <div className="signup-form__img-container">
-            <img className="signup-form__profile-pic" src="" alt=""></img>
+            <img
+              className="signup-form__profile-pic"
+              src={image}
+              alt=""
+            ></img>
           </div>
           <label htmlFor="signup-img">Profile Picture</label>
           <input
+            type="file"
+            accept="image/*"
             className="signup-form__input--style"
             id="signup-img"
-            value={image}
-            onChange={e => setImage(e.target.value)}
+            onChange={e => setImage(e.target.files[0])}
           />
         </section>
         {/* ===== EMAIL ===== */}
@@ -94,7 +117,10 @@ export const SignupForm = () => {
 
         {/* ===== BUTTON ===== */}
         <section className="signup-form__btn-section">
-          <button className="signup-form__signup-btn" type="submit">
+          <button
+            className="signup-form__signup-btn"
+            type="submit"
+          >
             Sign Up
           </button>
         </section>
