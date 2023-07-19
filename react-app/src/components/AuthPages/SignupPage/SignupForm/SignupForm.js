@@ -8,7 +8,7 @@ export const SignupForm = () => {
   const dispatch = useDispatch();
 
   const [image, setImage] = useState('');
-  const [imageLoading, setImageLoading] = useState(false);
+  const [loadingState, setLoadingState] = useState(false);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -26,12 +26,14 @@ export const SignupForm = () => {
     formData.append('password', password);
     formData.append('profile_pic', image);
 
-    setImageLoading(true);
+    setLoadingState(true);
 
     const data = await dispatch(signUp(formData));
 
+    setLoadingState(false);
+
     if (data?.errors) {
-      if (confirmPassword !== password) {
+      if (password && confirmPassword !== password) {
         data.errors.confirmPasswordError =
           'Confirm Password field must be the same as the Password field';
       }
@@ -46,15 +48,7 @@ export const SignupForm = () => {
         onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
-        {/* {errors.prof && <ErrorView error={errors.email} />} */}
         <section className="signup-form__img-section">
-          <div className="signup-form__img-container">
-            <img
-              className="signup-form__profile-pic"
-              src={image}
-              alt=""
-            ></img>
-          </div>
           <label htmlFor="signup-img">Profile Picture</label>
           <input
             type="file"
@@ -64,6 +58,7 @@ export const SignupForm = () => {
             onChange={e => setImage(e.target.files[0])}
           />
         </section>
+
         {/* ===== EMAIL ===== */}
         {errors.email && <ErrorView error={errors.email} />}
         <section className="signup-form__email-section">
@@ -90,6 +85,7 @@ export const SignupForm = () => {
 
         {/* ===== PASSWORD ===== */}
         {errors.confirmPasswordError && <ErrorView error={errors.confirmPasswordError} />}
+        {errors.password && <ErrorView error={errors.password} />}
         <section className="signup-form__password-section">
           <label htmlFor="signup-password">Password</label>
           <input
@@ -121,7 +117,7 @@ export const SignupForm = () => {
             className="signup-form__signup-btn"
             type="submit"
           >
-            Sign Up
+            {loadingState ? 'Loading...' : 'Sign Up'}
           </button>
         </section>
       </form>
