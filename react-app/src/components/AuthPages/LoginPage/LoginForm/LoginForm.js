@@ -7,6 +7,8 @@ import { logger } from '../../../../utils/helpers';
 import './LoginForm.css';
 
 export const LoginForm = () => {
+  // TODO - make validation errors display more naturally
+
   const history = useHistory();
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
@@ -29,13 +31,16 @@ export const LoginForm = () => {
   const handleDemoUser = async e => {
     e.preventDefault();
 
-    dispatch(login('demo@aa.io', 'password'));
+    await dispatch(login('demo@aa.io', 'password'));
     history.push('/users/1/dashboard');
   };
 
   return (
     <div className="form-wrapper">
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form
+        className="login-form"
+        onSubmit={handleSubmit}
+      >
         <section className="login-form__input-section">
           {/* ===== NAME ===== */}
           <div className="login-form__name-container">
@@ -47,7 +52,12 @@ export const LoginForm = () => {
               autoComplete="off"
               className={`login-form__input--style ${errors.email ? 'error-outline' : ''}`}
             />
-            {errors.email && <ErrorView error={errors.email} styling={'login-form__name'} />}
+            {errors.email && (
+              <ErrorView
+                error={errors.email}
+                styling="login-form__name"
+              />
+            )}
           </div>
 
           {/* ===== PASSWORD ===== */}
@@ -62,7 +72,10 @@ export const LoginForm = () => {
               className={`login-form__input--style ${errors.password ? 'error-outline' : ''}`}
             />
             {errors.password && (
-              <ErrorView error={errors.password} styling={'login-form__password'} />
+              <ErrorView
+                error={errors.password}
+                styling="login-form__password"
+              />
             )}
           </div>
         </section>
@@ -70,10 +83,16 @@ export const LoginForm = () => {
         {/* ===== BUTTONS ===== */}
         <section className="login-form__btn-section">
           <div className="login-form__btn-container">
-            <button className="login-form__login-btn" type="submit">
+            <button
+              className="login-form__login-btn"
+              type="submit"
+            >
               Log In
             </button>
-            <button className="login-form__demo-btn" onClick={handleDemoUser}>
+            <button
+              className="login-form__demo-btn"
+              onClick={handleDemoUser}
+            >
               Demo User
             </button>
           </div>
