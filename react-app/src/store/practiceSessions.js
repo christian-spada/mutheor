@@ -94,9 +94,19 @@ export default function reducer(state = initialState, action) {
         allPracticeSessions: normalizeData(action.payload.practiceSessions),
       };
     case GET_SINGLE_PRACTICE_SESSION:
-      return {};
+      return {
+        ...state,
+        singlePracticeSession: action.payload,
+      };
     case CREATE_PRACTICE_SESSION:
-      return {};
+      return {
+        ...state,
+        allPracticeSessions: {
+          ...state.allPracticeSessions,
+          [action.payload.id]: action.payload,
+        },
+        singlePracticeSession: action.payload,
+      };
     default:
       return state;
   }
