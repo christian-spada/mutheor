@@ -5,13 +5,14 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';
 
 import './EditGoalModal.css';
+import { ErrorView } from '../../../UtilComponents/ErrorView';
 
 export const EditGoalModal = ({ goalToEdit, user }) => {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
-  let dateInput = useRef();
+  // let dateInput = useRef();
 
-  const [focus, setFocus] = useState(false);
+  // const [focus, setFocus] = useState(false);
 
   const instruments = user.instruments;
   const [instrumentId, setInstrumentId] = useState();
@@ -47,15 +48,16 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
     const res = await dispatch(thunkEditGoal(user.id, newGoal));
 
     if (res.errors) {
+      setErrors(res.errors);
     } else {
       closeModal();
     }
   };
 
-  if (dateInput.current) {
-    if (focus) dateInput.current.setAttribute('type', 'date');
-    else dateInput.current.setAttribute('type', 'text');
-  }
+  // if (dateInput.current) {
+  //   if (focus) dateInput.current.setAttribute('type', 'date');
+  //   else dateInput.current.setAttribute('type', 'text');
+  // }
 
   return (
     <div className="edit-goal-modal">
@@ -87,15 +89,16 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
             </select>
           </div>
           <div>
+            {errors.target_date && <ErrorView error={errors.target_date} />}
             <label htmlFor="goal-target-date">Target Date</label>
             <input
-              type="text"
+              type="date"
               value={targetDate}
-              placeholder={0 + formatDate(goalToEdit.targetDate, '/')}
+              // placeholder={0 + formatDate(goalToEdit.targetDate, '/')}
               onChange={e => setTargetDate(e.target.value)}
-              onFocus={() => setFocus(true)}
-              onBlur={() => setFocus(false)}
-              ref={dateInput}
+              // onFocus={() => setFocus(true)}
+              // onBlur={() => setFocus(false)}
+              // ref={dateInput}
               className="edit-goal-form__date-input"
             />
           </div>
@@ -123,6 +126,7 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
 
         {/* ===== GOAL DESCRIPTION SECTION ===== */}
         <section className="edit-goal-form__description-section">
+          {errors.description && <ErrorView error={errors.description} />}
           <textarea
             className="edit-goal-form__description"
             placeholder="Describe your goal here..."

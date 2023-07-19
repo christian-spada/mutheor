@@ -71,7 +71,6 @@ const CreateGoalModal = ({ user }) => {
                   <option
                     key={inst.id}
                     value={inst.type}
-                    data-instrument-id={inst.id}
                   >
                     {inst.type}
                   </option>
@@ -80,21 +79,24 @@ const CreateGoalModal = ({ user }) => {
             </select>
           </div>
           <div>
+            {errors.target_date && <ErrorView error={errors.target_date} />}
             <label htmlFor="goal-target-date">Target Date</label>
             <input
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}
             />
-            {errors.target_date && <ErrorView error={errors.target_date} />}
           </div>
         </section>
 
         {/* ===== OPTIONAL INSTRUMENT MODEL SECTION ===== */}
         {multipleSameTypeInstruments.length > 1 && (
           <section className="create-goal-form__multiple-same-type-section">
-            <label>Which one of your {instrumentType}'s?</label>
+            <label htmlFor="create-goal-multiple-inst-type">
+              Which one of your {instrumentType}'s?
+            </label>
             <select
+              id="create-goal-multiple-inst-type"
               className="create-goal-form__multiple-same-type"
               onChange={e => setInstrumentId(parseInt(e.target.value))}
             >
@@ -112,13 +114,13 @@ const CreateGoalModal = ({ user }) => {
 
         {/* ===== GOAL DESCRIPTION SECTION ===== */}
         <section className="create-goal-form__description-section">
+          {errors.description && <ErrorView error={errors.description} />}
           <textarea
             className="create-goal-form__description"
             placeholder="Describe your goal here..."
             onChange={e => setDescription(e.target.value)}
             value={description}
           ></textarea>
-          {errors.description && <ErrorView error={errors.description} />}
         </section>
 
         <section className="create-goal-form__btn-section">
