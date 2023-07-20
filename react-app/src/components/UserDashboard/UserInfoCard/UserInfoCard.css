@@ -4,17 +4,31 @@
   gap: 3rem;
   padding: 5rem;
   border-radius: 1rem;
-  background-color: var(--primary-200);
+  background-color: var(--primary-400);
+  border: 1px solid var(--primary-900);
 }
 
 .user-info-card__img-container {
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  border: 1px solid var(--primary-900);
 }
 
 .user-info-card__info {
-  border: 1px solid black;
+  border: 1px solid var(--primary-900);
+  background-color: var(--primary-100);
+  border-radius: inherit;
+  padding: 1rem;
   width: 300px;
   height: 200px;
+}
+
+.user-info-card__info > section {
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.user-info-card__info > section:nth-child(odd) {
+  background-color: var(--primary-200);
 }
