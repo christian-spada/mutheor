@@ -47,6 +47,10 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "profilePic": self.profile_pic,
             "instruments": [inst.to_dict() for inst in self.instruments],
+            "practiceSessions": [sesh.to_dict() for sesh in self.practice_sessions],
+            "goals": [goal.to_dict() for goal in self.goals],
+            "repertoire": [rep.to_dict() for rep in self.repertoire],
+            "achievements": [ach.to_dict() for ach in self.achievements],
         }
         if timestamps:
             dct["createdAt"] = self.created_at
