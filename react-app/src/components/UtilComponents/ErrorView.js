@@ -1,3 +1,8 @@
 export const ErrorView = ({ error, styling }) => {
-  return <p className={`error ${styling ? styling : ''}`}>{error}</p>;
+  return (
+    <>
+      <i className="fa-solid fa-circle-exclamation error"></i>
+      <p className={`error ${styling ? styling : ''}`}>{error}</p>
+    </>
+  );
 };

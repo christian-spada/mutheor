@@ -2,7 +2,6 @@ import { logger } from '../../../utils/helpers';
 import './UserInfoCard.css';
 
 const UserInfoCard = ({ user }) => {
-  logger('user', user);
   return (
     <div className="user-info-card">
       <div className="user-info-card__img-container">
