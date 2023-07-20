@@ -25,12 +25,12 @@ def username_exists(form, field):
 class SignUpForm(FlaskForm):
     username = StringField(
         "username",
-        validators=[DataRequired("Username field is required"), username_exists],
+        validators=[DataRequired("Username is required"), username_exists],
     )
     email = StringField(
         "email",
         validators=[
-            DataRequired("Email field is required"),
+            DataRequired("Email is required"),
             user_exists,
         ],
     )
@@ -41,5 +41,5 @@ class SignUpForm(FlaskForm):
         ],
     )
     password = StringField(
-        "password", validators=[DataRequired("Password field is required")]
+        "password", validators=[DataRequired("Password is required")]
     )

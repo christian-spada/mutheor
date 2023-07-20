@@ -25,10 +25,16 @@ category_choices = [("Percussion"), ("Brass"), ("Woodwind"), ("String"), ("Elect
 
 
 class EditInstrumentForm(FlaskForm):
-    type = SelectField("type", choices=type_choices, validators=[DataRequired()])
-    model = StringField("model", validators=[DataRequired()])
+    type = SelectField(
+        "type",
+        choices=type_choices,
+        validators=[DataRequired("Type is required")],
+    )
+    model = StringField("model", validators=[DataRequired("Model is required")])
     category = SelectField(
-        "category", choices=category_choices, validators=[DataRequired()]
+        "category",
+        choices=category_choices,
+        validators=[DataRequired("Category is required")],
     )
     image = FileField(
         "image",
