@@ -12,6 +12,15 @@
   margin-bottom: 3px;
 }
 
+#edit-goal-instrument-type,
+#edit-goal-multiple-same-type,
+#edit-goal-target-date {
+  padding: 0.3rem;
+  border-radius: 8px;
+  background-color: var(--primary-100);
+  border: none;
+}
+
 .edit-goal-form__date-input {
   width: 136px;
 }
@@ -23,12 +32,15 @@
 .edit-goal-form__description-section {
   margin-top: 2rem;
 }
+
 .edit-goal-form__description {
   border-radius: 8px;
+  border: none;
   height: 100px;
   width: 100%;
   resize: none;
   padding: 0.3rem;
+  background-color: var(--primary-100);
 }
 
 .edit-goal-form__btn-section {
