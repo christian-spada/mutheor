@@ -81,6 +81,16 @@ button {
   --primary-300: hsl(246, 54%, 80%);
   --primary-200: hsl(246, 54%, 90%);
   --primary-100: hsl(246, 54%, 95%); */
+
+  --primary-blue: #0077ff;
+  --secondary-blue: #00c3ff;
+  --primary-orange: #fe7235;
+  --secondary-orange: #fe7235;
+  --primary-light: #fcf5ef;
+  /*
+  #FCF5EF linen #FEA735 Sunshade #FE7235 burning orange #00C3FF bright turquoise #0077FF azure radiance
+
+ */
 }
 
 .error {
