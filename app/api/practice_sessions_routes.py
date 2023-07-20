@@ -1,15 +1,11 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 from sqlalchemy import and_
 from app.forms import CreatePracticeSession
 from app.models import (
     db,
-    User,
     Instrument,
-    Goal,
     PracticeSession,
-    Repertoire,
-    Achievement,
 )
 from app.utils import (
     bad_request,
