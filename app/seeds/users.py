@@ -7,19 +7,19 @@ def seed_users():
     demo = User(
         username="Demo",
         email="demo@aa.io",
-        profile_pic="https://images.pexels.com/photos/13243132/pexels-photo-13243132.jpeg",
+        profile_pic="https://my-mutheor-user-images-bucket.s3.amazonaws.com/pexels-stefan-stefancik-91227.jpg",
         password="password",
     )
     jess = User(
         username="Jess",
         email="jess@aa.io",
-        profile_pic="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg",
+        profile_pic="https://my-mutheor-user-images-bucket.s3.amazonaws.com/pexels-andrea-piacquadio-762020.jpg",
         password="password",
     )
     derek = User(
         username="Derek",
         email="derek@aa.io",
-        profile_pic="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg",
+        profile_pic="https://my-mutheor-user-images-bucket.s3.amazonaws.com/pexels-moose-photos-1036623.jpg",
         password="password",
     )
 

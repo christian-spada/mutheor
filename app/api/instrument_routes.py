@@ -169,6 +169,9 @@ def delete_instrument(user_id, instrument_id):
         instrument = Instrument.query.filter(
             and_(Instrument.id == instrument_id, Instrument.user_id == user_id)
         ).one()
+
+        remove_file_from_s3(instrument.image)
+
         db.session.delete(instrument)
         db.session.commit()
     except:

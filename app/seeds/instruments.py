@@ -8,21 +8,21 @@ def seed_instruments():
         type="Electric Guitar",
         model="Fender Strat",
         category="String",
-        image="https://images.pexels.com/photos/2646825/pexels-photo-2646825.jpeg",
+        image="https://my-mutheor-user-images-bucket.s3.amazonaws.com/fender-strat.jpg",
     )
     inst2 = Instrument(
         user_id=1,
         type="Bongos",
-        model="Tama",
+        model="Tama 210",
         category="Percussion",
-        image="https://images.pexels.com/photos/9488150/pexels-photo-9488150.jpeg",
+        image="https://my-mutheor-user-images-bucket.s3.amazonaws.com/DW-C70-bongos.jpg",
     )
     inst3 = Instrument(
         user_id=2,
         type="Piano",
-        model="Yamaha",
+        model="Yamaha C350",
         category="Percussion",
-        image="https://images.pexels.com/photos/1021142/pexels-photo-1021142.jpeg",
+        image="https://my-mutheor-user-images-bucket.s3.amazonaws.com/piano-yamaha-C50.jpg",
     )
 
     db.session.add(inst1)

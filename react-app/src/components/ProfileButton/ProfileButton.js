@@ -29,8 +29,8 @@ const ProfileButton = ({ user }) => {
     return () => document.removeEventListener('click', closeMenu);
   }, [showMenu]);
 
-  const handleLogout = e => {
-    dispatch(logout());
+  const handleLogout = async e => {
+    await dispatch(logout());
   };
 
   const ulClassName = 'profile-dropdown' + (showMenu ? '' : ' hidden');
@@ -39,13 +39,26 @@ const ProfileButton = ({ user }) => {
 
   return (
     <div className="profile-dropdown-container">
-      <div onClick={openMenu} className="profile-button__img-container">
-        <img className="profile-button__img" src={user?.profilePic} alt=""></img>
+      <div
+        onClick={openMenu}
+        className="profile-button__img-container"
+      >
+        <img
+          className="profile-button__img"
+          src={user?.profilePic}
+          alt=""
+        ></img>
       </div>
-      <ul className={ulClassName} ref={ulRef}>
+      <ul
+        className={ulClassName}
+        ref={ulRef}
+      >
         <li className="profile-dropdown__username">{user?.username}</li>
         <li className="profile-dropdown__email">{user?.email}</li>
-        <li className="profile-dropdown__logout-btn" onClick={handleLogout}>
+        <li
+          className="profile-dropdown__logout-btn"
+          onClick={handleLogout}
+        >
           Logout
         </li>
       </ul>
