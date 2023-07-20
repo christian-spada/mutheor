@@ -85,6 +85,7 @@ const CreateGoalModal = ({ user }) => {
             {errors.target_date && <ErrorView error={errors.target_date} />}
             <label htmlFor="goal-target-date">Target Date</label>
             <input
+              id="goal-target-date"
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}
