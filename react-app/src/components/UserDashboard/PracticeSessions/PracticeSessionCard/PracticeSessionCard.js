@@ -6,9 +6,9 @@ const PracticeSessionCard = ({ session }) => {
 
   return (
     <div className="session-card card">
-      <header className="session-card__header">
+      {/* <header className="session-card__header">
         <i className="fa-solid fa-xmark"></i>
-      </header>
+      </header> */}
       <section className="session-card__time-section">
         <div>
           <i className="fa-regular fa-calendar"></i>
@@ -22,9 +22,8 @@ const PracticeSessionCard = ({ session }) => {
       <section className="session-card__instrument-type">
         <div>
           <i className="fa-solid fa-sliders"></i>
-          <span>
-            {session.instrument.type} - {session.instrument.model}
-          </span>
+          <span className="session-card__model">{session.instrument.model}</span>
+          <span className="session-card__type">{session.instrument.type}</span>
         </div>
       </section>
       <section className="session-card__focus-area">
