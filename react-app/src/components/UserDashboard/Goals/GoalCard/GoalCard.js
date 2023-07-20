@@ -1,12 +1,16 @@
-import { formatDate, logger } from '../../../../utils/helpers';
+import { formatDate, getDaysRemaining, logger } from '../../../../utils/helpers';
 import OpenModalButton from '../../../OpenModalButton';
 import DeleteGoalModal from '../DeleteGoalModal/DeleteGoalModal';
 import EditGoalModal from '../EditGoalModal/EditGoalModal';
 import './GoalCard.css';
 
 const GoalCard = ({ goal, user }) => {
+  const currentDate = new Date();
+  const targetDateObj = new Date(goal.targetDate);
+  const daysRemaining = getDaysRemaining(targetDateObj, currentDate);
+
   return (
-    <div className="goal-card card">
+    <div className={`goal-card card ${daysRemaining < 0 ? 'target-date-missed' : ''}`}>
       <header className="goal-card__header">
         <OpenModalButton
           modalComponent={
@@ -29,11 +33,12 @@ const GoalCard = ({ goal, user }) => {
         />
       </header>
       <section className="goal-card__info-section">
-        <div>
+        <div className="goal-card__instruments-container">
           <i className="fa-solid fa-sliders"></i>
-          <span>
-            {goal.instrument.type} - {goal.instrument.model}
-          </span>
+          <div>
+            <p className="goal-card__model">{goal.instrument.model}</p>
+            <p className="goal-card__type">{goal.instrument.type}</p>
+          </div>
         </div>
         <div>
           <i className="fa-regular fa-calendar"></i>
@@ -41,9 +46,21 @@ const GoalCard = ({ goal, user }) => {
         </div>
       </section>
 
-      {/* TODO - MAKE DAYS REMAINING FOR GOAL DYNAMIC. IT IS CURRENTLY HARD CODED */}
       <section className="goal-card__days-remaining-section">
-        <p className="goal-card__days-remaining">25 days remaining</p>
+        <p className="goal-card__days-remaining">
+          {daysRemaining > 0 && (
+            <>
+              <span className="days-remaining">{daysRemaining}</span>
+              <span> days remaining</span>
+            </>
+          )}
+          {daysRemaining === 0 && (
+            <span className="today-target-date">Today is your target date!</span>
+          )}
+          {daysRemaining < 0 && (
+            <span className="missed-target-date-message">You missed your target date!</span>
+          )}
+        </p>
       </section>
 
       <section className="goal-card__description-section">
