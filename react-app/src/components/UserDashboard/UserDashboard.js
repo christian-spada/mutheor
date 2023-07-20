@@ -21,12 +21,15 @@ import './UserDashboard.css';
 
 const UserDashboard = () => {
   const dispatch = useDispatch();
+
   const user = useSelector(state => state.session.user);
   const practiceSessions = useSelector(state =>
     Object.values(state.practiceSession.allPracticeSessions)
   );
   const instruments = useSelector(state => Object.values(state.instrument.allInstruments));
   const goals = useSelector(state => Object.values(state.goal.allGoals));
+  goals.sort((a, b) => new Date(a.targetDate) - new Date(b.targetDate));
+
   const [showSideBar, setShowSidebar] = useState(false);
   const [contentView, setContentView] = useState('Instruments');
   const sidebar = useRef();
