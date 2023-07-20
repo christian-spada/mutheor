@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { thunkCreatePracticeSession } from '../../../../store/practiceSessions';
 import './CreatePracticeSessionModal.css';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
+import { thunkGetUser } from '../../../../store/session';
 
 const CreatePracticeSessionModal = ({ user }) => {
   const { closeModal } = useModal();
@@ -45,6 +46,8 @@ const CreatePracticeSessionModal = ({ user }) => {
     };
 
     const res = await dispatch(thunkCreatePracticeSession(user.id, newSession));
+
+    await dispatch(thunkGetUser(user.id));
 
     if (res.errors) {
       setErrors(res.errors);
