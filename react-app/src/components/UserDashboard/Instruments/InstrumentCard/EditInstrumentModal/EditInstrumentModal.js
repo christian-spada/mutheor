@@ -5,16 +5,19 @@ import { thunkEditInstrument } from '../../../../../store/instruments';
 import { useModal } from '../../../../../context/Modal';
 import { thunkGetUser } from '../../../../../store/session';
 import './EditInstrumentModal.css';
+import { ErrorView } from '../../../../UtilComponents/ErrorView';
 
 const EditInstrumentModal = ({ instrumentToEdit, user }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
   const [image, setImage] = useState(instrumentToEdit.image);
-  const [loadingState, setLoadingState] = useState(false);
   const [instrumentType, setInstrumentType] = useState(instrumentToEdit.type);
   const [model, setModel] = useState(instrumentToEdit.model);
   const [category, setCategory] = useState(instrumentToEdit.category);
+  const [errors, setErrors] = useState({});
+
+  const [loadingState, setLoadingState] = useState(false);
 
   const typeSelectRef = useRef();
 
@@ -44,12 +47,17 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
 
     setLoadingState(true);
 
-    await dispatch(thunkEditInstrument(user.id, formData));
+    const res = await dispatch(thunkEditInstrument(user.id, formData));
 
     await dispatch(thunkGetUser(user.id));
 
     setLoadingState(true);
-    closeModal();
+
+    if (res.errors) {
+      setErrors(res.errors);
+    } else {
+      closeModal();
+    }
   };
 
   return (
@@ -67,7 +75,8 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
             ></img>
           </div>
           <div>
-            <label htmlFor="edit-instrument-image">Image Url</label>
+            <span className="edit-instrument-form__img-file-name">{image?.name}</span>
+            <label htmlFor="edit-instrument-image">Choose Image File</label>
             <input
               type="file"
               accept="image/*"
@@ -142,7 +151,11 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
           </div>
         </section>
         <section className="edit-instrument-form__model-section">
-          <label htmlFor="edit-instrument-model">Model</label>
+          {errors.model ? (
+            <ErrorView error={errors.model} />
+          ) : (
+            <label htmlFor="edit-instrument-model">Model</label>
+          )}
           <input
             id="edit-instrument-model"
             onChange={e => setModel(e.target.value)}

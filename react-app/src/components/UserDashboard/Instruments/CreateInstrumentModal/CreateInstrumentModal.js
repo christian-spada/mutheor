@@ -5,6 +5,7 @@ import { thunkCreateInstrument } from '../../../../store/instruments';
 import { useModal } from '../../../../context/Modal';
 import { thunkGetUser } from '../../../../store/session';
 import './CreateInstrumentModal.css';
+import { ErrorView } from '../../../UtilComponents/ErrorView';
 
 const CreateInstrumentModal = ({ user }) => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const CreateInstrumentModal = ({ user }) => {
   const [category, setCategory] = useState('String');
 
   const [loadingState, setLoadingState] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const typeSelectRef = useRef();
 
@@ -44,12 +46,17 @@ const CreateInstrumentModal = ({ user }) => {
 
     setLoadingState(true);
 
-    await dispatch(thunkCreateInstrument(user.id, formData));
+    const res = await dispatch(thunkCreateInstrument(user.id, formData));
 
     await dispatch(thunkGetUser(user.id));
 
     setLoadingState(false);
-    closeModal();
+
+    if (res.errors) {
+      setErrors(res.errors);
+    } else {
+      closeModal();
+    }
   };
 
   return (
@@ -59,6 +66,7 @@ const CreateInstrumentModal = ({ user }) => {
         onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
+        {errors.image && <ErrorView error={errors.image} />}
         <section className="create-instrument-form__img-section">
           <span className="create-instrument-form__img-file-name">{image?.name}</span>
           <label htmlFor="create-instrument-image">Choose Image File</label>
@@ -135,7 +143,11 @@ const CreateInstrumentModal = ({ user }) => {
           </div>
         </section>
         <section className="create-instrument-form__model-section">
-          <label htmlFor="create-instrument-model">Model</label>
+          {errors.model ? (
+            <ErrorView error={errors.model} />
+          ) : (
+            <label htmlFor="create-instrument-model">Model</label>
+          )}
           <input
             id="create-instrument-model"
             onChange={e => setModel(e.target.value)}
