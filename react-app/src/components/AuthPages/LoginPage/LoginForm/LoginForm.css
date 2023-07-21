@@ -42,7 +42,7 @@
 }
 
 .login-form__login-btn {
-  background-color: var(--primary-400);
+  background-color: var(--primary-500);
   color: var(--primary-100);
 }
 

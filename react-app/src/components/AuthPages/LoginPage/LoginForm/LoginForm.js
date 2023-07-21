@@ -7,10 +7,9 @@ import { logger } from '../../../../utils/helpers';
 import './LoginForm.css';
 
 export const LoginForm = () => {
-  // TODO - make validation errors display more naturally
-
   const history = useHistory();
   const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
@@ -44,7 +43,11 @@ export const LoginForm = () => {
         <section className="login-form__input-section">
           {/* ===== NAME ===== */}
           <div className="login-form__name-container">
-            <label htmlFor="login-email">Email</label>
+            {errors.email ? (
+              <ErrorView error={errors.email} />
+            ) : (
+              <label htmlFor="login-email">Email</label>
+            )}
             <input
               id="login-email"
               value={email}
@@ -52,17 +55,15 @@ export const LoginForm = () => {
               autoComplete="off"
               className={`login-form__input--style ${errors.email ? 'error-outline' : ''}`}
             />
-            {errors.email && (
-              <ErrorView
-                error={errors.email}
-                styling="login-form__name"
-              />
-            )}
           </div>
 
           {/* ===== PASSWORD ===== */}
           <div className="login-form__password-container">
-            <label htmlFor="login-password">Password</label>
+            {errors.password ? (
+              <ErrorView error={errors.password} />
+            ) : (
+              <label htmlFor="login-password">Password</label>
+            )}
             <input
               id="login-password"
               type="password"
@@ -71,12 +72,6 @@ export const LoginForm = () => {
               autoComplete="off"
               className={`login-form__input--style ${errors.password ? 'error-outline' : ''}`}
             />
-            {errors.password && (
-              <ErrorView
-                error={errors.password}
-                styling="login-form__password"
-              />
-            )}
           </div>
         </section>
 
