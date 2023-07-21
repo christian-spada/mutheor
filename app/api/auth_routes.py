@@ -61,8 +61,6 @@ def sign_up():
     form = SignUpForm()
     attach_csrf_token(form, request)
 
-    validate_email(form.data["email"])
-
     if form.validate_on_submit():
         data = form.data
 
