@@ -18,7 +18,7 @@
 
 .goal-card__info-section {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin-top: 1.5rem;
 }
 
@@ -42,6 +42,7 @@
   padding: 1rem;
   background-color: var(--primary-200);
   border-radius: inherit;
+  height: 88px;
 }
 
 .goal-card__days-remaining-section {
@@ -62,7 +63,10 @@
 }
 
 .missed-target-date-message {
-  color: hsl(0, 70%, 51%);
+  font-weight: 600;
+  color: hsl(0, 70%, 61%);
+  position: relative;
+  top: 8px;
 }
 
 .days-remaining {
