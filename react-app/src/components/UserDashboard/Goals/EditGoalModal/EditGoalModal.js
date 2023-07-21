@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
-import { formatDate, logger } from '../../../../utils/helpers';
+import { formatDateToValidInputValue, logger } from '../../../../utils/helpers';
 import { thunkEditGoal } from '../../../../store/goals';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';
-
-import './EditGoalModal.css';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
+import './EditGoalModal.css';
 
 export const EditGoalModal = ({ goalToEdit, user }) => {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
 
   const instruments = user.instruments;
+  const currentDate = formatDateToValidInputValue();
+
   const [instrumentId, setInstrumentId] = useState();
   const [targetDate, setTargetDate] = useState(
-    new Date(goalToEdit.targetDate).toISOString().split('T')[0]
+    formatDateToValidInputValue(goalToEdit.targetDate)
   );
   const [description, setDescription] = useState(goalToEdit.description);
   const [instrumentType, setInstrumentType] = useState(goalToEdit.instrument.type);
@@ -93,6 +94,7 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}
+              min={currentDate}
               className={`edit-goal-form__date-input ${
                 errors.target_date ? 'error-outline' : ''
               }`}
