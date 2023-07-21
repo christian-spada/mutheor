@@ -24,12 +24,15 @@
 }
 
 .create-goal-form__multiple-same-type-section {
+  text-align: center;
   margin-top: 1rem;
+  animation: fade-in-opacity 500ms ease-in-out;
 }
 
 .create-goal-form__description-section {
   margin-top: 2rem;
 }
+
 .create-goal-form__description {
   border-radius: 8px;
   border: none;

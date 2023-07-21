@@ -97,23 +97,14 @@
 }
 
 .overlay {
-  background-color: hsl(246, 0%, 0%, 0.3);
+  background-color: hsl(246, 0%, 0%, 0.4);
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  animation: overlay 400ms ease-in-out;
-}
-
-@keyframes overlay {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
+  animation: fade-in-opacity 400ms ease-in-out;
+  z-index: 1;
 }
 
 .card {
@@ -137,19 +128,10 @@
   padding: 0.7rem;
   border-radius: 8px;
   font-size: 14px;
-  bottom: -75px;
-  animation: 300ms ease-in-out fade-in-reminder;
+  animation: 150ms ease-in-out fade-in-reminder;
+  bottom: 50px;
 }
 
-@keyframes fade-in-reminder {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.user-dashboard-view-selection-btn-container {
+.user-dashboard__view-selection-btn-container {
   position: relative;
 }

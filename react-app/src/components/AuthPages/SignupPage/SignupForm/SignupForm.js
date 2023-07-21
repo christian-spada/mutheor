@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUp } from '../../../../store/session';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
@@ -20,21 +20,25 @@ export const SignupForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const formData = new FormData();
+    if (password === confirmPassword) {
+      const formData = new FormData();
 
-    formData.append('username', username);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('profile_pic', image);
+      formData.append('username', username);
+      formData.append('email', email);
+      formData.append('password', password);
+      formData.append('profile_pic', image);
 
-    setLoadingState(true);
+      setLoadingState(true);
 
-    const data = await dispatch(signUp(formData));
+      const data = await dispatch(signUp(formData));
 
-    setLoadingState(false);
+      setLoadingState(false);
 
-    if (data?.errors) {
-      setErrors(data.errors);
+      if (data?.errors) {
+        setErrors(data.errors);
+      }
+    } else {
+      setErrors({ confirmPassword: 'Confirm password must be the same as password' });
     }
   };
 
@@ -95,7 +99,6 @@ export const SignupForm = () => {
         </section>
 
         {/* ===== PASSWORD ===== */}
-        {errors.confirmPasswordError && <ErrorView error={errors.confirmPasswordError} />}
         <section className="signup-form__password-section">
           {errors.password ? (
             <ErrorView error={errors.password} />
@@ -104,7 +107,7 @@ export const SignupForm = () => {
           )}
           <input
             id="signup-password"
-            className="signup-form__input--style"
+            className={`signup-form__input--style ${errors.password ? 'error-outline' : ''}`}
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
@@ -113,11 +116,15 @@ export const SignupForm = () => {
 
         {/* ===== CONFIRM PASSWORD ===== */}
         <section className="signup-form__confirm-password-section">
-          <label htmlFor="signup-confirm-password">Confirm Password</label>
+          {errors.confirmPassword ? (
+            <ErrorView error={errors.confirmPassword} />
+          ) : (
+            <label htmlFor="signup-confirm-password">Confirm Password</label>
+          )}
           <input
             id="signup-confirm-password"
             className={`signup-form__input--style ${
-              errors.confirmPasswordError ? 'error-outline' : ''
+              errors.confirmPassword ? 'error-outline' : ''
             }`}
             type="password"
             value={confirmPassword}

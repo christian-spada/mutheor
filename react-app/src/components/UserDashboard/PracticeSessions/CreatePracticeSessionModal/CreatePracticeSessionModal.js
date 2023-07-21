@@ -5,6 +5,7 @@ import { thunkCreatePracticeSession } from '../../../../store/practiceSessions';
 import './CreatePracticeSessionModal.css';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
 import { thunkGetUser } from '../../../../store/session';
+import { formatDateToValidInputValue } from '../../../../utils/helpers';
 
 const CreatePracticeSessionModal = ({ user }) => {
   const { closeModal } = useModal();
@@ -12,7 +13,7 @@ const CreatePracticeSessionModal = ({ user }) => {
 
   const instruments = user.instruments;
   const [instrumentId, setInstrumentId] = useState();
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(formatDateToValidInputValue());
   const [duration, setDuration] = useState(1);
   const [notes, setNotes] = useState('');
   const [areaOfFocus, setAreaOfFocus] = useState('Chords');
@@ -126,6 +127,7 @@ const CreatePracticeSessionModal = ({ user }) => {
             </select>
           </section>
         </div>
+
         {/* ===== OPTIONAL INSTRUMENT MODEL SECTION ===== */}
         {multipleSameTypeInstruments.length > 1 && (
           <section className="create-session-form__multiple-same-type-section">

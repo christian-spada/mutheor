@@ -15,7 +15,20 @@ const LoginPage = () => {
     <div className="login-page">
       <aside className="login-page__sidebar"></aside>
       <main className="login-page__main-section">
-        <LoginForm />
+        <section>
+          <div className="signup-page__member-redirect">
+            <p>
+              Not yet a member? Signup{' '}
+              <span
+                className="login-redirect-btn"
+                onClick={() => history.push('/signup')}
+              >
+                Here
+              </span>
+            </p>
+          </div>
+          <LoginForm />
+        </section>
       </main>
     </div>
   );

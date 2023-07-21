@@ -36,6 +36,8 @@ export const normalizeData = data => {
   return normalized;
 };
 
+//! ===== FORMATTING =====
+
 export const formatDate = (date, delimiter) => {
   const dateObj = new Date(date);
   const formattedDate = `${dateObj.getMonth() + 1}${delimiter}${
@@ -73,4 +75,10 @@ export const getDaysRemaining = (targetDate, currentDate) => {
   const daysRemaining = Math.ceil(diff / (1000 * 60 * 60 * 24));
 
   return daysRemaining;
+};
+
+export const formatDateToValidInputValue = (date = null) => {
+  if (!date) return new Date().toISOString().split('T')[0];
+
+  return new Date(date).toISOString().split('T')[0];
 };

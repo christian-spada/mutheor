@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { logger } from '../../../../utils/helpers';
+import { formatDateToValidInputValue, logger } from '../../../../utils/helpers';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
 import './CreateGoalModal.css';
 import { thunkCreateGoal } from '../../../../store/goals';
@@ -12,6 +12,8 @@ const CreateGoalModal = ({ user }) => {
   const dispatch = useDispatch();
 
   const instruments = user.instruments;
+  const currentDate = formatDateToValidInputValue();
+
   const [instrumentId, setInstrumentId] = useState();
   const [targetDate, setTargetDate] = useState('');
   const [description, setDescription] = useState('');
@@ -91,6 +93,7 @@ const CreateGoalModal = ({ user }) => {
               id="goal-target-date"
               type="date"
               value={targetDate}
+              min={currentDate}
               onChange={e => setTargetDate(e.target.value)}
               className={`${errors.target_date ? 'error-outline' : ''}`}
             />
