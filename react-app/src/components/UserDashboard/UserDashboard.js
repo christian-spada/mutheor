@@ -21,12 +21,15 @@ import './UserDashboard.css';
 
 const UserDashboard = () => {
   const dispatch = useDispatch();
+
   const user = useSelector(state => state.session.user);
   const practiceSessions = useSelector(state =>
     Object.values(state.practiceSession.allPracticeSessions)
   );
   const instruments = useSelector(state => Object.values(state.instrument.allInstruments));
   const goals = useSelector(state => Object.values(state.goal.allGoals));
+  goals.sort((a, b) => new Date(a.targetDate) - new Date(b.targetDate));
+
   const [showSideBar, setShowSidebar] = useState(false);
   const [contentView, setContentView] = useState('Instruments');
   const sidebar = useRef();
@@ -109,7 +112,7 @@ const UserDashboard = () => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill="hsla(30, 100%, 50%, .6)"
+              fill="hsla(30, 100%, 50%, .3)"
               d="M48.7,-69.7C60,-58.8,63.9,-40.4,64.3,-24.4C64.6,-8.4,61.2,5.2,57.8,19.8C54.4,34.3,51,49.9,41.3,63.3C31.7,76.8,15.8,88.2,3.9,82.8C-8,77.5,-16.1,55.3,-21.9,40.6C-27.7,25.9,-31.2,18.6,-39.2,9.2C-47.2,-0.3,-59.7,-11.9,-61.8,-24.6C-63.9,-37.3,-55.6,-51.2,-43.6,-61.9C-31.5,-72.6,-15.8,-80,1.5,-82C18.7,-84,37.4,-80.6,48.7,-69.7Z"
               transform="translate(100 100)"
             />

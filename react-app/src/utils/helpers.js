@@ -67,3 +67,10 @@ export const formatDuration = duration => {
 
   return formattedDuration;
 };
+
+export const getDaysRemaining = (targetDate, currentDate) => {
+  const diff = targetDate - currentDate;
+  const daysRemaining = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+  return daysRemaining;
+};

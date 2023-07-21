@@ -23,6 +23,15 @@
   justify-content: space-around;
 }
 
+.session-card__model {
+  font-weight: 400;
+}
+
+.session-card__type {
+  font-weight: 300;
+  font-size: 14px;
+}
+
 .session-card__notes-section {
   background-color: var(--primary-200);
   border-radius: inherit;

@@ -13,6 +13,33 @@
   align-items: center;
 }
 
+.edit-instrument-form [type='file'] {
+  display: none;
+}
+
+.edit-instrument-form__img-file-name {
+  border-radius: 8px;
+  height: 30px;
+  padding: 0.3rem 0.6rem;
+  overflow: hidden;
+  width: 10rem;
+  display: block;
+  background-color: var(--primary-100);
+  margin-bottom: 0.3rem;
+}
+
+.edit-instrument-form__img-section label {
+  border-radius: 8px;
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  width: fit-content;
+  height: 30px;
+  background-color: var(--primary-500);
+  color: var(--primary-white);
+  margin-left: 2px;
+}
+
 .edit-instrument-form__img-container {
   width: 100px;
   height: 100px;
@@ -26,6 +53,8 @@
 #edit-instrument-model {
   padding: 0.3rem;
   border-radius: 8px;
+  background-color: var(--primary-100);
+  border: none;
 }
 
 .edit-instrument-form__type-section {

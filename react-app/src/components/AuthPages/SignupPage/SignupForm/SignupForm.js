@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { signUp } from '../../../../store/session';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
 import './SignupForm.css';
+import { logger } from '../../../../utils/helpers';
 
 export const SignupForm = () => {
   const dispatch = useDispatch();
@@ -33,10 +34,6 @@ export const SignupForm = () => {
     setLoadingState(false);
 
     if (data?.errors) {
-      if (password && confirmPassword !== password) {
-        data.errors.confirmPasswordError =
-          'Confirm Password field must be the same as the Password field';
-      }
       setErrors(data.errors);
     }
   };
@@ -49,7 +46,15 @@ export const SignupForm = () => {
         encType="multipart/form-data"
       >
         <section className="signup-form__img-section">
-          <label htmlFor="signup-img">Profile Picture</label>
+          <div>
+            <span>
+              Profile Picture <span className="optional">(optional)</span>
+            </span>
+          </div>
+          <div>
+            <span className="signup-form__img-file-name">{image?.name}</span>
+            <label htmlFor="signup-img">Choose Image File</label>
+          </div>
           <input
             type="file"
             accept="image/*"
@@ -60,9 +65,12 @@ export const SignupForm = () => {
         </section>
 
         {/* ===== EMAIL ===== */}
-        {errors.email && <ErrorView error={errors.email} />}
         <section className="signup-form__email-section">
-          <label htmlFor="signup-email">Email</label>
+          {errors.email ? (
+            <ErrorView error={errors.email} />
+          ) : (
+            <label htmlFor="signup-email">Email</label>
+          )}
           <input
             id="signup-email"
             className={`signup-form__input--style ${errors.email ? 'error-outline' : ''}`}
@@ -72,9 +80,12 @@ export const SignupForm = () => {
         </section>
 
         {/* ===== NAME ===== */}
-        {errors.username && <ErrorView error={errors.username} />}
         <section className="signup-form__name-section">
-          <label htmlFor="signup-name">Username</label>
+          {errors.username ? (
+            <ErrorView error={errors.username} />
+          ) : (
+            <label htmlFor="signup-name">Username</label>
+          )}
           <input
             id="signup-name"
             className={`signup-form__input--style ${errors.username ? 'error-outline' : ''}`}
@@ -85,9 +96,12 @@ export const SignupForm = () => {
 
         {/* ===== PASSWORD ===== */}
         {errors.confirmPasswordError && <ErrorView error={errors.confirmPasswordError} />}
-        {errors.password && <ErrorView error={errors.password} />}
         <section className="signup-form__password-section">
-          <label htmlFor="signup-password">Password</label>
+          {errors.password ? (
+            <ErrorView error={errors.password} />
+          ) : (
+            <label htmlFor="signup-password">Password</label>
+          )}
           <input
             id="signup-password"
             className="signup-form__input--style"

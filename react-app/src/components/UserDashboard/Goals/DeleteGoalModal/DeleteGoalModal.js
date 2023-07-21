@@ -11,6 +11,8 @@ export const DeleteGoalModal = ({ goalToDelete, user }) => {
 
   const handleDelete = async () => {
     await dispatch(thunkDeleteGoal(user.id, goalToDelete));
+    await dispatch(thunkGetUser(user.id));
+
     closeModal();
   };
 

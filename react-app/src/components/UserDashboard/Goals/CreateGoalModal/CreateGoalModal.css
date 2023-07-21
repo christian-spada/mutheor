@@ -1,5 +1,5 @@
 .create-goal-modal {
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .create-goal-form__type-section {
@@ -9,7 +9,18 @@
 
 .create-goal-form label {
   display: block;
-  margin-bottom: 3px;
+  font-size: var(--font-size-700);
+  margin-bottom: 0.3rem;
+  color: var(--primary-900);
+}
+
+#goal-instrument-type,
+#goal-target-date,
+#create-goal-multiple-inst-type {
+  padding: 0.3rem;
+  border-radius: 8px;
+  background-color: var(--primary-100);
+  border: none;
 }
 
 .create-goal-form__multiple-same-type-section {
@@ -21,10 +32,12 @@
 }
 .create-goal-form__description {
   border-radius: 8px;
+  border: none;
   height: 100px;
   width: 100%;
   resize: none;
   padding: 0.3rem;
+  background-color: var(--primary-100);
 }
 
 .create-goal-form__btn-section {

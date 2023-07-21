@@ -82,12 +82,17 @@ const CreateGoalModal = ({ user }) => {
             </select>
           </div>
           <div>
-            {errors.target_date && <ErrorView error={errors.target_date} />}
-            <label htmlFor="goal-target-date">Target Date</label>
+            {errors.target_date ? (
+              <ErrorView error={errors.target_date} />
+            ) : (
+              <label htmlFor="goal-target-date">Target Date</label>
+            )}
             <input
+              id="goal-target-date"
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}
+              className={`${errors.target_date ? 'error-outline' : ''}`}
             />
           </div>
         </section>
@@ -119,7 +124,9 @@ const CreateGoalModal = ({ user }) => {
         <section className="create-goal-form__description-section">
           {errors.description && <ErrorView error={errors.description} />}
           <textarea
-            className="create-goal-form__description"
+            className={`create-goal-form__description ${
+              errors.description ? 'error-outline' : ''
+            }`}
             placeholder="Describe your goal here..."
             onChange={e => setDescription(e.target.value)}
             value={description}

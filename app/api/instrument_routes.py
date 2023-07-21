@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 from sqlalchemy import and_
 from app.utils import (
@@ -9,15 +9,7 @@ from app.utils import (
     logger,
 )
 from app.forms import CreateInstrumentForm, EditInstrumentForm
-from app.models import (
-    db,
-    User,
-    Instrument,
-    Goal,
-    PracticeSession,
-    Repertoire,
-    Achievement,
-)
+from app.models import db, Instrument
 from app.api.aws_helpers import (
     upload_file_to_s3,
     remove_file_from_s3,

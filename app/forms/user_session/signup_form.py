@@ -2,8 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import User
-from flask_wtf.file import FileField, FileAllowed, FileRequired
+from flask_wtf.file import FileField, FileAllowed
 from app.api.aws_helpers import ALLOWED_EXTENSIONS
+import re
 
 
 def user_exists(form, field):
@@ -22,17 +23,22 @@ def username_exists(form, field):
         raise ValidationError("Username is already in use.")
 
 
+def validate_email(form, field):
+    email = field.data
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
+    if not re.match(pattern, email):
+        raise ValidationError("Email is not valid")
+
+
 class SignUpForm(FlaskForm):
     username = StringField(
         "username",
-        validators=[DataRequired("Username field is required"), username_exists],
+        validators=[DataRequired("Username is required"), username_exists],
     )
     email = StringField(
         "email",
-        validators=[
-            DataRequired("Email field is required"),
-            user_exists,
-        ],
+        validators=[DataRequired("Email is required"), user_exists, validate_email],
     )
     profile_pic = FileField(
         "profile_pic",
@@ -41,5 +47,5 @@ class SignUpForm(FlaskForm):
         ],
     )
     password = StringField(
-        "password", validators=[DataRequired("Password field is required")]
+        "password", validators=[DataRequired("Password is required")]
     )

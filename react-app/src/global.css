@@ -95,6 +95,13 @@ button {
 
 .error {
   color: hsl(0, 70%, 62%);
+  display: inline-block;
+  font-size: 13px;
+  margin-bottom: 0.3rem;
+}
+
+i.error {
+  margin-right: 5px;
 }
 
 .error-outline {

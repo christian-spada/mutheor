@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { formatDate, logger } from '../../../../utils/helpers';
 import { thunkEditGoal } from '../../../../store/goals';
 import { useDispatch } from 'react-redux';
@@ -10,13 +10,12 @@ import { ErrorView } from '../../../UtilComponents/ErrorView';
 export const EditGoalModal = ({ goalToEdit, user }) => {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
-  // let dateInput = useRef();
-
-  // const [focus, setFocus] = useState(false);
 
   const instruments = user.instruments;
   const [instrumentId, setInstrumentId] = useState();
-  const [targetDate, setTargetDate] = useState(goalToEdit.targetDate);
+  const [targetDate, setTargetDate] = useState(
+    new Date(goalToEdit.targetDate).toISOString().split('T')[0]
+  );
   const [description, setDescription] = useState(goalToEdit.description);
   const [instrumentType, setInstrumentType] = useState(goalToEdit.instrument.type);
   const [errors, setErrors] = useState({});
@@ -38,14 +37,14 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const newGoal = {
+    const updatedGoal = {
       id: goalToEdit.id,
       instrument_id: instrumentId,
       target_date: targetDate,
       description,
     };
 
-    const res = await dispatch(thunkEditGoal(user.id, newGoal));
+    const res = await dispatch(thunkEditGoal(user.id, updatedGoal));
 
     if (res.errors) {
       setErrors(res.errors);
@@ -53,11 +52,6 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
       closeModal();
     }
   };
-
-  // if (dateInput.current) {
-  //   if (focus) dateInput.current.setAttribute('type', 'date');
-  //   else dateInput.current.setAttribute('type', 'text');
-  // }
 
   return (
     <div className="edit-goal-modal">
@@ -68,11 +62,11 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
         {/* ===== INSTRUMENT TYPE SECTION ===== */}
         <section className="edit-goal-form__type-section">
           <div>
-            <label htmlFor="goal-instrument-type">Instrument Type</label>
+            <label htmlFor="edit-goal-instrument-type">Instrument Type</label>
             <select
               value={instrumentType}
               onChange={e => setInstrumentType(e.target.value)}
-              id="goal-instrument-type"
+              id="edit-goal-instrument-type"
             >
               {instruments.map(inst => {
                 if (userInstruments.has(inst.type)) return null;
@@ -89,17 +83,19 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
             </select>
           </div>
           <div>
-            {errors.target_date && <ErrorView error={errors.target_date} />}
-            <label htmlFor="goal-target-date">Target Date</label>
+            {errors.target_date ? (
+              <ErrorView error={errors.target_date} />
+            ) : (
+              <label htmlFor="edit-goal-target-date">Target Date</label>
+            )}
             <input
+              id="edit-goal-target-date"
               type="date"
               value={targetDate}
-              // placeholder={0 + formatDate(goalToEdit.targetDate, '/')}
               onChange={e => setTargetDate(e.target.value)}
-              // onFocus={() => setFocus(true)}
-              // onBlur={() => setFocus(false)}
-              // ref={dateInput}
-              className="edit-goal-form__date-input"
+              className={`edit-goal-form__date-input ${
+                errors.target_date ? 'error-outline' : ''
+              }`}
             />
           </div>
         </section>
@@ -107,8 +103,11 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
         {/* ===== OPTIONAL INSTRUMENT MODEL SECTION ===== */}
         {multipleSameTypeInstruments.length > 1 && (
           <section className="edit-goal-form__multiple-same-type-section">
-            <label>Which one of your {instrumentType}'s?</label>
+            <label htmlFor="edit-goal-multiple-same-type">
+              Which one of your {instrumentType}'s?
+            </label>
             <select
+              id="edit-goal-multiple-same-type"
               className="edit-goal-form__multiple-same-type"
               onChange={e => setInstrumentId(parseInt(e.target.value))}
             >
@@ -128,7 +127,9 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
         <section className="edit-goal-form__description-section">
           {errors.description && <ErrorView error={errors.description} />}
           <textarea
-            className="edit-goal-form__description"
+            className={`edit-goal-form__description ${
+              errors.description ? 'error-outline' : ''
+            }`}
             placeholder="Describe your goal here..."
             onChange={e => setDescription(e.target.value)}
             value={description}

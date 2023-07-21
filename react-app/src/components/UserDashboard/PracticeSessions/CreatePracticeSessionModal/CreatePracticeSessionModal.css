@@ -18,6 +18,11 @@
   gap: 3rem;
 }
 
+.create-session-form__date-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .create-session-form__time-section {
   display: flex;
   gap: 3rem;

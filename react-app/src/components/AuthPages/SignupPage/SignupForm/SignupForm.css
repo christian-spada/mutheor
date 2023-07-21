@@ -2,15 +2,48 @@
   margin-bottom: 1rem;
 }
 
-.signup-form__profile-pic {
-  border-radius: 50%;
+.signup-form [type='file'] {
+  display: none;
 }
 
-.signup-form label[for] {
-  color: hsl(0, 5%, 17%);
-  font-size: 14px;
-  margin-bottom: 0.2rem;
-  display: block;
+.signup-form__img-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form__img-section > div:nth-child(1) {
+  margin-bottom: 0.3rem;
+}
+
+.signup-form__img-section > div:nth-child(2) {
+  display: flex;
+}
+
+.optional {
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.signup-form__img-file-name {
+  border-radius: 8px 0 0 8px;
+  height: 30px;
+  padding: 0.3rem 0.6rem;
+  overflow: hidden;
+  width: 10rem;
+  background-color: var(--primary-100);
+}
+
+.signup-form__img-section label {
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  width: fit-content;
+  height: 30px;
+  background-color: var(--primary-500);
+  color: var(--primary-white);
 }
 
 .signup-form__input--style {
@@ -34,22 +67,7 @@
 }
 
 .signup-form__signup-btn {
-  background-color: var(--primary-400);
+  background-color: var(--primary-500);
   color: var(--primary-100);
   margin-top: 1rem;
-}
-
-.signup-form__img-container {
-  border-radius: 50%;
-  height: 125px;
-  width: 125px;
-  margin: 0 auto;
-  background-color: var(--primary-300);
-  margin-bottom: 1rem;
-}
-
-.signup-form__profile-pic {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
 }
