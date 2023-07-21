@@ -85,6 +85,7 @@ const CreatePracticeSessionModal = ({ user }) => {
               id="create-session-duration"
               type="number"
               value={duration}
+              min={1}
               onChange={e => setDuration(e.target.value)}
             />
           </div>

@@ -1,3 +1,7 @@
+div.session-card:hover {
+  transform: none;
+}
+
 .session-card > section {
   padding: 1rem;
 }
@@ -30,6 +34,7 @@
 .session-card__info-section {
   display: flex;
   gap: 1.5rem;
+  justify-content: space-around;
 }
 
 .session-card__model {
