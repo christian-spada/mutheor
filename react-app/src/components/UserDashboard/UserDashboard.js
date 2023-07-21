@@ -4,6 +4,7 @@ import { logger } from '../../utils/helpers';
 
 import ProfileButton from '../ProfileButton/ProfileButton';
 import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
+import Sidebar from './Sidebar/Sidebar';
 import UserInfoCard from './UserInfoCard/UserInfoCard';
 import PracticeSessionCard from './PracticeSessions/PracticeSessionCard/PracticeSessionCard';
 import CreatePracticeSessionModal from './PracticeSessions/CreatePracticeSessionModal/CreatePracticeSessionModal';
@@ -23,16 +24,20 @@ const UserDashboard = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.session.user);
+
   const practiceSessions = useSelector(state =>
     Object.values(state.practiceSession.allPracticeSessions)
   );
+  practiceSessions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
   const instruments = useSelector(state => Object.values(state.instrument.allInstruments));
+
   const goals = useSelector(state => Object.values(state.goal.allGoals));
   goals.sort((a, b) => new Date(a.targetDate) - new Date(b.targetDate));
 
   const [showSideBar, setShowSidebar] = useState(false);
-  const [contentView, setContentView] = useState('Instruments');
   const sidebar = useRef();
+  const [contentView, setContentView] = useState('Instruments');
 
   const handlePracticeSessionSelection = async e => {
     setContentView('Practice Sessions');
@@ -54,7 +59,7 @@ const UserDashboard = () => {
     if (!showSideBar) return;
 
     const closeMenu = e => {
-      if (!sidebar.current.contains(e.target)) {
+      if (!sidebar.current?.contains(e.target)) {
         setShowSidebar(false);
       }
     };
@@ -85,10 +90,10 @@ const UserDashboard = () => {
       </header>
 
       {/* ===== SIDEBAR ===== */}
-      <aside
-        className={`user-dashboard__sidebar ${showSideBar ? 'show' : ''}`}
-        ref={sidebar}
-      ></aside>
+      <Sidebar
+        sidebarRef={sidebar}
+        showSideBar={showSideBar}
+      />
       {showSideBar && <div className="overlay"></div>}
 
       {/* ===== MAIN ==== */}
