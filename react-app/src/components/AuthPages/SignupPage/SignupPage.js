@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { SignupForm } from './SignupForm/SignupForm';
 import './SignupPage.css';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const SignupPage = () => {
   const history = useHistory();
@@ -20,12 +20,9 @@ const SignupPage = () => {
           <div className="signup-page__member-redirect">
             <p>
               Already a member? Login{' '}
-              <span
-                className="login-redirect-btn"
-                onClick={() => history.push('/login')}
-              >
-                Here
-              </span>
+              <Link to="/login">
+                <span className="login-redirect-btn">Here</span>
+              </Link>
             </p>
           </div>
           <SignupForm />

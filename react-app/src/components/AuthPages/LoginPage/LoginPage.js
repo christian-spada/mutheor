@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { LoginForm } from './LoginForm/LoginForm';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -19,12 +20,9 @@ const LoginPage = () => {
           <div className="signup-page__member-redirect">
             <p>
               Not yet a member? Signup{' '}
-              <span
-                className="login-redirect-btn"
-                onClick={() => history.push('/signup')}
-              >
-                Here
-              </span>
+              <Link to="/signup">
+                <span className="login-redirect-btn">Here</span>
+              </Link>
             </p>
           </div>
           <LoginForm />

@@ -1,8 +1,7 @@
-import { useHistory } from 'react-router-dom';
 import './NavBar.css';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
-export const NavBar = () => {
-  const history = useHistory();
+export const NavBar = ({ user }) => {
   return (
     <nav className="navbar">
       <div className="navbar__logo-container">
@@ -10,8 +9,20 @@ export const NavBar = () => {
         <span className="navbar__app-title">Mutheor</span>
       </div>
       <div className="navbar__action-btn-container">
-        <button onClick={() => history.push('/login')}>Login</button>
-        <button onClick={() => history.push('/signup')}>Signup</button>
+        {user ? (
+          <Link to={`/users/${user.id}/dashboard`}>
+            <button>Dashboard</button>
+          </Link>
+        ) : (
+          <>
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+            <Link to="/signup">
+              <button>Signup</button>
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
