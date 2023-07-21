@@ -2,13 +2,8 @@ import { logger, formatDate, formatDuration } from '../../../../utils/helpers';
 import './PracticeSessionCard.css';
 
 const PracticeSessionCard = ({ session }) => {
-  const handleDelete = async () => {};
-
   return (
     <div className="session-card card">
-      {/* <header className="session-card__header">
-        <i className="fa-solid fa-xmark"></i>
-      </header> */}
       <section className="session-card__time-section">
         <div>
           <i className="fa-regular fa-calendar"></i>
@@ -19,20 +14,17 @@ const PracticeSessionCard = ({ session }) => {
           <span>{formatDuration(session.duration)}</span>
         </div>
       </section>
-      <section className="session-card__instrument-type">
+      <section className="session-card__info-section">
         <div>
           <i className="fa-solid fa-sliders"></i>
-          <span className="session-card__model">{session.instrument.model}</span>
-          <span className="session-card__type">{session.instrument.type}</span>
+          <div>
+            <p className="session-card__model">{session.instrument.model}</p>
+            <p className="session-card__type">{session.instrument.type}</p>
+          </div>
         </div>
-      </section>
-      <section className="session-card__focus-area">
         <div>
-          <i
-            onClick={handleDelete}
-            className="fa-solid fa-arrows-to-circle"
-          ></i>
-          <span>{session.areaOfFocus}</span>
+          <i className="fa-solid fa-arrows-to-circle"></i>
+          <span className="session-card__focus">{session.areaOfFocus}</span>
         </div>
       </section>
       <section className="session-card__notes-section">

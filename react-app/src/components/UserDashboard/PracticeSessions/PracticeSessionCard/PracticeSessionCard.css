@@ -7,6 +7,10 @@
   color: var(--primary-400);
 }
 
+.session-card i.fa-arrows-to-circle {
+  font-size: 16px;
+}
+
 .session-card section > div {
   display: flex;
   gap: 8px;
@@ -23,19 +27,29 @@
   justify-content: space-around;
 }
 
+.session-card__info-section {
+  display: flex;
+  gap: 1.5rem;
+}
+
 .session-card__model {
   font-weight: 400;
+  font-size: 15px;
 }
 
 .session-card__type {
   font-weight: 300;
-  font-size: 14px;
+  font-size: 12px;
+}
+
+.session-card__focus {
+  font-size: 15px;
 }
 
 .session-card__notes-section {
   background-color: var(--primary-200);
   border-radius: inherit;
-  height: 90px;
+  height: 146px;
   overflow-y: hidden;
   padding: 0.8rem;
 }
