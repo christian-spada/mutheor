@@ -42,7 +42,6 @@ export const SignupForm = () => {
     }
   };
 
-  logger('error', errors);
   return (
     <div className="form-wrapper">
       <form
