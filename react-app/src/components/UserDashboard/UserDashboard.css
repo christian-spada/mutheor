@@ -25,24 +25,6 @@
   justify-content: center;
 }
 
-.user-dashboard__sidebar {
-  width: 400px;
-  height: 100vh;
-  background-color: var(--primary-500);
-  position: fixed;
-  top: 0;
-  transform: translateX(-400px);
-  opacity: 0;
-  transition: transform 150ms ease-in-out, opacity 150ms ease-in-out;
-  z-index: 10;
-}
-
-.user-dashboard__sidebar.show {
-  opacity: 1;
-  transform: translateX(0);
-  transition: transform 150ms ease-in-out, opacity 150ms ease-in-out;
-}
-
 .user-dashboard__view-selection-section {
   display: flex;
   justify-content: center;
@@ -113,6 +95,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: transform 100ms ease-in-out, box-shadow 100ms ease-in-out;
+  height: 300px;
 }
 
 .card:hover {
@@ -130,6 +113,10 @@
   font-size: 14px;
   animation: 150ms ease-in-out fade-in-reminder;
   bottom: 50px;
+}
+
+.delete-warning {
+  font-weight: 600;
 }
 
 .user-dashboard__view-selection-btn-container {

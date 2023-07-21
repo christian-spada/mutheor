@@ -17,7 +17,10 @@ const DeleteInstrumentModal = ({ instrumentToDelete, user }) => {
 
   return (
     <div className="delete-instrument-modal">
-      <p>Are you sure you want to delete this instrument? This action cannot be undone.</p>
+      <p>
+        Are you sure you want to delete this instrument?{' '}
+        <span className="delete-warning">This action cannot be undone.</span>
+      </p>
       <div className="delete-instrument-modal__btn-container">
         <button
           className="delete-instrument-modal__cancel-btn"
