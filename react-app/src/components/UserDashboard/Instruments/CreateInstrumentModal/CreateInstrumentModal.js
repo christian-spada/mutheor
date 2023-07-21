@@ -152,6 +152,7 @@ const CreateInstrumentModal = ({ user }) => {
             id="create-instrument-model"
             onChange={e => setModel(e.target.value)}
             value={model}
+            className={errors.model && 'error-outline'}
           />
         </section>
         <section className="create-instrument-form__btn-section">

@@ -13,7 +13,9 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
 
   const instruments = user.instruments;
   const [instrumentId, setInstrumentId] = useState();
-  const [targetDate, setTargetDate] = useState(goalToEdit.targetDate);
+  const [targetDate, setTargetDate] = useState(
+    new Date(goalToEdit.targetDate).toISOString().split('T')[0]
+  );
   const [description, setDescription] = useState(goalToEdit.description);
   const [instrumentType, setInstrumentType] = useState(goalToEdit.instrument.type);
   const [errors, setErrors] = useState({});
@@ -35,14 +37,14 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const newGoal = {
+    const updatedGoal = {
       id: goalToEdit.id,
       instrument_id: instrumentId,
       target_date: targetDate,
       description,
     };
 
-    const res = await dispatch(thunkEditGoal(user.id, newGoal));
+    const res = await dispatch(thunkEditGoal(user.id, updatedGoal));
 
     if (res.errors) {
       setErrors(res.errors);
@@ -81,16 +83,19 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
             </select>
           </div>
           <div>
-            {errors.target_date && <ErrorView error={errors.target_date} />}
-            <label htmlFor="edit-goal-target-date">
-              Target Date ({formatDate(goalToEdit.targetDate, '-')})
-            </label>
+            {errors.target_date ? (
+              <ErrorView error={errors.target_date} />
+            ) : (
+              <label htmlFor="edit-goal-target-date">Target Date</label>
+            )}
             <input
               id="edit-goal-target-date"
               type="date"
               value={targetDate}
               onChange={e => setTargetDate(e.target.value)}
-              className="edit-goal-form__date-input"
+              className={`edit-goal-form__date-input ${
+                errors.target_date ? 'error-outline' : ''
+              }`}
             />
           </div>
         </section>
@@ -122,7 +127,9 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
         <section className="edit-goal-form__description-section">
           {errors.description && <ErrorView error={errors.description} />}
           <textarea
-            className="edit-goal-form__description"
+            className={`edit-goal-form__description ${
+              errors.description ? 'error-outline' : ''
+            }`}
             placeholder="Describe your goal here..."
             onChange={e => setDescription(e.target.value)}
             value={description}

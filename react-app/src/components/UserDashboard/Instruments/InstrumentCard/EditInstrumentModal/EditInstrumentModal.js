@@ -51,7 +51,7 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
 
     await dispatch(thunkGetUser(user.id));
 
-    setLoadingState(true);
+    setLoadingState(false);
 
     if (res.errors) {
       setErrors(res.errors);
@@ -160,6 +160,7 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
             id="edit-instrument-model"
             onChange={e => setModel(e.target.value)}
             value={model}
+            className={errors.model && 'error-outline'}
           />
         </section>
         <section className="edit-instrument-form__btn-section">

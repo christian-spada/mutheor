@@ -64,13 +64,17 @@ const CreatePracticeSessionModal = ({ user }) => {
       >
         <section className="create-session-form__time-section">
           <div className="create-session-form__date-container">
-            {errors.date && <ErrorView error={errors.date} />}
-            <label htmlFor="create-session-date">Date</label>
+            {errors.date ? (
+              <ErrorView error={errors.date} />
+            ) : (
+              <label htmlFor="create-session-date">Date</label>
+            )}
             <input
               id="create-session-date"
               type="date"
               value={date}
               onChange={e => setDate(e.target.value)}
+              className={errors.date && 'error-outline'}
             />
           </div>
           <div className="create-session-form__duration-container">
@@ -86,7 +90,6 @@ const CreatePracticeSessionModal = ({ user }) => {
         </section>
         <div className="session-flex">
           <section className="create-session-form__instrument-section">
-            {errors.type && <ErrorView error={errors.type} />}
             <label htmlFor="create-session-inst-type">Instrument Type</label>
             <select
               id="create-session-inst-type"
@@ -108,7 +111,6 @@ const CreatePracticeSessionModal = ({ user }) => {
             </select>
           </section>
           <section className="create-session-form__focus-section">
-            {errors.area_of_focus && <ErrorView error={errors.area_of_focus} />}
             <label htmlFor="create-session-focus">Area of Focus</label>
             <select
               id="create-session-focus"
@@ -147,13 +149,17 @@ const CreatePracticeSessionModal = ({ user }) => {
           </section>
         )}
         <section className="create-session-form__notes-section">
-          {errors.notes && <ErrorView error={errors.notes} />}
-          <label htmlFor="create-session-notes">Session Notes</label>
+          {errors.notes ? (
+            <ErrorView error={errors.notes} />
+          ) : (
+            <label htmlFor="create-session-notes">Session Notes</label>
+          )}
           <textarea
             id="create-session-notes"
             placeholder="Describe what you worked on here..."
             onChange={e => setNotes(e.target.value)}
             value={notes}
+            className={errors.notes && 'error-outline'}
           />
         </section>
         <section className="create-session-form__btn-section">
