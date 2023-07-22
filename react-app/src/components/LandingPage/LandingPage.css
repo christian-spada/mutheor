@@ -1,5 +1,5 @@
 .hero {
-  background-color: var(--primary-700);
+  background-color: var(--primary-600);
   height: 100vh;
   padding: 30rem;
 }
@@ -51,8 +51,7 @@
 .goals-section {
   display: grid;
   place-items: center;
-  height: 75vh;
-  border-top: 2px solid red;
+  height: 50vh;
 }
 
 .instruments-section__content-container,
@@ -60,7 +59,6 @@
 .goals-section__content-container {
   display: flex;
   justify-content: space-around;
-  border: 2px solid blue;
 }
 
 .instruments__headline,
@@ -75,4 +73,32 @@
 .subheading {
   font-size: 35px;
   width: 50%;
+}
+
+.fade.show-text {
+  animation: text-opacity 1000ms ease-in-out;
+}
+
+.fade.show-img {
+  animation: img-transform 1000ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+@keyframes text-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes img-transform {
+  from {
+    opacity: 0;
+    transform: translateX(500px);
+  }
+  to {
+    transform: translateX();
+    opacity: 1;
+  }
 }
