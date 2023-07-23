@@ -21,6 +21,12 @@ const CreateGoalModal = ({ user }) => {
 
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    if (description.length === 255)
+      setErrors({ description: 'You have reached the max character limit' });
+    else setErrors({});
+  }, [description]);
+
   const userInstruments = new Set();
   const multipleSameTypeInstruments = instruments.filter(inst => {
     return inst.type === instrumentType;
@@ -133,6 +139,7 @@ const CreateGoalModal = ({ user }) => {
             placeholder="Describe your goal here..."
             onChange={e => setDescription(e.target.value)}
             value={description}
+            maxLength={255}
           ></textarea>
         </section>
 

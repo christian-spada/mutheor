@@ -28,6 +28,12 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
   });
 
   useEffect(() => {
+    if (description.length === 255)
+      setErrors({ description: 'You have reached the max character limit' });
+    else setErrors({});
+  }, [description]);
+
+  useEffect(() => {
     const currentInstrument = multipleSameTypeInstruments.find(
       inst => inst.type === instrumentType
     );
@@ -135,6 +141,7 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
             placeholder="Describe your goal here..."
             onChange={e => setDescription(e.target.value)}
             value={description}
+            maxLength={255}
           ></textarea>
         </section>
         <section className="edit-goal-form__btn-section">

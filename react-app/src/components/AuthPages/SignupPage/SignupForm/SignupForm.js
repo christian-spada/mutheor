@@ -17,6 +17,15 @@ export const SignupForm = () => {
 
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    const errors = {};
+    if (email.length === 128) errors.email = 'You have reached the 128 character limit';
+    if (password.length === 128) errors.password = 'You have reached the 128 character limit';
+    if (username.length === 40) errors.username = 'You have reached the 40 character limit';
+
+    setErrors(errors);
+  }, [email, password, username]);
+
   const handleSubmit = async e => {
     e.preventDefault();
 
@@ -80,6 +89,7 @@ export const SignupForm = () => {
             className={`signup-form__input--style ${errors.email ? 'error-outline' : ''}`}
             value={email}
             onChange={e => setEmail(e.target.value)}
+            maxLength={128}
           />
         </section>
 
@@ -95,6 +105,7 @@ export const SignupForm = () => {
             className={`signup-form__input--style ${errors.username ? 'error-outline' : ''}`}
             value={username}
             onChange={e => setUsername(e.target.value)}
+            maxLength={40}
           />
         </section>
 
@@ -111,6 +122,8 @@ export const SignupForm = () => {
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
+            minLength={2}
+            maxLength={128}
           />
         </section>
 
