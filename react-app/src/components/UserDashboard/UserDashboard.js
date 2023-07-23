@@ -4,6 +4,7 @@ import { logger } from '../../utils/helpers';
 
 import ProfileButton from '../ProfileButton/ProfileButton';
 import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
+import Sidebar from './Sidebar/Sidebar';
 import UserInfoCard from './UserInfoCard/UserInfoCard';
 import PracticeSessionCard from './PracticeSessions/PracticeSessionCard/PracticeSessionCard';
 import CreatePracticeSessionModal from './PracticeSessions/CreatePracticeSessionModal/CreatePracticeSessionModal';
@@ -23,38 +24,45 @@ const UserDashboard = () => {
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.session.user);
+
   const practiceSessions = useSelector(state =>
     Object.values(state.practiceSession.allPracticeSessions)
   );
+  practiceSessions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
   const instruments = useSelector(state => Object.values(state.instrument.allInstruments));
+
   const goals = useSelector(state => Object.values(state.goal.allGoals));
   goals.sort((a, b) => new Date(a.targetDate) - new Date(b.targetDate));
 
   const [showSideBar, setShowSidebar] = useState(false);
-  const [contentView, setContentView] = useState('Instruments');
   const sidebar = useRef();
+  const cardContainer = useRef();
+  const [contentView, setContentView] = useState('Instruments');
 
-  const handlePracticeSessionSelection = async e => {
-    setContentView('Practice Sessions');
-
-    dispatch(thunkGetAllPracticeSessions(user.id));
-  };
-  const handleInstrumentSelection = async e => {
-    setContentView('Instruments');
-
-    dispatch(thunkGetAllInstruments(user.id));
-  };
-  const handleGoalSelection = async e => {
-    setContentView('Goals');
-
-    dispatch(thunkGetAllGoals(user.id));
+  const handleViewChange = selection => {
+    if (selection === 'Practice Sessions') {
+      setContentView('Practice Sessions');
+      dispatch(thunkGetAllPracticeSessions(user.id));
+      return;
+    }
+    if (selection === 'Instruments') {
+      setContentView('Instruments');
+      dispatch(thunkGetAllInstruments(user.id));
+      return;
+    }
+    if (selection === 'Goals') {
+      setContentView('Goals');
+      dispatch(thunkGetAllGoals(user.id));
+      return;
+    }
   };
 
   useEffect(() => {
     if (!showSideBar) return;
 
     const closeMenu = e => {
-      if (!sidebar.current.contains(e.target)) {
+      if (!sidebar.current?.contains(e.target)) {
         setShowSidebar(false);
       }
     };
@@ -71,6 +79,26 @@ const UserDashboard = () => {
     if (user && contentView === 'Goals') dispatch(thunkGetAllGoals(user.id));
   }, []);
 
+  useEffect(() => {
+    const cards = document.querySelectorAll('.visible-card');
+
+    const handleCardIntersect = entries => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle('visible', entry.isIntersecting);
+      });
+    };
+
+    const cardObserver = new IntersectionObserver(handleCardIntersect, {
+      root: cardContainer.current,
+      rootMargin: '0px',
+      threshold: 0.4,
+    });
+
+    cards.forEach(card => cardObserver.observe(card));
+
+    return () => cardObserver.disconnect();
+  }, [practiceSessions, goals, instruments]);
+
   return (
     <div className="user-dashboard-wrapper">
       {/* ===== HEADER ==== */}
@@ -85,10 +113,10 @@ const UserDashboard = () => {
       </header>
 
       {/* ===== SIDEBAR ===== */}
-      <aside
-        className={`user-dashboard__sidebar ${showSideBar ? 'show' : ''}`}
-        ref={sidebar}
-      ></aside>
+      <Sidebar
+        sidebarRef={sidebar}
+        showSideBar={showSideBar}
+      />
       {showSideBar && <div className="overlay"></div>}
 
       {/* ===== MAIN ==== */}
@@ -128,7 +156,7 @@ const UserDashboard = () => {
           <div className="user-dashboard__view-selection">
             <div className="user-dashboard__view-selection-btn-container">
               <button
-                onClick={handleInstrumentSelection}
+                onClick={() => handleViewChange('Instruments')}
                 className={contentView === 'Instruments' ? 'active' : ''}
               >
                 Instruments
@@ -142,7 +170,7 @@ const UserDashboard = () => {
             </div>
             <div className="user-dashboard__view-selection-btn-container">
               <button
-                onClick={handlePracticeSessionSelection}
+                onClick={() => handleViewChange('Practice Sessions')}
                 className={contentView === 'Practice Sessions' ? 'active' : ''}
               >
                 Practice Sessions
@@ -161,7 +189,7 @@ const UserDashboard = () => {
             </div>
             <div className="user-dashboard__view-selection-btn-container">
               <button
-                onClick={handleGoalSelection}
+                onClick={() => handleViewChange('Goals')}
                 className={contentView === 'Goals' ? 'active' : ''}
               >
                 Goals
@@ -182,31 +210,40 @@ const UserDashboard = () => {
         </section>
 
         {/* ===== CONTENT SECTION ==== */}
-        <section className="user-dashboard__content-section">
+        <section
+          className="user-dashboard__content-section"
+          ref={cardContainer}
+        >
           <div className="user-dashboard__content-container">
             {contentView === 'Practice Sessions' &&
               practiceSessions.map(session => (
-                <PracticeSessionCard
-                  key={session.id}
-                  user={user}
-                  session={session}
-                />
+                <div className="visible-card">
+                  <PracticeSessionCard
+                    key={session.id}
+                    user={user}
+                    session={session}
+                  />
+                </div>
               ))}
             {contentView === 'Instruments' &&
               instruments.map(instrument => (
-                <InstrumentCard
-                  key={instrument.id}
-                  user={user}
-                  instrument={instrument}
-                />
+                <div className="visible-card">
+                  <InstrumentCard
+                    key={instrument.id}
+                    user={user}
+                    instrument={instrument}
+                  />
+                </div>
               ))}
             {contentView === 'Goals' &&
               goals.map(goal => (
-                <GoalCard
-                  key={goal.id}
-                  user={user}
-                  goal={goal}
-                />
+                <div className="visible-card">
+                  <GoalCard
+                    key={goal.id}
+                    user={user}
+                    goal={goal}
+                  />
+                </div>
               ))}
           </div>
         </section>

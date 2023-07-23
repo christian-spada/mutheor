@@ -22,6 +22,11 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
   const typeSelectRef = useRef();
 
   useEffect(() => {
+    if (model.length === 20) setErrors({ model: 'You have reached the max character limit' });
+    else setErrors({});
+  }, [model]);
+
+  useEffect(() => {
     setInstrumentType(typeSelectRef.current?.value);
   }, [category]);
 
@@ -161,6 +166,7 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
             onChange={e => setModel(e.target.value)}
             value={model}
             className={errors.model && 'error-outline'}
+            maxLength={20}
           />
         </section>
         <section className="edit-instrument-form__btn-section">

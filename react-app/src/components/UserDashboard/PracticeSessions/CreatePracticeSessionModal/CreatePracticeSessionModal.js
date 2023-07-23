@@ -27,6 +27,11 @@ const CreatePracticeSessionModal = ({ user }) => {
   });
 
   useEffect(() => {
+    if (notes.length === 255) setErrors({ notes: 'You have reached the max character limit' });
+    else setErrors({});
+  }, [notes]);
+
+  useEffect(() => {
     const currentInstrument = multipleSameTypeInstruments.find(
       inst => inst.type === instrumentType
     );
@@ -85,6 +90,7 @@ const CreatePracticeSessionModal = ({ user }) => {
               id="create-session-duration"
               type="number"
               value={duration}
+              min={1}
               onChange={e => setDuration(e.target.value)}
             />
           </div>
@@ -162,6 +168,7 @@ const CreatePracticeSessionModal = ({ user }) => {
             onChange={e => setNotes(e.target.value)}
             value={notes}
             className={errors.notes && 'error-outline'}
+            maxLength={255}
           />
         </section>
         <section className="create-session-form__btn-section">

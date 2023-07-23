@@ -21,6 +21,7 @@ h6,
 p {
   font-weight: normal;
   font-size: initial;
+  word-wrap: break-word;
 }
 
 img,
@@ -116,10 +117,19 @@ i.error {
 }
 
 @keyframes fade-in-opacity {
-  0% {
+  from {
     opacity: 0;
   }
-  100% {
+  to {
     opacity: 1;
+  }
+}
+
+@keyframes fade-out-opacity {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }

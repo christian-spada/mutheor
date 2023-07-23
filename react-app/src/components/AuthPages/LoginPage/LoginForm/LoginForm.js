@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { login } from '../../../../store/session';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
-import { logger } from '../../../../utils/helpers';
 import './LoginForm.css';
 
 export const LoginForm = () => {
@@ -13,6 +12,13 @@ export const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const errors = {};
+    if (email.length === 128) errors.email = 'You have reached the 128 character limit';
+    if (password.length === 128) errors.password = 'You have reached the 128 character limit';
+    setErrors(errors);
+  }, [email, password]);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -54,6 +60,7 @@ export const LoginForm = () => {
               onChange={e => setEmail(e.target.value)}
               autoComplete="off"
               className={`login-form__input--style ${errors.email ? 'error-outline' : ''}`}
+              maxLength={128}
             />
           </div>
 
@@ -71,6 +78,8 @@ export const LoginForm = () => {
               onChange={e => setPassword(e.target.value)}
               autoComplete="off"
               className={`login-form__input--style ${errors.password ? 'error-outline' : ''}`}
+              minLength={2}
+              maxLength={128}
             />
           </div>
         </section>

@@ -23,7 +23,6 @@
 }
 
 .bar-2.open {
-  /* transform: translateX(-100px); */
   opacity: 0;
 }
 

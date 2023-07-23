@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store/session';
-import { logger } from '../../utils/helpers';
-import './ProfileButton.css';
 import { Redirect } from 'react-router-dom';
+import './ProfileButton.css';
 
 const ProfileButton = ({ user }) => {
   const dispatch = useDispatch();
