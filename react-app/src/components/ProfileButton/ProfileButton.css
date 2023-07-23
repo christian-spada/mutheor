@@ -20,6 +20,9 @@
   border-radius: 8px;
   box-shadow: 0 5px 10px 3px hsl(246, 10%, 90%);
   animation: fade-in 100ms ease-in;
+  width: 100px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 @keyframes fade-in {
