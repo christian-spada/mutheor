@@ -37,22 +37,25 @@ const UserDashboard = () => {
 
   const [showSideBar, setShowSidebar] = useState(false);
   const sidebar = useRef();
+  const cardContainer = useRef();
   const [contentView, setContentView] = useState('Instruments');
 
-  const handlePracticeSessionSelection = async e => {
-    setContentView('Practice Sessions');
-
-    dispatch(thunkGetAllPracticeSessions(user.id));
-  };
-  const handleInstrumentSelection = async e => {
-    setContentView('Instruments');
-
-    dispatch(thunkGetAllInstruments(user.id));
-  };
-  const handleGoalSelection = async e => {
-    setContentView('Goals');
-
-    dispatch(thunkGetAllGoals(user.id));
+  const handleViewChange = selection => {
+    if (selection === 'Practice Sessions') {
+      setContentView('Practice Sessions');
+      dispatch(thunkGetAllPracticeSessions(user.id));
+      return;
+    }
+    if (selection === 'Instruments') {
+      setContentView('Instruments');
+      dispatch(thunkGetAllInstruments(user.id));
+      return;
+    }
+    if (selection === 'Goals') {
+      setContentView('Goals');
+      dispatch(thunkGetAllGoals(user.id));
+      return;
+    }
   };
 
   useEffect(() => {
@@ -75,6 +78,26 @@ const UserDashboard = () => {
     if (user && contentView === 'Instruments') dispatch(thunkGetAllInstruments(user.id));
     if (user && contentView === 'Goals') dispatch(thunkGetAllGoals(user.id));
   }, []);
+
+  useEffect(() => {
+    const cards = document.querySelectorAll('.visible-card');
+
+    const handleCardIntersect = entries => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle('visible', entry.isIntersecting);
+      });
+    };
+
+    const cardObserver = new IntersectionObserver(handleCardIntersect, {
+      root: cardContainer.current,
+      rootMargin: '0px',
+      threshold: 0.4,
+    });
+
+    cards.forEach(card => cardObserver.observe(card));
+
+    return () => cardObserver.disconnect();
+  }, [practiceSessions, goals, instruments]);
 
   return (
     <div className="user-dashboard-wrapper">
@@ -133,7 +156,7 @@ const UserDashboard = () => {
           <div className="user-dashboard__view-selection">
             <div className="user-dashboard__view-selection-btn-container">
               <button
-                onClick={handleInstrumentSelection}
+                onClick={() => handleViewChange('Instruments')}
                 className={contentView === 'Instruments' ? 'active' : ''}
               >
                 Instruments
@@ -147,7 +170,7 @@ const UserDashboard = () => {
             </div>
             <div className="user-dashboard__view-selection-btn-container">
               <button
-                onClick={handlePracticeSessionSelection}
+                onClick={() => handleViewChange('Practice Sessions')}
                 className={contentView === 'Practice Sessions' ? 'active' : ''}
               >
                 Practice Sessions
@@ -166,7 +189,7 @@ const UserDashboard = () => {
             </div>
             <div className="user-dashboard__view-selection-btn-container">
               <button
-                onClick={handleGoalSelection}
+                onClick={() => handleViewChange('Goals')}
                 className={contentView === 'Goals' ? 'active' : ''}
               >
                 Goals
@@ -187,31 +210,40 @@ const UserDashboard = () => {
         </section>
 
         {/* ===== CONTENT SECTION ==== */}
-        <section className="user-dashboard__content-section">
+        <section
+          className="user-dashboard__content-section"
+          ref={cardContainer}
+        >
           <div className="user-dashboard__content-container">
             {contentView === 'Practice Sessions' &&
               practiceSessions.map(session => (
-                <PracticeSessionCard
-                  key={session.id}
-                  user={user}
-                  session={session}
-                />
+                <div className="visible-card">
+                  <PracticeSessionCard
+                    key={session.id}
+                    user={user}
+                    session={session}
+                  />
+                </div>
               ))}
             {contentView === 'Instruments' &&
               instruments.map(instrument => (
-                <InstrumentCard
-                  key={instrument.id}
-                  user={user}
-                  instrument={instrument}
-                />
+                <div className="visible-card">
+                  <InstrumentCard
+                    key={instrument.id}
+                    user={user}
+                    instrument={instrument}
+                  />
+                </div>
               ))}
             {contentView === 'Goals' &&
               goals.map(goal => (
-                <GoalCard
-                  key={goal.id}
-                  user={user}
-                  goal={goal}
-                />
+                <div className="visible-card">
+                  <GoalCard
+                    key={goal.id}
+                    user={user}
+                    goal={goal}
+                  />
+                </div>
               ))}
           </div>
         </section>
