@@ -45,6 +45,13 @@
   height: 88px;
 }
 
+.goal-card__description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .goal-card__days-remaining-section {
   text-align: center;
   margin-top: 2rem;
