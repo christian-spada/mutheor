@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const SignupPage = () => {
   const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
+  const user = useSelector(state => state.session.user);
 
-  if (sessionUser) {
-    history.push('/');
+  if (user) {
+    history.push(`/users/${user.id}/dashboard`);
   }
 
   return (
