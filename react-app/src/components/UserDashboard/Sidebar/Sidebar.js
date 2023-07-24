@@ -11,6 +11,18 @@ const Sidebar = ({ sidebarRef, showSideBar }) => {
         <Link to="/">
           <li className="sidebar__link">Home</li>
         </Link>
+        <li
+          className="sidebar__link"
+          onClick={() => alert('Feature coming soon!')}
+        >
+          Practice Hub
+        </li>
+        <li
+          className="sidebar__link"
+          onClick={() => alert('Feature coming soon!')}
+        >
+          Your Stats
+        </li>
       </ul>
     </aside>
   );

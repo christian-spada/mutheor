@@ -7,9 +7,6 @@ import './LandingPage.css';
 
 const LandingPage = () => {
   const user = useSelector(state => state.session.user);
-  // const [isInstrumentsVisible, setIsInstrumentsVisible] = useState();
-  // const [isSessionsVisible, setIsSessionsVisible] = useState();
-  // const [isGoalsVisible, setIsGoalsVisible] = useState();
   const instrumentsText = useRef();
   const instrumentsImg = useRef();
   const sessionsText = useRef();
@@ -59,7 +56,7 @@ const LandingPage = () => {
           <div className="hero__heading">
             <h1 className="hero__headline">Level Up Your Practice</h1>
             <h2 className="hero__subheading">
-              Mutheor is a place for musicians to track there progress with practice session
+              Mutheor is a place for musicians to track their progress with practice session
               data and goal setting
             </h2>
             <Link to="/signup">
@@ -135,7 +132,7 @@ const LandingPage = () => {
           ></img>
         </div>
       </section>
-      <footer style={{ height: '400px', backgroundColor: 'var(--primary-600)' }}></footer>
+      <footer className="landing-page__footer"></footer>
     </div>
   );
 };
