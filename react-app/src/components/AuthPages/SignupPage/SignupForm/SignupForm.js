@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { signUp } from '../../../../store/session';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
 import './SignupForm.css';
-import { logger } from '../../../../utils/helpers';
 
 export const SignupForm = () => {
   const dispatch = useDispatch();
