@@ -1,3 +1,7 @@
+.user-dashboard__main-content {
+  /* min-width: 100% */
+}
+
 .user-dashboard__header {
   display: flex;
   justify-content: space-between;
@@ -65,7 +69,7 @@
   justify-content: center;
   margin: 0 auto;
   margin-top: 5rem;
-  width: 1455px;
+  max-width: 1455px;
   height: 750px;
   border-radius: 15px;
   padding: 3rem;
@@ -131,4 +135,40 @@
 
 .user-dashboard__view-selection-btn-container {
   position: relative;
+}
+
+@media screen and (max-width: 1500px) {
+  .user-dashboard__content-container {
+    grid-template-columns: repeat(3, 300px);
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .user-dashboard__content-container {
+    grid-template-columns: repeat(2, 300px);
+  }
+}
+
+@media screen and (max-width: 822px) {
+  .user-dashboard__content-container {
+    grid-template-columns: repeat(1, 300px);
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .user-dashboard__content-section {
+    margin-inline: 2rem;
+  }
+}
+
+@media screen and (max-width: 465px) {
+  .user-dashboard__view-selection {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .user-dashboard__content-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

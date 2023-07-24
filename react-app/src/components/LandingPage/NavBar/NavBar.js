@@ -1,7 +1,7 @@
 import './NavBar.css';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
-export const NavBar = ({ user }) => {
+const NavBar = ({ user }) => {
   return (
     <nav className="navbar">
       <div className="navbar__logo-container">
@@ -27,3 +27,5 @@ export const NavBar = ({ user }) => {
     </nav>
   );
 };
+
+export default NavBar;
