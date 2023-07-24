@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { formatDateToValidInputValue, logger } from '../../../../utils/helpers';
+import { formatDateToValidInputValue } from '../../../../utils/helpers';
 import { thunkEditGoal } from '../../../../store/goals';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';

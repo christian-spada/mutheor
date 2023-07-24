@@ -1,4 +1,4 @@
-import { customFetch, logger, normalizeData } from '../utils/helpers';
+import { customFetch, normalizeData } from '../utils/helpers';
 
 const GET_ALL_INSTRUMENTS = 'instruments/GET_ALL_INSTRUMENTS';
 const GET_SINGLE_INSTRUMENT = 'instruments/GET_SINGLE_INSTRUMENT';

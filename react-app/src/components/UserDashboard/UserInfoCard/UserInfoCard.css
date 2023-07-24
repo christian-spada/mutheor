@@ -32,3 +32,14 @@
 .user-info-card__info > section:nth-child(odd) {
   background-color: var(--primary-200);
 }
+
+@media screen and (max-width: 735px) {
+  .user-info-card {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 400px) {
+  .user-info-card {
+    padding: 0.2rem;
+  }
+}

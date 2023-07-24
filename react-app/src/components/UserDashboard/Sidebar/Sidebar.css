@@ -25,4 +25,9 @@
   cursor: pointer;
   font-weight: 300;
   text-transform: uppercase;
+  transition: background-color 150ms ease-in-out;
+}
+
+.sidebar__link:hover {
+  background-color: var(--primary-400);
 }

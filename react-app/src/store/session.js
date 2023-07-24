@@ -1,4 +1,4 @@
-import { logger, customFetch } from '../utils/helpers';
+import { customFetch } from '../utils/helpers';
 
 //! ===== ACTIONS ======
 const GET_USER = 'sessoin/GET_USER';

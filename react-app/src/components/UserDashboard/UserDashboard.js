@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
-import { logger } from '../../utils/helpers';
 
 import ProfileButton from '../ProfileButton/ProfileButton';
 import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
@@ -19,6 +18,7 @@ import { thunkGetAllInstruments } from '../../store/instruments';
 import { thunkGetAllGoals } from '../../store/goals';
 
 import './UserDashboard.css';
+import { Redirect } from 'react-router-dom';
 
 const UserDashboard = () => {
   const dispatch = useDispatch();
@@ -98,6 +98,8 @@ const UserDashboard = () => {
 
     return () => cardObserver.disconnect();
   }, [practiceSessions, goals, instruments]);
+
+  if (!user) return <Redirect to="/" />;
 
   return (
     <div className="user-dashboard-wrapper">

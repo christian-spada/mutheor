@@ -1,4 +1,4 @@
-import { customFetch, logger, normalizeData } from '../utils/helpers';
+import { customFetch, normalizeData } from '../utils/helpers';
 
 const GET_ALL_GOALS = 'goals/GET_ALL_';
 const GET_SINGLE_GOAL = 'goals/GET_SINGLE_GOAL';
