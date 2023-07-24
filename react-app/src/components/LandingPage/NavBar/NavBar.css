@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: var(--primary-300);
+  background-color: var(--primary-500);
 }
 
 .navbar__logo-container {
@@ -16,6 +16,7 @@
   font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
+  color: var(--primary-100);
 }
 
 .navbar__action-btn-container {
@@ -23,9 +24,9 @@
   gap: 1rem;
 }
 
-.navbar__action-btn-container > button {
-  background-color: var(--primary-500);
-  color: var(--primary-100);
+.navbar__action-btn-container button {
+  background-color: var(--primary-200);
+  color: var(--primary-800);
 }
 
 .navbar__logo {
