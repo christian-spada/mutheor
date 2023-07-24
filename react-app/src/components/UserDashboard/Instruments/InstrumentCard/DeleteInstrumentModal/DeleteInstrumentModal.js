@@ -2,7 +2,6 @@ import { thunkDeleteInstrument } from '../../../../../store/instruments';
 import { useDispatch } from 'react-redux';
 import './DeleteInstrumentModal.css';
 import { useModal } from '../../../../../context/Modal';
-import { logger } from '../../../../../utils/helpers';
 import { thunkGetUser } from '../../../../../store/session';
 
 const DeleteInstrumentModal = ({ instrumentToDelete, user }) => {

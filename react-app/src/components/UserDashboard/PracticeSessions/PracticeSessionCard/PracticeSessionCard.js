@@ -1,4 +1,4 @@
-import { logger, formatDate, formatDuration } from '../../../../utils/helpers';
+import { formatDate, formatDuration } from '../../../../utils/helpers';
 import './PracticeSessionCard.css';
 
 const PracticeSessionCard = ({ session }) => {

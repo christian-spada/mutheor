@@ -1,4 +1,4 @@
-import { customFetch, logger, normalizeData } from '../utils/helpers';
+import { customFetch, normalizeData } from '../utils/helpers';
 
 const GET_ALL_PRACTICE_SESSIONS = 'practiceSessions/GET_ALL_PRACTICE_SESSIONS';
 const GET_SINGLE_PRACTICE_SESSION = 'practiceSessions/GET_SINGLE_PRACTICE_SESSION';

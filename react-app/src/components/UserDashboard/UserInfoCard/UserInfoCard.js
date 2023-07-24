@@ -1,4 +1,3 @@
-import { logger } from '../../../utils/helpers';
 import './UserInfoCard.css';
 
 const UserInfoCard = ({ user }) => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { formatDateToValidInputValue, logger } from '../../../../utils/helpers';
+import { formatDateToValidInputValue } from '../../../../utils/helpers';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
 import './CreateGoalModal.css';
 import { thunkCreateGoal } from '../../../../store/goals';

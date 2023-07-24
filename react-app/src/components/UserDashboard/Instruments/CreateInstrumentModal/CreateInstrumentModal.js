@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { logger } from '../../../../utils/helpers';
 import { useDispatch } from 'react-redux';
 import { thunkCreateInstrument } from '../../../../store/instruments';
 import { useModal } from '../../../../context/Modal';
