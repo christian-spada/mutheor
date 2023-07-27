@@ -219,9 +219,11 @@ const UserDashboard = () => {
           <div className="user-dashboard__content-container">
             {contentView === 'Practice Sessions' &&
               practiceSessions.map(session => (
-                <div className="visible-card">
+                <div
+                  className="visible-card"
+                  key={session.id}
+                >
                   <PracticeSessionCard
-                    key={session.id}
                     user={user}
                     session={session}
                   />
@@ -229,9 +231,11 @@ const UserDashboard = () => {
               ))}
             {contentView === 'Instruments' &&
               instruments.map(instrument => (
-                <div className="visible-card">
+                <div
+                  className="visible-card"
+                  key={instrument.id}
+                >
                   <InstrumentCard
-                    key={instrument.id}
                     user={user}
                     instrument={instrument}
                   />
@@ -239,9 +243,11 @@ const UserDashboard = () => {
               ))}
             {contentView === 'Goals' &&
               goals.map(goal => (
-                <div className="visible-card">
+                <div
+                  className="visible-card"
+                  key={goal.id}
+                >
                   <GoalCard
-                    key={goal.id}
                     user={user}
                     goal={goal}
                   />
