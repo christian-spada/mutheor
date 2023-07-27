@@ -1,14 +1,21 @@
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import './Hero.css';
 import NavBar from '../NavBar/NavBar';
+import { useRef } from 'react';
+import './Hero.css';
+import { logger } from '../../../utils/helpers';
 
-const Hero = ({ user, heroRef }) => {
+const Hero = ({ user }) => {
+  const heroRef = useRef();
+
   return (
     <section
       ref={heroRef}
       className="hero"
     >
-      <NavBar user={user} />
+      <NavBar
+        user={user}
+        heroRef={heroRef}
+      />
       <div className="hero__layout">
         <div className="hero__heading">
           <h1 className="hero__headline">Level Up Your Practice</h1>

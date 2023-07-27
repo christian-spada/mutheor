@@ -45,3 +45,13 @@
   background-color: var(--primary-500);
   color: var(--primary-100);
 }
+
+@media (max-width: 350px) {
+  .hero__headline {
+    font-size: 40px;
+  }
+
+  .hero__subheading {
+    font-size: 24px;
+  }
+}

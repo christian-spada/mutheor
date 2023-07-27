@@ -16,7 +16,7 @@
   background-color: hsl(223, 0%, 98%);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1250px) {
   .instruments-section,
   .sessions-section,
   .goals-section {
@@ -94,4 +94,42 @@
 .landing-page__footer {
   height: 400px;
   background-color: var(--primary-900);
+}
+
+@media (max-width: 520px) {
+  .landing-page img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .instruments__headline,
+  .sessions__headline,
+  .goals__headline {
+    width: 100%;
+    font-size: 32px;
+  }
+
+  .subheading {
+    font-size: 24px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .landing-page img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .instruments__headline,
+  .sessions__headline,
+  .goals__headline {
+    width: 100%;
+    font-size: 24px;
+  }
+
+  .subheading {
+    font-size: 16px;
+    width: 100%;
+  }
 }
