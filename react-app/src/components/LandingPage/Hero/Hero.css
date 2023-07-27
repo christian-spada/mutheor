@@ -1,9 +1,9 @@
 .hero {
-  background-image: url('https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3270&q=80');
+  background-image: url('https://my-mutheor-user-images-bucket.s3.amazonaws.com/hero-image.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: hsla(232, 46%, 22%);
+  background-color: hsla(232, 46%, 16%);
   background-blend-mode: overlay;
   display: grid;
   place-items: center;
@@ -12,30 +12,18 @@
 }
 
 .hero__heading {
+  text-align: center;
+  max-width: 775px;
 }
 
 #hero-session-card {
   width: 300px;
 }
 
-.hero__heading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5rem;
-}
-
-@media screen and (max-width: 1000px) {
-  .hero__heading-container {
-    flex-direction: column;
-    gap: 5rem;
-  }
-}
-
 .hero__headline {
   font-size: clamp(72px, 8vw + 1rem, 80px);
   font-weight: 900;
-  color: var(--primary-200);
+  color: var(--primary-400);
   letter-spacing: -2px;
   margin-bottom: 1rem;
   width: fit-content;
@@ -44,11 +32,8 @@
 .hero__subheading {
   font-size: clamp(24px, 8vw + 1rem, 32px);
   font-weight: 300;
-  width: 540px;
-  color: var(--primary-200);
+  color: var(--primary-300);
 }
-
-/* @media (max-width: ) */
 
 .hero__action-btn {
   font-size: 20px;

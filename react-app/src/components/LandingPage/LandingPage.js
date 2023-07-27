@@ -2,6 +2,7 @@ import NavBar from './NavBar/NavBar';
 import Hero from './Hero/Hero';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
+import { logger } from '../../utils/helpers';
 import './LandingPage.css';
 
 const LandingPage = () => {
@@ -25,11 +26,15 @@ const LandingPage = () => {
   useEffect(() => {
     const handleIntersect = entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting && entry.target.tagName === 'DIV') {
-          entry.target.classList.add('show-text');
+        const { tagName, alt, classList } = entry.target;
+        if (entry.isIntersecting && tagName === 'DIV') {
+          classList.add('show-text');
+          return;
         }
-        if (entry.isIntersecting && entry.target.tagName === 'IMG') {
-          entry.target.classList.add('show-img');
+        if (entry.isIntersecting && tagName === 'IMG') {
+          alt !== 'session-card'
+            ? classList.add('show-img', 'right')
+            : classList.add('show-img', 'left');
         }
       });
     };
@@ -69,6 +74,12 @@ const LandingPage = () => {
         ></img>
       </section>
       <section className="sessions-section">
+        <img
+          ref={sessionsImg}
+          src="https://my-mutheor-user-images-bucket.s3.amazonaws.com/Session-Card-image.png"
+          alt="session-card"
+          className="fade"
+        ></img>
         <div
           ref={sessionsText}
           className="fade"
@@ -80,12 +91,6 @@ const LandingPage = () => {
             Keep record of all of your sessions with date information and notes on the session
           </h3>
         </div>
-        <img
-          ref={sessionsImg}
-          src="https://my-mutheor-user-images-bucket.s3.amazonaws.com/Session-Card-image.png"
-          alt="session-card"
-          className="fade"
-        ></img>
       </section>
       <section className="goals-section">
         <div
