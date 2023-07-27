@@ -1,4 +1,3 @@
-import NavBar from './NavBar/NavBar';
 import Hero from './Hero/Hero';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
@@ -52,10 +51,7 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      <header className="navbar-container">
-        <NavBar user={user} />
-      </header>
-      <Hero />
+      <Hero user={user} />
       <section className="instruments-section">
         <div
           ref={instrumentsText}
@@ -68,7 +64,7 @@ const LandingPage = () => {
         </div>
         <img
           ref={instrumentsImg}
-          src="https://my-mutheor-user-images-bucket.s3.amazonaws.com/Instrument-card-image.png"
+          src="https://my-mutheor-user-images-bucket.s3.amazonaws.com/Instrument-card-svg.svg"
           alt="instrument-card"
           className="fade"
         ></img>
@@ -76,7 +72,7 @@ const LandingPage = () => {
       <section className="sessions-section">
         <img
           ref={sessionsImg}
-          src="https://my-mutheor-user-images-bucket.s3.amazonaws.com/Session-Card-image.png"
+          src="https://my-mutheor-user-images-bucket.s3.amazonaws.com/Session-Card-svg.svg"
           alt="session-card"
           className="fade"
         ></img>
@@ -104,7 +100,7 @@ const LandingPage = () => {
         </div>
         <img
           ref={goalsImg}
-          src="https://my-mutheor-user-images-bucket.s3.amazonaws.com/Goal-Card-image.png"
+          src="https://my-mutheor-user-images-bucket.s3.amazonaws.com/Goal-Card-svg.svg"
           alt="goal-card"
           className="fade"
         ></img>
