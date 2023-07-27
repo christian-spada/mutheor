@@ -1,7 +1,3 @@
-.user-dashboard__main-content {
-  /* min-width: 100% */
-}
-
 .user-dashboard__header {
   display: flex;
   justify-content: space-between;
@@ -65,8 +61,6 @@
 }
 
 .user-dashboard__content-section {
-  display: flex;
-  justify-content: center;
   margin: 0 auto;
   margin-top: 5rem;
   max-width: 1455px;
