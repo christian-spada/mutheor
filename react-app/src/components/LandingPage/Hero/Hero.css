@@ -5,6 +5,9 @@
   background-repeat: no-repeat;
   background-color: hsla(232, 46%, 16%);
   background-blend-mode: overlay;
+}
+
+.hero__layout {
   display: grid;
   place-items: center;
   height: 100vh;
