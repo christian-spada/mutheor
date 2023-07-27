@@ -1,3 +1,9 @@
+.navbar-container {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 .landing-page img {
   width: 300px;
   height: 300px;
@@ -6,16 +12,20 @@
 .instruments-section,
 .sessions-section,
 .goals-section {
-  display: grid;
-  place-items: center;
-  height: 50vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10rem 5rem;
 }
 
-.instruments-section__content-container,
-.sessions-section__content-container,
-.goals-section__content-container {
-  display: flex;
-  justify-content: space-around;
+@media (max-width: 1000px) {
+  .instruments-section,
+  .sessions-section,
+  .goals-section {
+    flex-direction: column;
+    gap: 5rem;
+    text-align: center;
+  }
 }
 
 .instruments__headline,
@@ -24,14 +34,14 @@
   font-size: 45px;
   font-weight: 900;
   letter-spacing: -1px;
-  width: 50%;
+  width: 540px;
   color: var(--primary-800);
   margin-bottom: 16px;
 }
 
 .subheading {
   font-size: 35px;
-  width: 50%;
+  width: 540px;
   color: var(--primary-700);
   font-weight: 300;
 }
