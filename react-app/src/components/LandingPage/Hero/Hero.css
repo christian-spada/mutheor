@@ -1,38 +1,38 @@
 .hero {
-  background-color: var(--primary-100);
+  background-image: url('https://my-mutheor-user-images-bucket.s3.amazonaws.com/hero-image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: hsla(232, 46%, 16%);
+  background-blend-mode: overlay;
+  display: grid;
+  place-items: center;
   height: 100vh;
-  padding: 30rem;
+  padding: 5rem;
 }
 
 .hero__heading {
-  height: 50%;
+  text-align: center;
+  max-width: 775px;
 }
 
 #hero-session-card {
   width: 300px;
 }
 
-.hero__heading-container {
-  display: flex;
-  gap: 5rem;
-  justify-content: center;
-  align-items: center;
-}
-
 .hero__headline {
-  font-size: 60px;
+  font-size: clamp(72px, 8vw + 1rem, 80px);
   font-weight: 900;
-  color: var(--primary-700);
+  color: var(--primary-400);
   letter-spacing: -2px;
   margin-bottom: 1rem;
   width: fit-content;
 }
 
 .hero__subheading {
-  font-size: 25px;
+  font-size: clamp(24px, 8vw + 1rem, 32px);
   font-weight: 300;
-  color: var(--primary-500);
-  width: 60%;
+  color: var(--primary-300);
 }
 
 .hero__action-btn {
@@ -41,10 +41,4 @@
   margin-top: 2rem;
   background-color: var(--primary-500);
   color: var(--primary-100);
-}
-
-@media screen and (max-width: 1440px) {
-  .hero {
-    padding: 10rem;
-  }
 }
