@@ -1,18 +1,16 @@
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { useEffect, useRef } from 'react';
 import './NavBar.css';
-import { useEffect, useState } from 'react';
-import { logger } from '../../../utils/helpers';
 
-const NavBar = ({ user }) => {
-  const [backgroundColor, setBackgroundColor] = useState();
+const NavBar = ({ user, heroRef }) => {
+  const navbarRef = useRef();
 
   useEffect(() => {
-    const hero = document.querySelector('.hero');
     const handleScroll = () => {
-      if (hero.getBoundingClientRect().bottom <= 57) {
-        setBackgroundColor('var(--primary-900)');
+      if (heroRef.current.getBoundingClientRect().bottom <= 57) {
+        navbarRef.current.classList.add('add-bg-color');
       } else {
-        setBackgroundColor('initial');
+        navbarRef.current.classList.remove('add-bg-color');
       }
     };
 
@@ -20,10 +18,11 @@ const NavBar = ({ user }) => {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   return (
     <nav
+      ref={navbarRef}
       className="navbar"
-      style={{ backgroundColor: backgroundColor }}
     >
       <div className="navbar__logo-container">
         <div className="navbar__logo"></div>
