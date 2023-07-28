@@ -1,6 +1,7 @@
 import Hero from './Hero/Hero';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {
@@ -80,7 +81,7 @@ const LandingPage = () => {
           className="fade"
         >
           <h2 className="sessions__headline">
-            Create records for all of your practice sessions. Upload your own pictures as well.
+            Create records for all of your practice sessions.
           </h2>
           <h3 className="subheading">
             Keep record of all of your sessions with date information and notes on the session
@@ -92,9 +93,7 @@ const LandingPage = () => {
           ref={goalsText}
           className="fade"
         >
-          <h2 className="goals__headline">
-            Create records for all of your goals. Upload your own pictures as well.
-          </h2>
+          <h2 className="goals__headline">Create records for all of your goals.</h2>
           <h3 className="subheading">Set goals to keep yourself accountable</h3>
         </div>
         <img
@@ -104,7 +103,32 @@ const LandingPage = () => {
           className="fade"
         ></img>
       </section>
-      <footer className="landing-page__footer"></footer>
+      <footer className="landing-page__footer">
+        <div className="landing-page__footer-info-container">
+          <div className="developer-attribution">
+            <p>
+              Designed <span>&&</span> Developed by:
+            </p>
+            <p className="name">Christian Spada</p>
+          </div>
+          <div className="social-icons-container">
+            <a
+              href="https://github.com/christian-spada"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <i className="fa-brands fa-square-github"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/christian-s-82a24a23b/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <i className="fa-brands fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

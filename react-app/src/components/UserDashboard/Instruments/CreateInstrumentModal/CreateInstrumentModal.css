@@ -33,8 +33,12 @@
   cursor: pointer;
   width: fit-content;
   height: 30px;
-  background-color: var(--primary-500);
+  background-color: var(--primary-600);
   color: var(--primary-white);
+}
+
+.create-instrument-form__img-section label:hover {
+  background-color: var(--primary-500);
 }
 
 .create-instrument-form__img-container {
@@ -71,7 +75,7 @@
 }
 
 .create-instrument-form__create-btn {
-  background-color: var(--primary-500);
+  background-color: var(--primary-600);
   color: var(--primary-white);
 }
 

@@ -16,6 +16,10 @@ body {
   overflow-x: hidden;
 }
 
+a:visited {
+  color: inherit;
+}
+
 h1,
 h2,
 h3,
@@ -165,5 +169,5 @@ i.error {
 .create-session-form button:hover,
 .create-goal-form button:hover,
 .edit-goal-form button:hover {
-  background-color: var(--primary-400);
+  background-color: var(--primary-500);
 }

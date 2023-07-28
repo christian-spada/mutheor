@@ -42,8 +42,12 @@
   cursor: pointer;
   width: fit-content;
   height: 30px;
-  background-color: var(--primary-500);
+  background-color: var(--primary-600);
   color: var(--primary-white);
+}
+
+.signup-form__img-section label:hover {
+  background-color: var(--primary-500);
 }
 
 .signup-form__input--style {
@@ -67,7 +71,12 @@
 }
 
 .signup-form__signup-btn {
-  background-color: var(--primary-500);
+  background-color: var(--primary-600);
   color: var(--primary-100);
   margin-top: 1rem;
+  transition: background-color 100ms ease-in-out;
+}
+
+.signup-form__signup-btn:hover {
+  background-color: var(--primary-500);
 }
