@@ -46,10 +46,18 @@
   align-items: center;
 }
 
+.user-dashboard__view-selection-btn-container button:not([class='active']):hover {
+  background-color: hsl(232, 5%, 90%);
+}
+
 .fa-square-plus {
-  color: hsl(100, 51%, 67%);
+  color: hsl(100, 57%, 64%);
   font-size: 30px;
   cursor: pointer;
+}
+
+.fa-square-plus:hover {
+  color: hsl(100, 51%, 57%);
 }
 
 .active {
