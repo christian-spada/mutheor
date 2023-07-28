@@ -52,6 +52,6 @@
 }
 
 .edit-goal-form__update-goal-btn {
-  background-color: var(--primary-500);
+  background-color: var(--primary-600);
   color: var(--primary-white);
 }

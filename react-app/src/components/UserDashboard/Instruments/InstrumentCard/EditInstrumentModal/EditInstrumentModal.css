@@ -35,9 +35,13 @@
   cursor: pointer;
   width: fit-content;
   height: 30px;
-  background-color: var(--primary-500);
+  background-color: var(--primary-600);
   color: var(--primary-white);
   margin-left: 2px;
+}
+
+.edit-instrument-form__img-section label:hover {
+  background-color: var(--primary-500);
 }
 
 .edit-instrument-form__img-container {
@@ -74,7 +78,7 @@
 }
 
 .edit-instrument-form__update-btn {
-  background-color: var(--primary-500);
+  background-color: var(--primary-600);
   color: var(--primary-white);
 }
 

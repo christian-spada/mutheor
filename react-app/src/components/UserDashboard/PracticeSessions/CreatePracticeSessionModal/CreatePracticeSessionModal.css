@@ -70,6 +70,6 @@
 }
 
 .create-session-form__create-session-btn {
-  background-color: var(--primary-500);
+  background-color: var(--primary-600);
   color: var(--primary-white);
 }

@@ -45,6 +45,13 @@
   margin-top: 2rem;
   background-color: var(--primary-500);
   color: var(--primary-100);
+  transition: background-color 100ms ease-in-out, transform 100ms ease-in-out;
+}
+
+.hero__action-btn:hover {
+  background-color: var(--primary-900);
+  outline: 1px solid var(--primary-300);
+  transform: scale(1.02);
 }
 
 @media (max-width: 400px) {

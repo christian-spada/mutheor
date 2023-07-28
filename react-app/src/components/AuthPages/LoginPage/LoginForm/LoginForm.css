@@ -42,14 +42,25 @@
 }
 
 .login-form__login-btn {
-  background-color: var(--primary-500);
+  background-color: var(--primary-600);
   color: var(--primary-100);
+  transition: background-color 100ms ease-in-out;
+}
+
+.login-form__login-btn:hover {
+  background-color: var(--primary-500);
 }
 
 .login-form__demo-btn {
   background-color: var(--primary-100);
   color: var(--primary-800);
-  font-size: 12px;
+  font-size: 13px;
+  outline: 1px solid var(--primary-200);
+  transition: background-color 100ms ease-in-out;
+}
+
+.login-form__demo-btn:hover {
+  background-color: var(--primary-200);
 }
 
 .login-form__input--style {

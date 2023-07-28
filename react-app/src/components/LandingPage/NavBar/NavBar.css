@@ -33,8 +33,14 @@
 }
 
 .navbar__action-btn-container button {
-  background-color: var(--primary-200);
-  color: var(--primary-800);
+  background-color: var(--primary-500);
+  color: var(--primary-white);
+  text-transform: uppercase;
+  transition: background-color 100ms ease-in-out;
+}
+
+.navbar__action-btn-container button:hover {
+  background-color: var(--primary-900);
 }
 
 .navbar__logo {
