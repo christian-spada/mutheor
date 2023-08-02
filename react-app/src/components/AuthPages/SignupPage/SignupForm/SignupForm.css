@@ -58,7 +58,6 @@
   background-color: var(--primary-100);
   padding: 0.4rem;
   width: 100%;
-  transition: outline 150ms ease-in-out;
 }
 
 .signup-form__input--style:focus {
