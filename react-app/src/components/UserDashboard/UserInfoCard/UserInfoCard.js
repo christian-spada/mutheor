@@ -12,16 +12,28 @@ const UserInfoCard = ({ user }) => {
       </div>
       <div className="user-info-card__info">
         <section className="user-info-card__instruments-section">
-          <p># of Instruments - {user?.instruments.length}</p>
+          <p>
+            <span className="num-tag"> #</span> of Instruments -{' '}
+            <span className="num-count">{user?.instruments.length}</span>
+          </p>
         </section>
         <section className="user-info-card__sessions-section">
-          <p># of Practice Sessions - {user?.practiceSessions.length}</p>
+          <p>
+            <span className="num-tag"> #</span> of Practice Sessions -{' '}
+            <span className="num-count">{user?.practiceSessions.length}</span>
+          </p>
         </section>
         <section className="user-info-card__goals-section">
-          <p># of Goals - {user?.goals.length}</p>
+          <p>
+            <span className="num-tag"> #</span> of Goals -{' '}
+            <span className="num-count">{user?.goals.length}</span>
+          </p>
         </section>
         <section className="user-info-card__achievements-section">
-          <p># of Achievements - {user?.achievements.length}</p>
+          <p>
+            <span className="num-tag"> #</span> of Achievements -{' '}
+            <span className="num-count">{user?.achievements.length}</span>
+          </p>
         </section>
       </div>
     </div>
