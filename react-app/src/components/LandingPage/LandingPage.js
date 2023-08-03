@@ -1,7 +1,6 @@
 import Hero from './Hero/Hero';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {

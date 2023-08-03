@@ -5,6 +5,7 @@
   padding: 5rem;
   border-radius: 1rem;
   background-color: var(--primary-400);
+  background-color: hsl(223, 57%, 76%);
   border: 1px solid var(--primary-900);
 }
 
@@ -27,6 +28,25 @@
 .user-info-card__info > section {
   padding: 0.5rem;
   border-radius: 8px;
+}
+
+.user-info-card__info > section > p {
+  font-size: 18px;
+}
+
+.num-tag {
+  font-weight: 300;
+  font-size: 24px;
+  color: var(--primary-500);
+  margin-right: 3px;
+  position: relative;
+  top: 1.5px;
+}
+
+.num-count {
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--primary-500);
 }
 
 .user-info-card__info > section:nth-child(odd) {
