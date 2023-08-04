@@ -25,7 +25,6 @@ const NavBar = ({ user, heroRef }) => {
       className="navbar"
     >
       <div className="navbar__logo-container">
-        <div className="navbar__logo"></div>
         <span className="navbar__app-title">Mutheor</span>
       </div>
       <div className="navbar__action-btn-container">
