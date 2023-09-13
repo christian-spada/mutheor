@@ -66,4 +66,8 @@
   .hero__action-btn {
     font-size: 16px;
   }
+
+  .hero {
+    background-attachment: scroll;
+  }
 }
