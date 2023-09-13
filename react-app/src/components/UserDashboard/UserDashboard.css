@@ -149,6 +149,11 @@
   .user-dashboard__content-container {
     grid-template-columns: repeat(2, 300px);
   }
+
+  .svg-container,
+  .svg-container-2 {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 822px) {
@@ -172,5 +177,9 @@
 @media screen and (max-width: 400px) {
   .user-dashboard__content-container {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .card {
+    width: 200px;
+    height: 205px;
   }
 }
