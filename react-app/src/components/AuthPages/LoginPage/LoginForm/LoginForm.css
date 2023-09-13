@@ -90,3 +90,9 @@
   left: 5rem;
   font-size: 14px;
 }
+
+@media screen and (max-width: 525px) {
+  .login-page__main-section > section {
+    width: 100%;
+  }
+}

@@ -1,5 +1,6 @@
 .login-page {
   display: flex;
+  height: 100vh;
 }
 
 .login-page__main-section {
@@ -13,4 +14,10 @@
   background-color: var(--primary-900);
   height: 100vh;
   width: 22%;
+}
+
+@media (max-width: 675px) {
+  .login-page__sidebar {
+    display: none;
+  }
 }
