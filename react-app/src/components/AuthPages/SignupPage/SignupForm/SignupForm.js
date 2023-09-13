@@ -65,7 +65,7 @@ export const SignupForm = () => {
           </div>
           <div>
             <span className="signup-form__img-file-name">{image?.name}</span>
-            <label htmlFor="signup-img">Choose Image File</label>
+            <label htmlFor="signup-img">Choose Image</label>
           </div>
           <input
             type="file"

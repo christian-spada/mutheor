@@ -1,5 +1,6 @@
 .signup-page {
   display: flex;
+  height: 100vh;
 }
 
 .signup-page__main-section {
@@ -32,4 +33,10 @@
 .login-redirect-btn:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+@media (max-width: 675px) {
+  .signup-page__sidebar {
+    display: none;
+  }
 }
