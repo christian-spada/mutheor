@@ -60,6 +60,13 @@
 }
 @media screen and (max-width: 400px) {
   .user-info-card {
-    padding: 0.2rem;
+    padding: initial;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 300px;
+  }
+
+  .user-info-card__info {
+    width: auto;
   }
 }
