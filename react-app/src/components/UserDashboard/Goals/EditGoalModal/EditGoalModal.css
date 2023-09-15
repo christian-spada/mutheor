@@ -10,6 +10,7 @@
 .edit-goal-form label {
   display: block;
   margin-bottom: 3px;
+  font-size: var(--font-size-700);
 }
 
 #edit-goal-instrument-type,
@@ -54,4 +55,10 @@
 .edit-goal-form__update-goal-btn {
   background-color: var(--primary-600);
   color: var(--primary-white);
+}
+
+@media (max-width: 375px) {
+  .edit-goal-modal {
+    padding: 1.2rem;
+  }
 }

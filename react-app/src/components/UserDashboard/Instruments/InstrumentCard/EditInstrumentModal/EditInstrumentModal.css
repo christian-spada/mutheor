@@ -90,3 +90,9 @@
 #edit-instrument-model {
   width: 100%;
 }
+
+@media (max-width: 375px) {
+  .edit-instrument-form > section {
+    flex-direction: column;
+  }
+}
