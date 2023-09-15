@@ -79,3 +79,20 @@
 .signup-form__signup-btn:hover {
   background-color: var(--primary-500);
 }
+
+@media (max-width: 525px) {
+  section .form-wrapper {
+    width: 100%;
+    box-shadow: none;
+  }
+  .signup-page__main-section > section {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 381px) {
+  .signup-form__img-section [for='signup-img'] {
+    font-size: 10px;
+    text-align: center;
+  }
+}

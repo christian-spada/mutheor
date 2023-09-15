@@ -73,3 +73,18 @@
   background-color: var(--primary-600);
   color: var(--primary-white);
 }
+
+@media (max-width: 375px) {
+  .create-session-form > section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #create-session-focus,
+  #create-session-inst-type {
+    width: 100%;
+  }
+  #create-session-date {
+    margin: 0 auto;
+  }
+}

@@ -35,3 +35,11 @@
   position: relative;
   right: 3.5px;
 }
+
+@media (max-width: 400px) {
+  .instrument-card__type-section,
+  .instrument-card__category-section,
+  .instrument-card__model-section {
+    display: none;
+  }
+}
