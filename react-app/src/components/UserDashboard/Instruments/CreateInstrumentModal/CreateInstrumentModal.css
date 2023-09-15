@@ -87,3 +87,26 @@
 #create-instrument-model {
   width: 100%;
 }
+
+@media (max-width: 375px) {
+  .create-instrument-form > section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #create-instrument-type,
+  #create-instrument-category {
+    width: 100%;
+  }
+
+  .create-instrument-form__img-file-name {
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+
+  label[for='create-instrument-image'] {
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-top: 5px;
+  }
+}
