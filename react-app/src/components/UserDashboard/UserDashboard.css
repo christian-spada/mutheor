@@ -170,7 +170,8 @@
 
 @media screen and (max-width: 465px) {
   .user-dashboard__view-selection {
-    flex-direction: column;
+    gap: 2rem;
+    box-shadow: none;
   }
 }
 
