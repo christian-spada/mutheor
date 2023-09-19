@@ -31,3 +31,13 @@
 .sidebar__link:hover {
   background-color: var(--primary-400);
 }
+
+@media screen and (max-width: 400px) {
+  .sidebar {
+    width: 300px;
+  }
+  .sidebar__link {
+    padding: 3rem;
+    font-size: 24px;
+  }
+}
