@@ -37,9 +37,18 @@
 }
 
 @media (max-width: 400px) {
-  .instrument-card__type-section,
-  .instrument-card__category-section,
-  .instrument-card__model-section {
+  .instrument-card__info-container {
     display: none;
+  }
+  .instrument-card__info-container.isFlipped {
+    display: block;
+    margin-top: 2rem;
+  }
+  .instrument-card__img-section.isFlipped {
+    display: none;
+  }
+
+  .instrument-card__info-container.isFlipped > section {
+    transform: rotateY(180deg);
   }
 }

@@ -1,8 +1,4 @@
-div.session-card:hover {
-  transform: none;
-}
-
-.session-card > section {
+.session-card section {
   padding: 1rem;
 }
 
@@ -15,7 +11,7 @@ div.session-card:hover {
   font-size: 16px;
 }
 
-.session-card section > div {
+.session-card__info-container > section > div {
   display: flex;
   gap: 8px;
   align-items: center;
@@ -61,4 +57,25 @@ div.session-card:hover {
   -webkit-line-clamp: 7;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+@media (max-width: 400px) {
+  .session-card__notes-section {
+    display: none;
+  }
+  .session-card__notes-section.isFlipped {
+    display: block;
+  }
+  .session-card__info-container.isFlipped {
+    display: none;
+  }
+  .session-card__notes-section.isFlipped {
+    transform: rotateY(180deg);
+  }
+  .session-card__time-section {
+    gap: 1rem;
+  }
+  .session-card__info-section {
+    gap: 0.5rem;
+  }
 }
