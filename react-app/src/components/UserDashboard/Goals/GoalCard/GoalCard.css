@@ -82,3 +82,21 @@
   color: var(--primary-600);
   margin-right: 1px;
 }
+
+@media (max-width: 400px) {
+  .goal-card__description-section {
+    display: none;
+  }
+  .goal-card__description-section.isFlipped {
+    display: block;
+  }
+  .goal-card__description-section.isFlipped > p {
+    transform: rotateY(180deg);
+  }
+  .goal-card__info-container.isFlipped {
+    display: none;
+  }
+  .goal-card__days-remaining-section {
+    margin-top: 1rem;
+  }
+}
