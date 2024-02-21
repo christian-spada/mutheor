@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';
 import './DeleteGoalModal.css';
 import { thunkDeleteGoal } from '../../../../store/goals';
-import { logger } from '../../../../utils/helpers';
 import { thunkGetUser } from '../../../../store/session';
 
 export const DeleteGoalModal = ({ goalToDelete, user }) => {
