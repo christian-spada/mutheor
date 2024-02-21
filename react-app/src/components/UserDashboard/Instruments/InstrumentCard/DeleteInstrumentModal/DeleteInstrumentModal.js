@@ -9,8 +9,8 @@ const DeleteInstrumentModal = ({ instrumentToDelete, user }) => {
   const { closeModal } = useModal();
 
   const handleDelete = async () => {
-    await dispatch(thunkDeleteInstrument(user.id, instrumentToDelete));
-    await dispatch(thunkGetUser(user.id));
+    dispatch(thunkDeleteInstrument(user.id, instrumentToDelete));
+    dispatch(thunkGetUser(user.id));
     closeModal();
   };
 
