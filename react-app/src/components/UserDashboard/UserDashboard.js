@@ -43,17 +43,23 @@ const UserDashboard = () => {
   const handleViewChange = selection => {
     if (selection === 'Practice Sessions') {
       setContentView('Practice Sessions');
-      dispatch(thunkGetAllPracticeSessions(user.id));
+      if (!practiceSessions.length) {
+        dispatch(thunkGetAllPracticeSessions(user.id));
+      }
       return;
     }
     if (selection === 'Instruments') {
       setContentView('Instruments');
-      dispatch(thunkGetAllInstruments(user.id));
+      if (!instruments.length) {
+        dispatch(thunkGetAllInstruments(user.id));
+      }
       return;
     }
     if (selection === 'Goals') {
       setContentView('Goals');
-      dispatch(thunkGetAllGoals(user.id));
+      if (!goals.length) {
+        dispatch(thunkGetAllGoals(user.id));
+      }
       return;
     }
   };

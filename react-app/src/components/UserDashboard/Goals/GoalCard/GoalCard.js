@@ -1,4 +1,4 @@
-import { formatDate, getDaysRemaining, logger } from '../../../../utils/helpers';
+import { formatDate, getDaysRemaining } from '../../../../utils/helpers';
 import OpenModalButton from '../../../OpenModalButton';
 import DeleteGoalModal from '../DeleteGoalModal/DeleteGoalModal';
 import EditGoalModal from '../EditGoalModal/EditGoalModal';

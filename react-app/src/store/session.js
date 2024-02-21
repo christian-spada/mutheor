@@ -1,7 +1,7 @@
 import { customFetch } from '../utils/helpers';
 
 //! ===== ACTIONS ======
-const GET_USER = 'sessoin/GET_USER';
+const GET_USER = 'session/GET_USER';
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 

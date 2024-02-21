@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import NavBar from '../NavBar/NavBar';
 import { useRef } from 'react';
 import './Hero.css';
-import { logger } from '../../../utils/helpers';
 
 const Hero = ({ user }) => {
   const heroRef = useRef();
