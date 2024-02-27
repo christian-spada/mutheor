@@ -3,6 +3,7 @@ import { customFetch, normalizeData } from '../utils/helpers';
 const GET_ALL_PRACTICE_SESSIONS = 'practiceSessions/GET_ALL_PRACTICE_SESSIONS';
 const GET_SINGLE_PRACTICE_SESSION = 'practiceSessions/GET_SINGLE_PRACTICE_SESSION';
 const CREATE_PRACTICE_SESSION = 'practiceSessions/CREATE_PRACTICE_SESSION';
+const CLEAR_PRACTICE_SESSIONS = 'practiceSessions/CLEAR_PRACTICE_SESSIONS';
 
 //! ===== ACTION CREATORS =====
 const getAllPracticeSessions = practiceSessions => {
@@ -23,6 +24,13 @@ const createPracticeSession = practiceSession => {
   return {
     type: CREATE_PRACTICE_SESSION,
     payload: practiceSession,
+  };
+};
+
+const clearPracticeSessions = instrumentId => {
+  return {
+    type: CLEAR_PRACTICE_SESSIONS,
+    payload: instrumentId,
   };
 };
 
@@ -82,6 +90,10 @@ export const thunkCreatePracticeSession = (userId, newPracticeSession) => async 
   }
 };
 
+export const thunkClearPracticeSessions = instrumentId => async dispatch => {
+  dispatch(clearPracticeSessions(instrumentId));
+};
+
 //! ===== REDUCER =====
 
 const initialState = { allPracticeSessions: {}, singlePracticeSession: {} };
@@ -107,6 +119,26 @@ export default function reducer(state = initialState, action) {
         },
         singlePracticeSession: action.payload,
       };
+    case CLEAR_PRACTICE_SESSIONS:
+      const filteredSessionsArr = Object.values(state.allPracticeSessions).filter(({ id }) => {
+        const instrumentId = state.allPracticeSessions[id].instrument.id;
+        return instrumentId !== action.payload;
+      });
+      const filteredSessions = normalizeData(filteredSessionsArr);
+
+      if (state.singlePracticeSession.instrument?.id === action.payload) {
+        return {
+          ...state,
+          allPracticeSessions: filteredSessions,
+          singlePracticeSession: {},
+        };
+      } else {
+        return {
+          ...state,
+          allPracticeSessions: filteredSessions,
+        };
+      }
+
     default:
       return state;
   }
