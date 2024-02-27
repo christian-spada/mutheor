@@ -5,6 +5,7 @@ const GET_SINGLE_GOAL = 'goals/GET_SINGLE_GOAL';
 const CREATE_GOAL = 'goals/CREATE_GOAL';
 const EDIT_GOAL = 'goals/EDIT_GOAL';
 const DELETE_GOAL = 'goals/DELETE_GOAL';
+const CLEAR_GOALS = 'goals/CLEAR_GOALS';
 
 //! ===== ACTION CREATORS =====
 const getAllGoals = goals => {
@@ -39,6 +40,13 @@ const deleteGoal = goalId => {
   return {
     type: DELETE_GOAL,
     payload: goalId,
+  };
+};
+
+const clearGoals = instrumentId => {
+  return {
+    type: CLEAR_GOALS,
+    payload: instrumentId,
   };
 };
 
@@ -140,6 +148,10 @@ export const thunkDeleteGoal = (userId, goalToDelete) => async dispatch => {
   }
 };
 
+export const thunkClearGoals = instrumentId => async dispatch => {
+  dispatch(clearGoals(instrumentId));
+};
+
 //! ===== REDUCER =====
 
 const initialState = { allGoals: {}, singleGoal: {} };
@@ -176,6 +188,25 @@ export default function reducer(state = initialState, action) {
       };
       delete newState.allGoals[action.payload];
       return newState;
+    case CLEAR_GOALS:
+      const filteredGoalsArr = Object.keys(state.allGoals).filter(({ id }) => {
+        const instrumentId = state.allGoals[id].instrument.id;
+        return instrumentId !== action.payload;
+      });
+      const filteredGoals = normalizeData(filteredGoalsArr);
+
+      if (state.singleGoal.instrument?.id === action.payload) {
+        return {
+          ...state,
+          allGoals: filteredGoals,
+          singleGoal: {},
+        };
+      } else {
+        return {
+          ...state,
+          allGoals: filteredGoals,
+        };
+      }
     default:
       return state;
   }
