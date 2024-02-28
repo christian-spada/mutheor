@@ -1,4 +1,4 @@
-import { customFetch, normalizeData } from '../utils/helpers';
+import { customFetch, logger, normalizeData } from '../utils/helpers';
 
 const GET_ALL_GOALS = 'goals/GET_ALL_';
 const GET_SINGLE_GOAL = 'goals/GET_SINGLE_GOAL';
@@ -189,7 +189,7 @@ export default function reducer(state = initialState, action) {
       delete newState.allGoals[action.payload];
       return newState;
     case CLEAR_GOALS:
-      const filteredGoalsArr = Object.keys(state.allGoals).filter(({ id }) => {
+      const filteredGoalsArr = Object.values(state.allGoals).filter(({ id }) => {
         const instrumentId = state.allGoals[id].instrument.id;
         return instrumentId !== action.payload;
       });
