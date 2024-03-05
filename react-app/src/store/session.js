@@ -7,7 +7,7 @@ const REMOVE_USER = 'session/REMOVE_USER';
 const ADD_USER_GOAL = 'session/ADD_USER_GOAL';
 const CLEAR_USER_GOALS = 'session/CLEAR_USER_GOALS';
 const EDIT_USER_GOAL = 'session/EDIT_USER_GOAL';
-// const ADD_USER_INSTRUMENT = 'session/ADD_USER_INSTRUMENT';
+const ADD_USER_INSTRUMENT = 'session/ADD_USER_INSTRUMENT';
 // const EDIT_USER_INSTRUMENT = 'session/EDIT_USER_INSTRUMENT';
 // const CLEAR_USER_INSTRUMENTS = 'session/CLEAR_USER_INSTRUMENTS';
 const ADD_USER_PRACTICE_SESSION = 'session/ADD_USER_PRACTICE_SESSION';
@@ -51,13 +51,13 @@ const clearUserGoals = goalId => {
   };
 };
 
-// // INSTRUMENTS
-// const addUserInstrument = instrument => {
-//   return {
-//     type: ADD_USER_INSTRUMENT,
-//     payload: instrument,
-//   };
-// };
+// INSTRUMENTS
+const addUserInstrument = instrument => {
+  return {
+    type: ADD_USER_INSTRUMENT,
+    payload: instrument,
+  };
+};
 
 // const editUserInstrument = instrument => {
 //   return {
@@ -179,10 +179,10 @@ export const thunkEditUserGoal = goal => async dispatch => {
   dispatch(editUserGoal(goal));
 };
 
-// // INSTRUMENTS
-// export const thunkAddUserInstrument = instrument => async dispatch => {
-//   dispatch(addUserInstrument(instrument));
-// };
+// INSTRUMENTS
+export const thunkAddUserInstrument = instrument => async dispatch => {
+  dispatch(addUserInstrument(instrument));
+};
 
 // export const thunkEditUserInstrument = instrument => async dispatch => {
 //   dispatch(editUserInstrument(instrument));
@@ -209,10 +209,10 @@ export default function reducer(state = initialState, action) {
       return { user: null };
 
     // INSTRUMENTS
-    // case ADD_USER_INSTRUMENT:
-    //   return {
-    //     user: { ...state.user, instruments: [...state.user.instruments, action.payload] },
-    //   };
+    case ADD_USER_INSTRUMENT:
+      return {
+        user: { ...state.user, instruments: [...state.user.instruments, action.payload] },
+      };
     // case EDIT_USER_INSTRUMENT:
     //   const updatedInstruments = state.user.instruments.map(instrument => {
     //     if (instrument.id === action.payload.id) {
