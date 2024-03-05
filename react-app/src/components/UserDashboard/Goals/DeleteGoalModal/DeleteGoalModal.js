@@ -2,15 +2,15 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';
 import './DeleteGoalModal.css';
 import { thunkDeleteGoal } from '../../../../store/goals';
-import { thunkGetUser } from '../../../../store/session';
+import { thunkClearUserGoals } from '../../../../store/session';
 
 export const DeleteGoalModal = ({ goalToDelete, user }) => {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
   const handleDelete = async () => {
-    await dispatch(thunkDeleteGoal(user.id, goalToDelete));
-    await dispatch(thunkGetUser(user.id));
+    dispatch(thunkDeleteGoal(user.id, goalToDelete));
+    dispatch(thunkClearUserGoals(goalToDelete.id));
 
     closeModal();
   };
