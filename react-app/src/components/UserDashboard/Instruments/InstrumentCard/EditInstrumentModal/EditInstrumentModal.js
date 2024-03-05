@@ -51,7 +51,7 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
 
     setLoadingState(true);
 
-    const res = dispatch(thunkEditInstrument(user.id, formData));
+    const res = await dispatch(thunkEditInstrument(user.id, formData));
 
     dispatch(thunkGetUser(user.id));
 

@@ -49,9 +49,9 @@ const CreateGoalModal = ({ user }) => {
       description,
     };
 
-    const res = dispatch(thunkCreateGoal(user.id, newGoal));
+    const res = await dispatch(thunkCreateGoal(user.id, newGoal));
 
-    dispatch(thunkAddUserGoal(newGoal));
+    dispatch(thunkAddUserGoal(res));
 
     if (res.errors) {
       setErrors(res.errors);

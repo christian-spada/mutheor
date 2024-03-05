@@ -50,7 +50,7 @@ const CreateInstrumentModal = ({ user }) => {
 
     setLoadingState(true);
 
-    const res = dispatch(thunkCreateInstrument(user.id, formData));
+    const res = await dispatch(thunkCreateInstrument(user.id, formData));
 
     dispatch(thunkGetUser(user.id));
 

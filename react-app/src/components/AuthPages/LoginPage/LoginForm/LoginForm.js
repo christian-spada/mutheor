@@ -24,7 +24,7 @@ export const LoginForm = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    const data = dispatch(login(email, password));
+    const data = await dispatch(login(email, password));
 
     if (data?.errors) {
       setErrors(data.errors);

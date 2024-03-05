@@ -38,7 +38,7 @@ export const SignupForm = () => {
 
       setLoadingState(true);
 
-      const data = dispatch(signUp(formData));
+      const data = await dispatch(signUp(formData));
 
       setLoadingState(false);
 
