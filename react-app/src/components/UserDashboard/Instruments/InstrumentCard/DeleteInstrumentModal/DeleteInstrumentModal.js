@@ -1,5 +1,5 @@
 import { thunkDeleteInstrument } from '../../../../../store/instruments';
-import { thunkGetUser } from '../../../../../store/session';
+import { thunkClearUserInstruments, thunkGetUser } from '../../../../../store/session';
 import { thunkClearGoals } from '../../../../../store/goals';
 import { thunkClearPracticeSessions } from '../../../../../store/practiceSessions';
 import { useDispatch } from 'react-redux';
@@ -12,7 +12,7 @@ const DeleteInstrumentModal = ({ instrumentToDelete, user }) => {
 
   const handleDelete = async () => {
     dispatch(thunkDeleteInstrument(user.id, instrumentToDelete));
-    dispatch(thunkGetUser(user.id));
+    dispatch(thunkClearUserInstruments(instrumentToDelete.id));
     dispatch(thunkClearGoals(instrumentToDelete.id));
     dispatch(thunkClearPracticeSessions(instrumentToDelete.id));
 

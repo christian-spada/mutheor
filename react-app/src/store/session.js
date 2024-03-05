@@ -9,7 +9,7 @@ const CLEAR_USER_GOALS = 'session/CLEAR_USER_GOALS';
 const EDIT_USER_GOAL = 'session/EDIT_USER_GOAL';
 const ADD_USER_INSTRUMENT = 'session/ADD_USER_INSTRUMENT';
 const EDIT_USER_INSTRUMENT = 'session/EDIT_USER_INSTRUMENT';
-// const CLEAR_USER_INSTRUMENTS = 'session/CLEAR_USER_INSTRUMENTS';
+const CLEAR_USER_INSTRUMENTS = 'session/CLEAR_USER_INSTRUMENTS';
 const ADD_USER_PRACTICE_SESSION = 'session/ADD_USER_PRACTICE_SESSION';
 
 //! ===== ACTION CREATORS ======
@@ -66,12 +66,12 @@ const editUserInstrument = instrument => {
   };
 };
 
-// const clearUserInstruments = instrumentId => {
-//   return {
-//     type: CLEAR_USER_INSTRUMENTS,
-//     payload: instrumentId,
-//   };
-// };
+const clearUserInstruments = instrumentId => {
+  return {
+    type: CLEAR_USER_INSTRUMENTS,
+    payload: instrumentId,
+  };
+};
 
 // PRACTICE SESSIONS
 const addUserPracticeSession = session => {
@@ -188,9 +188,9 @@ export const thunkEditUserInstrument = instrument => async dispatch => {
   dispatch(editUserInstrument(instrument));
 };
 
-// export const thunkClearUserInstruments = instrumentId => async dispatch => {
-//   dispatch(clearUserInstruments(instrumentId));
-// };
+export const thunkClearUserInstruments = instrumentId => async dispatch => {
+  dispatch(clearUserInstruments(instrumentId));
+};
 
 // PRACTICE SESSIONS
 export const thunkAddUserPracticeSession = session => async dispatch => {
@@ -221,12 +221,36 @@ export default function reducer(state = initialState, action) {
         return instrument;
       });
       return { user: { ...state.user, instruments: updatedInstruments } };
-    // case CLEAR_USER_INSTRUMENTS:
-    //   const filteredInstruments = state.user.instruments.filter(
-    //     instrument => instrument.id !== action.payload
-    //   );
-    //   return { user: { ...state.user, instruments: filteredInstruments } };
+    case CLEAR_USER_INSTRUMENTS: {
+      const filteredInstruments = state.user.instruments.filter(
+        instrument => instrument.id !== action.payload
+      );
 
+      // Remove goals and practice sessions associated with the instrument only if they exist
+      let filteredGoals;
+      let filteredSessions;
+      if (state.user.goals.length) {
+        filteredGoals = state.user.goals.filter(goal => goal.instrument.id !== action.payload);
+      }
+      if (state.user.practiceSessions.length) {
+        filteredSessions = state.user.practiceSessions.filter(
+          session => session.instrument.id !== action.payload
+        );
+      }
+
+      const newState = {
+        user: { ...state.user, instruments: filteredInstruments },
+      };
+
+      if (filteredGoals) {
+        newState.user.goals = filteredGoals;
+      }
+      if (filteredSessions) {
+        newState.user.practiceSessions = filteredSessions;
+      }
+
+      return newState;
+    }
     // GOALS
     case ADD_USER_GOAL:
       return { user: { ...state.user, goals: [...state.user.goals, action.payload] } };
