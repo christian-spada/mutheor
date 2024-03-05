@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { thunkCreateInstrument } from '../../../../store/instruments';
 import { useModal } from '../../../../context/Modal';
-import { thunkGetUser } from '../../../../store/session';
+import { thunkAddUserInstrument } from '../../../../store/session';
 import './CreateInstrumentModal.css';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
 
@@ -52,13 +52,12 @@ const CreateInstrumentModal = ({ user }) => {
 
     const res = await dispatch(thunkCreateInstrument(user.id, formData));
 
-    await dispatch(thunkGetUser(user.id));
-
     setLoadingState(false);
 
     if (res.errors) {
       setErrors(res.errors);
     } else {
+      dispatch(thunkAddUserInstrument(res));
       closeModal();
     }
   };

@@ -5,7 +5,7 @@ import './CreateGoalModal.css';
 import { thunkCreateGoal } from '../../../../store/goals';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';
-import { thunkGetUser } from '../../../../store/session';
+import { thunkAddUserGoal } from '../../../../store/session';
 
 const CreateGoalModal = ({ user }) => {
   const { closeModal } = useModal();
@@ -51,11 +51,10 @@ const CreateGoalModal = ({ user }) => {
 
     const res = await dispatch(thunkCreateGoal(user.id, newGoal));
 
-    await dispatch(thunkGetUser(user.id));
-
     if (res.errors) {
       setErrors(res.errors);
     } else {
+      dispatch(thunkAddUserGoal(res));
       closeModal();
     }
   };

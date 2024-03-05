@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../../../context/Modal';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
 import './EditGoalModal.css';
+import { thunkEditUserGoal } from '../../../../store/session';
 
 export const EditGoalModal = ({ goalToEdit, user }) => {
   const { closeModal } = useModal();
@@ -56,6 +57,7 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
     if (res.errors) {
       setErrors(res.errors);
     } else {
+      dispatch(thunkEditUserGoal(res));
       closeModal();
     }
   };

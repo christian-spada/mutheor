@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { thunkCreatePracticeSession } from '../../../../store/practiceSessions';
 import './CreatePracticeSessionModal.css';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
-import { thunkGetUser } from '../../../../store/session';
+import { thunkAddUserPracticeSession } from '../../../../store/session';
 import { formatDateToValidInputValue } from '../../../../utils/helpers';
 
 const CreatePracticeSessionModal = ({ user }) => {
@@ -53,11 +53,10 @@ const CreatePracticeSessionModal = ({ user }) => {
 
     const res = await dispatch(thunkCreatePracticeSession(user.id, newSession));
 
-    await dispatch(thunkGetUser(user.id));
-
     if (res.errors) {
       setErrors(res.errors);
     } else {
+      dispatch(thunkAddUserPracticeSession(res));
       closeModal();
     }
   };
