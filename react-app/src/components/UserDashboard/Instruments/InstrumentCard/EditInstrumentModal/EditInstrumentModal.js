@@ -53,13 +53,12 @@ const EditInstrumentModal = ({ instrumentToEdit, user }) => {
 
     const res = await dispatch(thunkEditInstrument(user.id, formData));
 
-    dispatch(thunkEditUserInstrument(res));
-
     setLoadingState(false);
 
     if (res.errors) {
       setErrors(res.errors);
     } else {
+      dispatch(thunkEditUserInstrument(res));
       closeModal();
     }
   };
