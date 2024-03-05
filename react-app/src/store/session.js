@@ -10,8 +10,7 @@ const EDIT_USER_GOAL = 'session/EDIT_USER_GOAL';
 // const ADD_USER_INSTRUMENT = 'session/ADD_USER_INSTRUMENT';
 // const EDIT_USER_INSTRUMENT = 'session/EDIT_USER_INSTRUMENT';
 // const CLEAR_USER_INSTRUMENTS = 'session/CLEAR_USER_INSTRUMENTS';
-// const ADD_PRACTICE_SESSION = 'session/ADD_PRACTICE_SESSION';
-// const EDIT_PRACTICE_SESSION = 'session/EDIT_PRACTICE_SESSION';
+const ADD_USER_PRACTICE_SESSION = 'session/ADD_USER_PRACTICE_SESSION';
 
 //! ===== ACTION CREATORS ======
 const getUser = user => {
@@ -74,20 +73,13 @@ const clearUserGoals = goalId => {
 //   };
 // };
 
-// // PRACTICE SESSIONS
-// const addPracticeSession = session => {
-//   return {
-//     type: ADD_PRACTICE_SESSION,
-//     payload: session,
-//   };
-// };
-
-// const editPracticeSession = session => {
-//   return {
-//     type: EDIT_PRACTICE_SESSION,
-//     payload: session,
-//   };
-// };
+// PRACTICE SESSIONS
+const addUserPracticeSession = session => {
+  return {
+    type: ADD_USER_PRACTICE_SESSION,
+    payload: session,
+  };
+};
 
 //! ===== THUNKS =====
 export const authenticate = () => async dispatch => {
@@ -200,14 +192,10 @@ export const thunkEditUserGoal = goal => async dispatch => {
 //   dispatch(clearUserInstruments(instrumentId));
 // };
 
-// // PRACTICE SESSIONS
-// export const thunkAddPracticeSession = session => async dispatch => {
-//   dispatch(addPracticeSession(session));
-// };
-
-// export const thunkEditPracticeSession = session => async dispatch => {
-//   dispatch(editPracticeSession(session));
-// };
+// PRACTICE SESSIONS
+export const thunkAddUserPracticeSession = session => async dispatch => {
+  dispatch(addUserPracticeSession(session));
+};
 
 const initialState = { user: null };
 
@@ -255,21 +243,13 @@ export default function reducer(state = initialState, action) {
       return { user: { ...state.user, goals: filteredGoals } };
 
     // PRACTICE SESSIONS
-    // case ADD_PRACTICE_SESSION:
-    //   return {
-    //     user: {
-    //       ...state.user,
-    //       practiceSessions: [...state.user.practiceSessions, action.payload],
-    //     },
-    //   };
-    // case EDIT_PRACTICE_SESSION:
-    //   const updatedSessions = state.user.practiceSessions.map(session => {
-    //     if (session.id === action.payload.id) {
-    //       return action.payload;
-    //     }
-    //     return session;
-    //   });
-    //   return { user: { ...state.user, practiceSessions: updatedSessions } };
+    case ADD_USER_PRACTICE_SESSION:
+      return {
+        user: {
+          ...state.user,
+          practiceSessions: [...state.user.practiceSessions, action.payload],
+        },
+      };
     default:
       return state;
   }
