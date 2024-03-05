@@ -51,9 +51,9 @@ const CreatePracticeSessionModal = ({ user }) => {
       notes,
     };
 
-    const res = await dispatch(thunkCreatePracticeSession(user.id, newSession));
+    const res = dispatch(thunkCreatePracticeSession(user.id, newSession));
 
-    await dispatch(thunkGetUser(user.id));
+    dispatch(thunkGetUser(user.id));
 
     if (res.errors) {
       setErrors(res.errors);

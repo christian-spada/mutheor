@@ -24,7 +24,7 @@ export const LoginForm = () => {
     e.preventDefault();
     e.stopPropagation();
 
-    const data = await dispatch(login(email, password));
+    const data = dispatch(login(email, password));
 
     if (data?.errors) {
       setErrors(data.errors);
@@ -36,7 +36,7 @@ export const LoginForm = () => {
   const handleDemoUser = async e => {
     e.preventDefault();
 
-    await dispatch(login('demo@aa.io', 'password'));
+    dispatch(login('demo@aa.io', 'password'));
     history.push('/users/1/dashboard');
   };
 

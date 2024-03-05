@@ -29,7 +29,7 @@ const ProfileButton = ({ user }) => {
   }, [showMenu]);
 
   const handleLogout = async e => {
-    await dispatch(logout());
+    dispatch(logout());
   };
 
   const ulClassName = 'profile-dropdown' + (showMenu ? '' : ' hidden');
