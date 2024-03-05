@@ -1,5 +1,5 @@
 import { thunkDeleteInstrument } from '../../../../../store/instruments';
-import { thunkClearUserInstruments, thunkGetUser } from '../../../../../store/session';
+import { thunkClearUserInstruments } from '../../../../../store/session';
 import { thunkClearGoals } from '../../../../../store/goals';
 import { thunkClearPracticeSessions } from '../../../../../store/practiceSessions';
 import { useDispatch } from 'react-redux';

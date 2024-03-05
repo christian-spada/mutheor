@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { thunkEditInstrument } from '../../../../../store/instruments';
 import { useModal } from '../../../../../context/Modal';
-import { thunkEditUserInstrument, thunkGetUser } from '../../../../../store/session';
+import { thunkEditUserInstrument } from '../../../../../store/session';
 import './EditInstrumentModal.css';
 import { ErrorView } from '../../../../UtilComponents/ErrorView';
 
