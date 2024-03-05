@@ -52,13 +52,12 @@ const CreateInstrumentModal = ({ user }) => {
 
     const res = await dispatch(thunkCreateInstrument(user.id, formData));
 
-    dispatch(thunkAddUserInstrument(res));
-
     setLoadingState(false);
 
     if (res.errors) {
       setErrors(res.errors);
     } else {
+      dispatch(thunkAddUserInstrument(res));
       closeModal();
     }
   };
