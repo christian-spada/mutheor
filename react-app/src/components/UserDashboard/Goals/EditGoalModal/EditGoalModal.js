@@ -54,11 +54,10 @@ export const EditGoalModal = ({ goalToEdit, user }) => {
 
     const res = await dispatch(thunkEditGoal(user.id, updatedGoal));
 
-    dispatch(thunkEditUserGoal(res));
-
     if (res.errors) {
       setErrors(res.errors);
     } else {
+      dispatch(thunkEditUserGoal(res));
       closeModal();
     }
   };
