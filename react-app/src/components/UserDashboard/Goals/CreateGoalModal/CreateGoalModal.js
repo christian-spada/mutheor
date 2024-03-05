@@ -51,11 +51,10 @@ const CreateGoalModal = ({ user }) => {
 
     const res = await dispatch(thunkCreateGoal(user.id, newGoal));
 
-    dispatch(thunkAddUserGoal(res));
-
     if (res.errors) {
       setErrors(res.errors);
     } else {
+      dispatch(thunkAddUserGoal(res));
       closeModal();
     }
   };
