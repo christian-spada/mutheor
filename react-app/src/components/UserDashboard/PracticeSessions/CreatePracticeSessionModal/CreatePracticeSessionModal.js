@@ -5,7 +5,7 @@ import { thunkCreatePracticeSession } from '../../../../store/practiceSessions';
 import './CreatePracticeSessionModal.css';
 import { ErrorView } from '../../../UtilComponents/ErrorView';
 import { thunkAddUserPracticeSession } from '../../../../store/session';
-import { formatDateToValidInputValue, logger } from '../../../../utils/helpers';
+import { formatDateToValidInputValue } from '../../../../utils/helpers';
 
 const CreatePracticeSessionModal = ({ user }) => {
   const { closeModal } = useModal();
