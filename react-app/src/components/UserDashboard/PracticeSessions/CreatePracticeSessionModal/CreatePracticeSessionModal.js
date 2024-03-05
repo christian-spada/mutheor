@@ -53,11 +53,10 @@ const CreatePracticeSessionModal = ({ user }) => {
 
     const res = await dispatch(thunkCreatePracticeSession(user.id, newSession));
 
-    dispatch(thunkAddUserPracticeSession(res));
-
     if (res.errors) {
       setErrors(res.errors);
     } else {
+      dispatch(thunkAddUserPracticeSession(res));
       closeModal();
     }
   };
