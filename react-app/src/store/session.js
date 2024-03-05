@@ -1,9 +1,11 @@
-import { customFetch } from '../utils/helpers';
+import { customFetch, logger } from '../utils/helpers';
 
 //! ===== ACTIONS ======
 const GET_USER = 'session/GET_USER';
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const ADD_USER_GOAL = 'session/ADD_USER_GOAL';
+const CLEAR_USER_GOALS = 'session/REMOVE_USER';
 
 //! ===== ACTION CREATORS ======
 const getUser = user => {
@@ -22,9 +24,21 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-const initialState = { user: null };
+const addUserGoal = goal => {
+  return {
+    type: ADD_USER_GOAL,
+    payload: goal,
+  };
+};
 
-//! ===== THUNKS ======
+const clearUserGoals = goalId => {
+  return {
+    type: CLEAR_USER_GOALS,
+    payload: goalId,
+  };
+};
+
+//! ===== THUNKS =====
 export const authenticate = () => async dispatch => {
   const response = await fetch('/api/auth/', {
     headers: {
@@ -107,6 +121,18 @@ export const signUp = newUser => async dispatch => {
   }
 };
 
+//! ===== UPDATE USER STORE DATA ONLY =====
+
+export const thunkClearUserGoals = goalId => async dispatch => {
+  dispatch(clearUserGoals(goalId));
+};
+
+export const thunkAddUserGoal = goal => async dispatch => {
+  dispatch(addUserGoal(goal));
+};
+
+const initialState = { user: null };
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
@@ -115,6 +141,12 @@ export default function reducer(state = initialState, action) {
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
+    // GOALS
+    case ADD_USER_GOAL:
+      return { user: { ...state.user, goals: [...state.user.goals, action.payload] } };
+    case CLEAR_USER_GOALS:
+      const filteredGoals = state.user.goals.filter(goal => goal.id !== action.payload);
+      return { user: { ...state.user, goals: filteredGoals } };
     default:
       return state;
   }
