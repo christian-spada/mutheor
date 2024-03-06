@@ -13,6 +13,8 @@ export const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
 
+  const [loadingAction, setLoadingAction] = useState('');
+
   useEffect(() => {
     const errors = {};
     if (email.length === 128) errors.email = 'You have reached the 128 character limit';
@@ -24,9 +26,11 @@ export const LoginForm = () => {
     e.preventDefault();
     e.stopPropagation();
 
+    setLoadingAction('login');
     const data = await dispatch(login(email, password));
 
     if (data?.errors) {
+      setLoadingAction('');
       setErrors(data.errors);
     } else {
       history.push(`/users/${data.id}/dashboard`);
@@ -36,7 +40,8 @@ export const LoginForm = () => {
   const handleDemoUser = async e => {
     e.preventDefault();
 
-    dispatch(login('demo@aa.io', 'password'));
+    setLoadingAction('demo-login');
+    await dispatch(login('demo@aa.io', 'password'));
     history.push('/users/1/dashboard');
   };
 
@@ -91,13 +96,13 @@ export const LoginForm = () => {
               className="login-form__login-btn"
               type="submit"
             >
-              Log In
+              {loadingAction === 'login' ? 'Loading...' : 'Login'}
             </button>
             <button
               className="login-form__demo-btn"
               onClick={handleDemoUser}
             >
-              Demo User
+              {loadingAction === 'demo-login' ? 'Loading...' : 'Demo User'}
             </button>
           </div>
         </section>
