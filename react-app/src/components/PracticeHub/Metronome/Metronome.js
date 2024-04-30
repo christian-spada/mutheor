@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Metronome.css';
+import Synth_Tick_D_hi from './sounds/Synth_Tick_D_hi.wav';
 
 const PlayButton = ({ setIsMetronomeActive }) => {
   const [isActive, setIsActive] = useState(false);
@@ -19,7 +20,7 @@ const PlayButton = ({ setIsMetronomeActive }) => {
   );
 };
 
-const BPMSlider = ({ setBpm }) => {
+const BPMSlider = ({ bpm, setBpm }) => {
   return (
     <div className="bpm-slider">
       <i
@@ -29,9 +30,9 @@ const BPMSlider = ({ setBpm }) => {
       <input
         type="range"
         onChange={e => setBpm(e.target.value)}
-        defaultValue={150}
-        min={1}
-        max={300}
+        value={bpm}
+        min={40}
+        max={230}
       />
       <i
         className="fa-solid fa-plus"
@@ -42,13 +43,14 @@ const BPMSlider = ({ setBpm }) => {
 };
 
 const Metronome = () => {
-  const [bpm, setBpm] = useState(150);
+  const [bpm, setBpm] = useState(140);
   const [isMetronomeActive, setIsMetronomeActive] = useState(false);
+  const clickSoundRef = useRef(null);
 
   useEffect(() => {
     if (isMetronomeActive) {
       const intervalId = setInterval(() => {
-        console.log('bpm', bpm);
+        clickSoundRef.current.play();
       }, Math.round(60000 / bpm));
 
       return () => clearInterval(intervalId);
@@ -57,6 +59,10 @@ const Metronome = () => {
 
   return (
     <div className="metronome">
+      <audio
+        ref={clickSoundRef}
+        src={Synth_Tick_D_hi}
+      ></audio>
       <div className="bpm-container">
         <div>
           <span className="bpm-container__bpm">{bpm}</span>
@@ -65,7 +71,10 @@ const Metronome = () => {
         <PlayButton setIsMetronomeActive={setIsMetronomeActive} />
       </div>
       <div className="bpm-slider-container">
-        <BPMSlider setBpm={setBpm} />
+        <BPMSlider
+          bpm={bpm}
+          setBpm={setBpm}
+        />
       </div>
     </div>
   );
