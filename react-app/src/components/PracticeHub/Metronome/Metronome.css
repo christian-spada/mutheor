@@ -41,12 +41,13 @@
 }
 
 .bpm-container__wrapper {
-  flex-basis: 162px;
+  flex-basis: 167px;
 }
 
 .bpm-container__bpm {
   font-size: 64px;
-  margin-right: 0.2rem;
+  font-weight: 500;
+  margin-right: 0.4rem;
 }
 
 .bpm-container__bpm-label {
@@ -67,6 +68,7 @@
   width: 75%;
   margin-left: 1rem;
   margin-right: 1rem;
+  cursor: pointer;
 }
 
 .bpm-slider :not(input):hover {
