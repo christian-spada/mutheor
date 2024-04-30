@@ -64,9 +64,9 @@ const Metronome = () => {
         src={Synth_Tick_D_hi}
       ></audio>
       <div className="bpm-container">
-        <div>
+        <div className="bpm-container__wrapper">
           <span className="bpm-container__bpm">{bpm}</span>
-          <span>BPM</span>
+          <span className="bpm-container__bpm-label">BPM</span>
         </div>
         <PlayButton setIsMetronomeActive={setIsMetronomeActive} />
       </div>
