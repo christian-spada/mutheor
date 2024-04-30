@@ -11,12 +11,12 @@ const PlayButton = ({ setIsMetronomeActive }) => {
   };
 
   return (
-    <div
+    <button
       className="playbutton"
       onClick={handleActiveStateChange}
     >
       {isActive ? <i className="fa-solid fa-pause"></i> : <i className="fa-solid fa-play"></i>}
-    </div>
+    </button>
   );
 };
 
