@@ -6,10 +6,12 @@ import LoginPage from './components/AuthPages/LoginPage';
 import { authenticate } from './store/session';
 import LandingPage from './components/LandingPage';
 import UserDashboard from './components/UserDashboard/UserDashboard';
+import PracticeHub from './components/PracticeHub/PracticeHub';
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -18,7 +20,10 @@ function App() {
     <>
       {isLoaded && (
         <Switch>
-          <Route exact path="/">
+          <Route
+            exact
+            path="/"
+          >
             <LandingPage />
           </Route>
           <Route path="/login">
@@ -29,6 +34,9 @@ function App() {
           </Route>
           <Route path="/users/:userId/dashboard">
             <UserDashboard />
+          </Route>
+          <Route path="/practice-hub">
+            <PracticeHub />
           </Route>
         </Switch>
       )}
