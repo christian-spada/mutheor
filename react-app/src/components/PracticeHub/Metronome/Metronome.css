@@ -1,3 +1,14 @@
+.metronome {
+  width: 800px;
+  height: 400px;
+  border-radius: 16px;
+  background-color: hsl(238, 20%, 77%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4rem;
+}
+
 .playbutton {
   height: 150px;
   width: 150px;
@@ -15,36 +26,45 @@
 }
 
 .playbutton > i {
-  font-size: 40px;
+  font-size: 60px;
   color: hsl(238, 20%, 80%);
-  margin-left: 6px;
 }
 
-.metronome {
-  width: 800px;
-  height: 400px;
-  background-color: hsl(238, 20%, 77%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.playbutton > i.fa-play {
+  margin-left: 10px;
 }
 
 .bpm-container {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
+}
+
+.bpm-container__wrapper {
+  flex-basis: 162px;
 }
 
 .bpm-container__bpm {
-  font-size: 32px;
+  font-size: 64px;
   margin-right: 0.2rem;
 }
 
+.bpm-container__bpm-label {
+  font-size: 24px;
+}
+
 .bpm-slider-container {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.bpm-slider {
+  display: flex;
+  align-items: center;
 }
 
 .bpm-slider > input {
-  width: 50%;
+  width: 75%;
   margin-left: 1rem;
   margin-right: 1rem;
 }
