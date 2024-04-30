@@ -11,12 +11,9 @@ const Sidebar = ({ sidebarRef, showSideBar }) => {
         <Link to="/">
           <li className="sidebar__link">Home</li>
         </Link>
-        <li
-          className="sidebar__link"
-          onClick={() => alert('Feature coming soon!')}
-        >
-          Practice Hub
-        </li>
+        <Link to="/practice-hub">
+          <li className="sidebar__link">Practice Hub</li>
+        </Link>
         <li
           className="sidebar__link"
           onClick={() => alert('Feature coming soon!')}
