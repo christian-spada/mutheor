@@ -1,8 +1,7 @@
-import './PracticeHub.css'
+import Metronome from './Metronome/Metronome';
+import './PracticeHub.css';
 
 const PracticeHub = () => {
-  return (
-    <h1> PracticeHub </h1>
-  )
-}
-export default PracticeHub
+  return <Metronome />;
+};
+export default PracticeHub;
