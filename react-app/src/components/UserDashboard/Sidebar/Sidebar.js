@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
 
-const Sidebar = ({ sidebarRef, showSideBar }) => {
+const Sidebar = ({ sidebarRef, showSideBar, user }) => {
   return (
     <aside
       className={`sidebar ${showSideBar ? 'show' : ''}`}
@@ -11,7 +11,7 @@ const Sidebar = ({ sidebarRef, showSideBar }) => {
         <Link to="/">
           <li className="sidebar__link">Home</li>
         </Link>
-        <Link to="/practice-hub">
+        <Link to={`/users/${user.id}/practice-hub`}>
           <li className="sidebar__link">Practice Hub</li>
         </Link>
         <li

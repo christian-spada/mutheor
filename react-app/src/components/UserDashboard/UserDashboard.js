@@ -124,6 +124,7 @@ const UserDashboard = () => {
       <Sidebar
         sidebarRef={sidebar}
         showSideBar={showSideBar}
+        user={user}
       />
       {showSideBar && <div className="overlay"></div>}
 

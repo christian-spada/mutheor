@@ -35,7 +35,7 @@ function App() {
           <Route path="/users/:userId/dashboard">
             <UserDashboard />
           </Route>
-          <Route path="/practice-hub">
+          <Route path="/users/:userId/practice-hub">
             <PracticeHub />
           </Route>
         </Switch>
