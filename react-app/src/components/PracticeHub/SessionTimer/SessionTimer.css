@@ -1,0 +1,34 @@
+.session-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4rem;
+  width: 400px;
+  height: 400px;
+  background-color: var(--primary-300);
+}
+
+.session-timer__time {
+  font-size: 60px;
+}
+
+.session-timer__start-btn {
+  background-color: hsl(141, 80%, 60%);
+  border: 2px solid var(--primary-600);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.session-timer__stop-btn {
+  background-color: hsl(7, 80%, 60%);
+  border: 2px solid var(--primary-600);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.session-timer__end-session-btn {
+  background-color: hsl(7, 80%, 60%);
+}
