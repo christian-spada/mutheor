@@ -7,7 +7,7 @@ import { ErrorView } from '../../../UtilComponents/ErrorView';
 import { thunkAddUserPracticeSession } from '../../../../store/session';
 import { formatDateToValidInputValue } from '../../../../utils/helpers';
 
-const CreatePracticeSessionModal = ({ user }) => {
+const CreatePracticeSessionModal = ({ user, isPracticeHubSession, sessionTime }) => {
   const { closeModal } = useModal();
   const dispatch = useDispatch();
 
@@ -80,6 +80,7 @@ const CreatePracticeSessionModal = ({ user }) => {
               value={date}
               onChange={e => setDate(e.target.value)}
               className={errors.date && 'error-outline'}
+              disabled={isPracticeHubSession}
             />
           </div>
           <div className="create-session-form__duration-container">
@@ -88,9 +89,10 @@ const CreatePracticeSessionModal = ({ user }) => {
             <input
               id="create-session-duration"
               type="number"
-              value={duration}
+              value={sessionTime || duration}
               min={1}
               onChange={e => setDuration(e.target.value)}
+              disabled={isPracticeHubSession}
             />
           </div>
         </section>
