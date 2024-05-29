@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import CreatePracticeSessionModal from '../../UserDashboard/PracticeSessions/CreatePracticeSessionModal/CreatePracticeSessionModal';
+import EndSessionModal from '../EndSessionModal/EndSessionModal';
 import OpenModalButton from '../../OpenModalButton';
 import './SessionTimer.css';
 
@@ -34,29 +34,11 @@ const StartStopButton = ({ isActive, setIsActive }) => {
 };
 
 const EndSessionButton = ({ time }) => {
-  /*
-  bring up modal confirming if user would like to end session or not
-    - if yes
-      - enter modal that request details about session
-        - instrument type
-        - session notes
-        - session focus
-        ** date and session length will be entered automatically with current date and timer status, respectively **
-      - update practice session store state
-      - update practice session DB
-    - if no
-      - close modal
-      - reset timer state to 0
-  */
-  const handleSessionEnd = () => {};
-
   return (
-    <button
-      onClick={handleSessionEnd}
-      className="session-timer__end-session-btn"
-    >
-      End Session
-    </button>
+    <OpenModalButton
+      modalComponent={<EndSessionModal sessionTime={time} />}
+      icon={<button className="session-timer__end-session-btn">End Session</button>}
+    />
   );
 };
 
