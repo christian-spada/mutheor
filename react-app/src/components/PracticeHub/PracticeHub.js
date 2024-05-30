@@ -5,8 +5,10 @@ import './PracticeHub.css';
 const PracticeHub = () => {
   return (
     <>
-      <SessionTimer />
-      <Metronome />
+      <section className="practice-hub">
+        <SessionTimer />
+        <Metronome />
+      </section>
     </>
   );
 };
