@@ -36,7 +36,7 @@ const StartStopButton = ({ isActive, setIsActive }) => {
 const EndSessionButton = ({ time }) => {
   return (
     <OpenModalButton
-      modalComponent={<EndSessionModal sessionTime={time} />}
+      modalComponent={<EndSessionModal sessionTime={Math.floor(time / 60)} />}
       icon={<button className="session-timer__end-session-btn">End Session</button>}
     />
   );
@@ -46,7 +46,7 @@ const SessionTimer = () => {
   const [isActive, setIsActive] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
 
-  const isSessionActive = !isActive && elapsedTime > 5;
+  const isSessionActive = !isActive && elapsedTime > 59;
 
   const formatElapsedTime = time => {
     const hour = Math.floor(time / 3600).toString();
