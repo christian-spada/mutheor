@@ -4,8 +4,9 @@
   align-items: center;
   flex-direction: column;
   gap: 4rem;
-  width: 400px;
-  height: 400px;
+  width: 450px;
+  height: 450px;
+  border-radius: 16px;
   background-color: var(--primary-300);
 }
 
@@ -15,20 +16,37 @@
 
 .session-timer__start-btn {
   background-color: hsl(141, 80%, 60%);
-  border: 2px solid var(--primary-600);
+  border: 3px solid var(--primary-100);
   border-radius: 50%;
   width: 100px;
   height: 100px;
+  font-weight: 600;
+  transition: transform 100ms ease-in-out;
 }
 
 .session-timer__stop-btn {
-  background-color: hsl(7, 80%, 60%);
-  border: 2px solid var(--primary-600);
+  background-color: hsl(7, 100%, 61%);
+  border: 3px solid var(--primary-100);
   border-radius: 50%;
   width: 100px;
   height: 100px;
+  font-weight: 600;
+  transition: transform 100ms ease-in-out;
 }
 
 .session-timer__end-session-btn {
-  background-color: hsl(7, 80%, 60%);
+  background-color: hsl(7, 100%, 51%);
+  font-weight: 500;
+  padding: 0.8rem;
+  border: 2px solid var(--primary-100);
+  transition: transform 100ms ease-in-out;
+  color: var(--primary-100);
+}
+
+.session-timer__end-session-btn:hover {
+  background-color: hsl(7, 100%, 65%);
+}
+.session-timer__start-btn:hover,
+.session-timer__stop-btn:hover {
+  transform: scale(1.03);
 }
