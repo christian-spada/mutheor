@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 
-import ProfileButton from '../ProfileButton/ProfileButton';
-import HamburgerMenu from './HamburgerMenu/HamburgerMenu';
+import Header from '../Header/Header';
 import Sidebar from './Sidebar/Sidebar';
+import useCloseSideBar from '../../custom-hooks/useCloseSideBar';
 import UserInfoCard from './UserInfoCard/UserInfoCard';
 import PracticeSessionCard from './PracticeSessions/PracticeSessionCard/PracticeSessionCard';
 import CreatePracticeSessionModal from './PracticeSessions/CreatePracticeSessionModal/CreatePracticeSessionModal';
@@ -36,7 +36,7 @@ const UserDashboard = () => {
   goals.sort((a, b) => new Date(a.targetDate) - new Date(b.targetDate));
 
   const [showSideBar, setShowSidebar] = useState(false);
-  const sidebar = useRef();
+  const sidebarRef = useRef();
   const cardContainer = useRef();
   const [contentView, setContentView] = useState('Instruments');
 
@@ -64,19 +64,7 @@ const UserDashboard = () => {
     }
   };
 
-  useEffect(() => {
-    if (!showSideBar) return;
-
-    const closeMenu = e => {
-      if (!sidebar.current?.contains(e.target)) {
-        setShowSidebar(false);
-      }
-    };
-
-    document.addEventListener('click', closeMenu);
-
-    return () => document.removeEventListener('click', closeMenu);
-  }, [showSideBar]);
+  useCloseSideBar(sidebarRef, showSideBar, setShowSidebar);
 
   useEffect(() => {
     if (user && contentView === 'Practice Sessions')
@@ -110,23 +98,19 @@ const UserDashboard = () => {
   return (
     <div className="user-dashboard-wrapper">
       {/* ===== HEADER ==== */}
-      <header className="user-dashboard__header">
-        <HamburgerMenu
-          showSideBar={showSideBar}
-          setShowSidebar={setShowSidebar}
-        />
-        <div className="user-dashboard__profile-container">
-          <ProfileButton user={user} />
-        </div>
-      </header>
+      <Header
+        showSideBar={showSideBar}
+        setShowSidebar={setShowSidebar}
+        user={user}
+      />
 
       {/* ===== SIDEBAR ===== */}
       <Sidebar
-        sidebarRef={sidebar}
+        sidebarRef={sidebarRef}
         showSideBar={showSideBar}
         user={user}
+        isDashboard={true}
       />
-      {showSideBar && <div className="overlay"></div>}
 
       {/* ===== MAIN ==== */}
       <main className="user-dashboard__main-content">
