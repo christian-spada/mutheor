@@ -4,7 +4,7 @@ import OpenModalButton from '../../OpenModalButton';
 import CreatePracticeSessionModal from '../../UserDashboard/PracticeSessions/CreatePracticeSessionModal/CreatePracticeSessionModal';
 import './EndSessionModal.css';
 
-const EndSessionModal = ({ sessionTime }) => {
+const EndSessionModal = ({ sessionTime, resetTimer }) => {
   const user = useSelector(state => state.session.user);
   const { closeModal } = useModal();
 
@@ -18,16 +18,18 @@ const EndSessionModal = ({ sessionTime }) => {
         >
           Cancel
         </button>
-        <OpenModalButton
-          modalComponent={
-            <CreatePracticeSessionModal
-              user={user}
-              isPracticeHubSession={true}
-              sessionTime={sessionTime}
-            />
-          }
-          icon={<button className="end-session-modal__btn">End Session</button>}
-        />
+        <div onClick={resetTimer}>
+          <OpenModalButton
+            modalComponent={
+              <CreatePracticeSessionModal
+                user={user}
+                isPracticeHubSession={true}
+                sessionTime={sessionTime}
+              />
+            }
+            icon={<button className="end-session-modal__btn">End Session</button>}
+          />
+        </div>
       </div>
     </div>
   );
